@@ -17,6 +17,15 @@ to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
+## Contributors
+
+Gabriel Pires
+Danilo Melo
+Carlos Augusto
+Gabriel Rossite
+Arthur Paixão
+Bernardo Coutinho
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
