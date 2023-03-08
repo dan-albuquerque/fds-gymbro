@@ -10,21 +10,14 @@ Just enter your name, age, weight, height, your health problems, and your object
 
 Keep your data updated and mark all the workouts you do. Gymbro will show your progress and congratulate you when you reach your objectives in fun ways that keep the user entertained and eager to improve.
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
 ## Contributors
 
-Gabriel Pires
-<p>Danilo Melo<\p>
-<p>Carlos Augusto<\p>
-Gabriel Rossite
-Arthur Paixão
-Bernardo Coutinho
+[Gabriel Pires](https://github.com/gabrielpires-1) <br />
+[Danilo Melo](https://github.com/dan-albuquerque) <br />
+[Carlos Augusto](https://github.com/CarlosAugustoP) <br />
+[Gabriel Rossiter](https://github.com/grossiter04) <br />
+[Arthur Paixão](https://github.com/paixaoao) <br />
+[Bernardo Coutinho](https://github.com/BernardoCC1) <br />
 
 ## License
 
