@@ -20,8 +20,8 @@ Please make sure to update tests as appropriate.
 ## Contributors
 
 Gabriel Pires
-Danilo Melo
-Carlos Augusto
+<p>Danilo Melo<\p>
+<p>Carlos Augusto<\p>
 Gabriel Rossite
 Arthur Paixão
 Bernardo Coutinho
