@@ -1,4 +1,4 @@
-## GymBro 🏋️🏆
+# GymBro 🏋️🏆
 
 Create, edit and manage gym workouts with precision 📈📊 
 
@@ -18,6 +18,9 @@ Keep your data updated and mark all the workouts you do. Gymbro will show your p
 [Gabriel Rossiter](https://github.com/grossiter04) <br />
 [Arthur Paixão](https://github.com/paixaoao) <br />
 [Bernardo Coutinho](https://github.com/BernardoCC1) <br />
+
+## Links
+<a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
 
 ## License
 
