@@ -21,7 +21,7 @@ Keep your data updated and mark all the workouts you do. Gymbro will show your p
 
 ## Links
 <a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
-<a href ="https://www.figma.com/proto/QEgeAOpzAlOgq7QZUUuQcW/gymbro-lo-fi?node-id=22-2941&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=3%3A147&show-proto-sidebar=1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /> </a>
+<a href ="https://www.figma.com/proto/QEgeAOpzAlOgq7QZUUuQcW/gymbro-lo-fi?node-id=3-147&scaling=contain&page-id=0%3A1&starting-point-node-id=3%3A147&show-proto-sidebar=1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /> </a>
 
 ## License
 
