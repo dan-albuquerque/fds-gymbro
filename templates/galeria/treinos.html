@@ -1,7 +1,15 @@
-{% extends 'galeria/base.html'%}
-{% load static %}
-{% block content %}
-
-
-
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Escolha um exercício</title>
+</head>
+<body>
+  <h1>Escolha um exercício</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+  </form>
+</body>
+</html>
