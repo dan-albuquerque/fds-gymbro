@@ -17,3 +17,5 @@ def treinos(request):
 
     return render(request, 'galeria/treinos.html', {'form': form})
 
+def sono(request):
+    return render(request, 'galeria/sono.html')

@@ -103,13 +103,15 @@
           </div>
         </div>
         <div class="col">
-          <div class="card">
-            <img src="{% static 'img/barbell-1839086_960_720.jpg' %}" class="card-img-top"
-              alt="Homem forte levantando uma barra" />
-            <div class="card-body">
-              <h5 class="card-title" id="sono">Sono</h5>
-              <p class="card-text">
-                Crie uma boa rotina de sono para conseguir o corpo que desejas.</p>
+          <div href="{% url 'sono' %}"class="card">
+            <a href="{% url 'sono' %}" class="nav-item nav-link" id="sono-menu">
+              <img src="{% static 'img/barbell-1839086_960_720.jpg' %}" class="card-img-top"
+                alt="Homem forte levantando uma barra" />
+              <div class="card-body">
+                <h5 class="card-title" id="sono">Sono</h5>
+                <p class="card-text">
+                  Crie uma boa rotina de sono para conseguir o corpo que desejas.</p>
+                </a>
             </div>
           </div>
         </div>
