@@ -19,3 +19,6 @@ def treinos(request):
 
 def sono(request):
     return render(request, 'galeria/sono.html')
+
+def treino_selecionado(request):
+    return render(request, 'galeria/treino_selecionado.html')
