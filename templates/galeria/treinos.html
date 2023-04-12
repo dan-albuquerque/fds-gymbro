@@ -1,15 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Escolha um exercício</title>
-</head>
-<body>
-  <h1>Escolha um exercício</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enviar</button>
-  </form>
-</body>
-</html>
+{% extends 'galeria/base.html'%}
+{% load static %}
+{% block content %}
+
+<div class="row row-cols-2 g-3" >
+    <div class="col">
+      <div class="card">      
+        <a href="#" class="navbar-brand">
+          <img src="{% static 'img/supino-reto.webp' %}" class="card-img-top" alt="imagem de um supino" />
+          <div class="card-body"> 
+            <h5 class="card-title" id="Treine">Peitoral</h5>
+            <p class="card-text"></p>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="{% static 'img/istockphoto-1339195913-1024x1024.webp '%}" class="card-img-top" alt="imagem de um braço musculoso" />
+        <div class="card-body">
+          <h5 class="card-title" id="Planejamento">Costas</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <img src="{% static 'img/istockphoto-1362684836-1024x1024.webp' %}" class="card-img-top"
+          alt="dupla de genero oposto fazendo academia" />
+        <div class="card-body">
+          <h5 class="card-title" id="Desafios">Perna</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="{% static 'js/scripts.js' %}"></script>
+
+  
+{% endblock %}

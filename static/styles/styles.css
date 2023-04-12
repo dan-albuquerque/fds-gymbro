@@ -50,6 +50,7 @@ header, .navbar{
     margin-right: 05%;
     background-color: rgb(2, 1, 1);
     width: 600px;
+    height: 20vh;
 }
 .card-text{
     color: white;
