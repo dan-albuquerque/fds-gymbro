@@ -72,12 +72,14 @@
     <div class="row row-cols-2 g-3">
         <div class="col">
           <div class="card">
-            <img src="{% static 'img/supino-reto.webp' %}" class="card-img-top"
-              alt="imagem de um supino" />
-            <div class="card-body">
-              <h5 class="card-title" id="Treine">Treine conosco</h5>
-              <p class="card-text">
-                Aprenda a treinar da melhor forma possível com nosso produto!</p>
+            <a href="{% url 'treinos' %}" class="nav-item nav-link" id="treinos-menu">
+              <img src="{% static 'img/supino-reto.webp' %}" class="card-img-top"
+                alt="imagem de um supino" />
+              <div class="card-body">
+                <h5 class="card-title" id="Treine">Treine conosco</h5>
+                <p class="card-text">
+                  Aprenda a treinar da melhor forma possível com nosso produto!</p>
+                </a>
             </div>
           </div>
         </div>
@@ -102,7 +104,7 @@
           </div>
         </div>
         <div class="col">
-          <div href="{% url 'sono' %}"class="card">
+          <div class="card">
             <a href="{% url 'sono' %}" class="nav-item nav-link" id="sono-menu">
               <img src="{% static 'img/barbell-1839086_960_720.jpg' %}" class="card-img-top"
                 alt="Homem forte levantando uma barra" />
