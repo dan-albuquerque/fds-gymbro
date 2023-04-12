@@ -1,9 +1,10 @@
 from django.urls import path
-from galeria.views import index, treinos, sono, treino_selecionado
+from galeria.views import index, treinos, sono, treino_selecionado, pesos
 
 urlpatterns = [
     path('', index, name='index'),
     path('treinos', treinos, name='treinos'),
     path('sono', sono, name='sono'),
-    path('treino_selecionado', treino_selecionado, name='treino_selecionado')
+    path('treino_selecionado', treino_selecionado, name='treino_selecionado'),
+    path("pesos",pesos, name='pesos'),
 ]

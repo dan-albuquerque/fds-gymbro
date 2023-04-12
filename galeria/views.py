@@ -22,3 +22,5 @@ def sono(request):
 
 def treino_selecionado(request):
     return render(request, 'galeria/treino_selecionado.html')
+def pesos(request):
+    return render(request, 'galeria/pesos.html')
