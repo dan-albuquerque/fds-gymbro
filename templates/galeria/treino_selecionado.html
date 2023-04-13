@@ -18,25 +18,66 @@
       <th style="border: 1px solid #ddd; padding: 8px;">Número de Série</th>
       <th style="border: 1px solid #ddd; padding: 8px;">Número de Repetições</th>
       <th style="border: 1px solid #ddd; padding: 8px;">Tempo de Descanso</th>
+      <th style="...">Carga</th>
     </tr>
     <tr>
-      <td style="border: 1px solid #ddd; padding: 8px;">Exercício 1</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">1</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">10</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
-    </tr>
+  <td style="border: 1px solid #ddd; padding: 8px;">Exercício 1</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+  <td style ="...">
+    <form action="/treino_selecionado/{{ treino.id }}" method="post">
+      {% csrf_token %}
+      <label for="treino_selecionado">Insira peso: </label>
+      <input id="treino_selecionado" type="text" name="name_field" value="Modificar carga.">
+      <input type="submit" value="OK">
+    </form>
+    {% if request.method == 'POST' %}
+      {% with weight=request.POST.name_field %}
+        <p>Peso escolhido: {{ weight }}</p>
+      {% endwith %}
+    {% endif %}
+  </td>
+<tr>
+  <td style="border: 1px solid #ddd; padding: 8px;">Exercício 1</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+  <td style ="...">
+    <form action="/treino_selecionado/{{ treino.id }}" method="post">
+      {% csrf_token %}
+      <label for="treino_selecionado">Insira peso: </label>
+      <input id="treino_selecionado" type="text" name="name_field" value="Modificar carga">
+      <input type="submit" value="OK">
+    </form>
+    {% if request.method == 'POST' %}
+      {% with weight=request.POST.name_field %}
+        <p>Peso escolhido: {{ weight }}</p>
+      {% endwith %}
+    {% endif %}
+  </td>
+</tr>
+
     <tr>
-      <td style="border: 1px solid #ddd; padding: 8px;">Exercício 2</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">2</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">8</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">45 segundos</td>
-    </tr>
-    <tr>
-      <td style="border: 1px solid #ddd; padding: 8px;">Exercício 3</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">3</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">12</td>
-      <td style="border: 1px solid #ddd; padding: 8px;">20 segundos</td>
-    </tr>
+  <td style="border: 1px solid #ddd; padding: 8px;">Exercício 1</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+  <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+  <td style ="...">
+    <form action="/treino_selecionado/{{ treino.id }}" method="post">
+      {% csrf_token %}
+      <label for="treino_selecionado">Insira peso: </label>
+      <input id="treino_selecionado" type="text" name="name_field" value="Modificar carga.">
+      <input type="submit" value="OK">
+    </form>
+    {% if request.method == 'POST' %}
+      {% with weight=request.POST.name_field %}
+        <p>Peso escolhido: {{ weight }}</p>
+      {% endwith %}
+    {% endif %}
+  </td>
+</tr>
+
     <!-- Adicione mais linhas conforme necessário -->
   </table>
   

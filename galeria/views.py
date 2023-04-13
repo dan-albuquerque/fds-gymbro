@@ -33,3 +33,16 @@ def register(response):
         form = RegisterForm()
 
     return render(response, "galeria/register.html", {"form":form})
+
+def treino_selecionado_view(request):
+    if request.method == 'POST':
+        user = request.user
+        weight = request.POST.get('name_field')
+        session_key = f'weight_{user.pk}'
+        request.session[session_key] = weight
+        return redirect('treino_selecionado')
+    else:
+        user = request.user
+        session_key = f'weight_{user.pk}'
+        weight = request.session.get(session_key, 'Insira o peso em kg.')
+        return render(request, 'treino_selecionado.html', {'weight': weight})
