@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -12,7 +13,6 @@ class Treinos(models.Model):
     foto = models.ImageField(upload_to="fotos/%Y/%m/%d/", blank=True)
     descricao = models.TextField(null=False, blank=False)
     categoria = models.CharField(max_length=100, choices=OPCOES_TREINOS, default='')
-
 
 '''
 class Exercicio(models.Model):

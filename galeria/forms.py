@@ -10,7 +10,7 @@ class ExercicioForm(forms.ModelForm):
 '''
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField()
+    email = forms.EmailField(max_length=254, required=True, help_text='Required. Enter a valid email address.')
 
     class Meta:
         model = User
