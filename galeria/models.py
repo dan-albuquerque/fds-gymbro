@@ -14,7 +14,7 @@ class Treinos(models.Model):
     categoria = models.CharField(max_length=100, choices=OPCOES_TREINOS, default='')
 
 
-
+'''
 class Exercicio(models.Model):
     NOME_EXERCICIOS_COSTAS = [
         ("puxada aberta", "Puxada aberta"),
@@ -38,4 +38,4 @@ class Exercicio(models.Model):
     tipo_treino = models.ForeignKey(Treinos, on_delete=models.CASCADE)
     numero_series = models.IntegerField()
     repeticoes = models.IntegerField()
-    tempo_descanso = models.DurationField()
+    tempo_descanso = models.DurationField()'''

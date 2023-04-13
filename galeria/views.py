@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-from galeria.models import Treinos, Exercicio
+from django.shortcuts import render, get_object_or_404, redirect
+from galeria.models import Treinos
+from .forms import RegisterForm
 
 # Create your views here.
 def index(request):
@@ -20,3 +21,15 @@ def treino_selecionado(request, treino_id):
 
 def pesos(request):
     return render(request, 'galeria/pesos.html')
+
+def register(response):
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
+        if form.is_valid():
+            form.save()
+
+        return redirect('')
+    else:
+        form = RegisterForm()
+
+    return render(response, "galeria/register.html", {"form":form})
