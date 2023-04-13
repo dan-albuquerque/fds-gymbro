@@ -1,17 +1,44 @@
 {% extends 'galeria/base.html'%}
 {% load static %}
 {% block content %}
+<style> 
+.exercise-box{background-color: #F2F2F2;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;}</style>
 
-    <div class="exercise-box">Agachamento</div>
-    <div class="exercise-box">Flexão de braço</div>
-    <div class="exercise-box">Abdominal</div>
-    <div class="exercise-box">Corrclassa</div>
-    <div class="exercise-box">Bicicleta</div>
-    <div class="exercise-box">Prancha</div>
-    <div class="exercise-box">Puxada na barra</div>
-    <div class="exercise-box">Levantamento de peso</div>
-    <div class="exercise-box">Caminhada</div>
-    <div class="exercise-box">Pular corda</div>
-
-   
+    
+<table style="border-collapse: collapse; width: 100%;">
+    <tr style="background-color: #f2f2f2;">
+      <th style="border: 1px solid #ddd; padding: 8px;">Exercício</th>
+      <th style="border: 1px solid #ddd; padding: 8px;">Número de Série</th>
+      <th style="border: 1px solid #ddd; padding: 8px;">Número de Repetições</th>
+      <th style="border: 1px solid #ddd; padding: 8px;">Tempo de Descanso</th>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Exercício 1</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">1</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Exercício 2</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">8</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">45 segundos</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #ddd; padding: 8px;">Exercício 3</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+      <td style="border: 1px solid #ddd; padding: 8px;">20 segundos</td>
+    </tr>
+    <!-- Adicione mais linhas conforme necessário -->
+  </table>
+  
+  
 {% endblock %}

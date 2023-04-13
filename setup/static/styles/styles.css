@@ -96,3 +96,15 @@ height: 100%;
 .container-fluid{
     margin-top: 05%;
 }
+
+/*treino-selecionado*/
+.exercise-box {
+    background-color: #F2F2F2;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}

@@ -48,9 +48,8 @@ header, .navbar{
     margin-top: 1%;
     margin-left: 05%;
     margin-right: 05%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(2, 1, 1);
     width: 600px;
-    height: 20vh;
 }
 .card-text{
     color: white;
@@ -96,4 +95,16 @@ height: 100%;
 }
 .container-fluid{
     margin-top: 05%;
+}
+
+/*treino-selecionado*/
+.exercise-box {
+    background-color: #F2F2F2;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
 }
