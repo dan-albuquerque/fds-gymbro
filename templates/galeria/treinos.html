@@ -3,36 +3,20 @@
 {% block content %}
 
 <div class="row row-cols-2 g-3" >
-    <div class="col">
-      <div class="card">      
-        <a href="treino_selecionado" class="navbar-brand">
-          <img src="{% static 'img/supino-reto.webp' %}" class="card-img-top" alt="imagem de um supino" />
-          <div class="card-body"> 
-            <h5 class="card-title" id="Treine">Peitoral</h5>
-            <p class="card-text"></p>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'img/istockphoto-1339195913-1024x1024.webp '%}" class="card-img-top" alt="imagem de um braço musculoso" />
-        <div class="card-body">
-          <h5 class="card-title" id="Planejamento">Costas</h5>
+  <div class="col">
+    {% if cards %}
+    {% for treino in cards %}
+    <div class="card">      
+      <a href="{% url 'treino_selecionado' treino.id %}" class="navbar-brand">
+        <img class="card-img-top" src="{{treino.foto.url}}"  alt="imagem de um supino" />
+        <div class="card-body"> 
+          <h5 class="card-title" id="Treine">{{treino.nome_treino}}</h5>
         </div>
-      </div>
+      </a>
     </div>
-    <div class="col">
-      <div class="card">
-        <img src="{% static 'img/istockphoto-1362684836-1024x1024.webp' %}" class="card-img-top"
-          alt="dupla de genero oposto fazendo academia" />
-        <div class="card-body">
-          <h5 class="card-title" id="Desafios">Perna</h5>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
+    {% else %}
+    {% endif %}
   </div>
-<script src="{% static 'js/scripts.js' %}"></script>
-
-  
+</div>
 {% endblock %}
