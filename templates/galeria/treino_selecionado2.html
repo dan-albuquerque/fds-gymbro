@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Treino de {{ option }}</title>
+</head>
+<body>
+    <h1>Treino de {{ option }}</h1>
+    <ul>
+    {% if exercises %}
+        {% for exercise in exercises %}
+            <li>{{ exercise.name }}</li>
+        {% empty %}
+            <li>Nenhum exercício encontrado.</li>
+        {% endfor %}
+    {% else %}
+        <li>Opção inválida.</li>
+    {% endif %}
+    </ul>
+</body>
+</html>

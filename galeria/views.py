@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from galeria.models import Treinos
+from galeria.models import Treinos, Exercise
 from .forms import RegisterForm
 
 # Create your views here.
@@ -12,6 +12,9 @@ def treinos(request):
     treinos = Treinos.objects.all()
 
     return render(request, 'galeria/treinos.html', {'cards': treinos})
+
+def treinos2(request):
+    return render(request, 'galeria/treinos2.html')
 
 def sono(request):
     return render(request, 'galeria/sono.html')
@@ -39,16 +42,19 @@ def register(request):
         form = RegisterForm()
     return render(request, 'galeria/register.html', {'form': form})
 
-'''
-def register(response):
-    if response.method == "POST":
-        form = RegisterForm(response.POST)
-        if form.is_valid():
-            form.save()
-
-        return redirect('index')
+def treino_selecionado2(request, option):
+    if option == 'peitoral':
+        exercises = Exercise.objects.filter(group='peitoral')
+    elif option == 'costas':
+        exercises = Exercise.objects.filter(group='costas')
+    elif option == 'perna':
+        exercises = Exercise.objects.filter(group='perna')
     else:
-        form = RegisterForm()
-
-    return render(response, "galeria/register.html", {"form":form})
-'''
+        exercises = None
+    
+    context = {
+        'option': option.capitalize(),
+        'exercises': exercises,
+    }
+    
+    return render(request, 'galeria/treino_selecionado2.html', context)
