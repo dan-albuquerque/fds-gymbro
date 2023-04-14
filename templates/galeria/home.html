@@ -1,3 +1,6 @@
+{% extends 'galeria/base.html'%}
+{% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,6 +10,59 @@
     <title>Tela de home</title>
 </head>
 <body>
-    <h1>teste teste testando.</h1>
+    <h1>Seja bem vindo, bro!</h1>
+<div class="row row-cols-2 g-3">
+        <div class="col">
+          <div class="card">
+            <a href="{% url 'treinos' %}" class="nav-item nav-link" id="treinos-menu">
+              <img src="{% static 'img/supino-reto.webp' %}" class="card-img-top"
+                alt="imagem de um supino" />
+              <div class="card-body">
+                <h5 class="card-title" id="Treine">Treine conosco</h5>
+                <p class="card-text">
+                  Aprenda a treinar da melhor forma possível com nosso produto!</p>
+                </a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="{% static 'img/istockphoto-1339195913-1024x1024.webp '%}" class="card-img-top" alt="imagem de um braço musculoso" />
+            <div class="card-body">
+              <h5 class="card-title" id="Planejamento">Planejamento</h5>
+              <p class="card-text">
+                Planeje a melhor forma de treinar!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="{% static 'img/istockphoto-1362684836-1024x1024.webp' %}" class="card-img-top"
+              alt="dupla de genero oposto fazendo academia" />
+            <div class="card-body">
+              <h5 class="card-title" id="Desafios">Desafios</h5>
+              <p class="card-text">Cumpra estimulantes desafios para alcançar seus objetivos!</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <a href="{% url 'sono' %}" class="nav-item nav-link" id="sono-menu">
+              <img src="{% static 'img/barbell-1839086_960_720.jpg' %}" class="card-img-top"
+                alt="Homem forte levantando uma barra" />
+              <div class="card-body">
+                <h5 class="card-title" id="sono">Sono</h5>
+                <p class="card-text">
+                  Crie uma boa rotina de sono para conseguir o corpo que desejas.</p>
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+
 </body>
 </html>
+
+{% endblock %}

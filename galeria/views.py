@@ -61,3 +61,5 @@ def treino_selecionado2(request, option):
     }
     
     return render(request, 'galeria/treino_selecionado2.html', context)
+def home(request):
+    return render(request, 'galeria/home.html')
