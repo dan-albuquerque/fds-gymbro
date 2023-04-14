@@ -19,6 +19,9 @@ def treinos2(request):
 def sono(request):
     return render(request, 'galeria/sono.html')
 
+def sono2(request):
+    return render(request, 'galeria/sono2.html')
+
 def treino_selecionado(request, treino_id):
     treino_escolhido = get_object_or_404(Treinos, pk=treino_id) 
 

@@ -2,4 +2,76 @@
 {% load static %}
 {% block content %}
 
+<style>
+    .botao {
+  display: inline-block;
+  background-color: #4CAF50; /* cor de fundo */
+  color: white; /* cor do texto */
+  padding: 12px 24px; /* espaçamento interno */
+  border: none; /* borda */
+  border-radius: 4px; /* arredondamento das bordas */
+  font-size: 16px; /* tamanho da fonte */
+  cursor: pointer; /* cursor do mouse */
+  text-decoration: none; /* sublinhado do texto */
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.subtitulo{
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+label {
+  display: inline-block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+
+
+</style>
+
+<head>
+    <title>monitorar sono</title>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h1>Monitoramento do seu sono</h1>
+        <p class="subtitulo">como melhorar o acompanhamento do seu sono</p>
+    </div>
+    <br>
+    <br>
+    <div>
+        <h2>Você pretende dormir quantas horas por dia?</h2>
+        <label for="tempo_sono">Quantas horas?</label>
+        <input type="text" id="tempo_sono" name="tempo_sono">
+    </div>
+    <br>
+    <br>
+    <div>
+        <h2>Qual horário você pretende dormir?</h2>
+        <label for="hora_dormir">Qual horário</label>
+        <input type="text" id="hora_dormir" name="hora_dormir">
+    </div>
+    <br>
+    <br>
+    <div>
+        <a href="{% url 'sono2' %}" class="botao">Registrar</a>
+    </div>
+</body>
 {% endblock %}
