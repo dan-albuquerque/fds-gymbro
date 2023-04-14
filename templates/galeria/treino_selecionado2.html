@@ -31,7 +31,13 @@
         <td style="border: 1px solid #ddd; padding: 8px;">{{ exercise.sets }}</td>
         <td style="border: 1px solid #ddd; padding: 8px;">{{ exercise.reps }}</td>
         <td style="border: 1px solid #ddd; padding: 8px;">{{ exercise.rest }}</td>
-        <td style="border: 1px solid #ddd; padding: 8px;">{{ exercise.weight }}</td>
+        <td style="border: 1px solid #ddd; padding: 8px;"><form method="post" action="">
+    {% csrf_token %}
+    <label for="peso_ex">Insira peso: </label>
+  <input id="peso_ex" type="text" name="peso_ex" value="{{ exercise.weight }}">
+  <input type="submit" value="OK">
+</form></td>
+
     </tr>
 
     {% endfor %}

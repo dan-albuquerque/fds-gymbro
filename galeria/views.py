@@ -54,12 +54,21 @@ def treino_selecionado2(request, option):
         exercises = Exercise.objects.filter(group='perna')
     else:
         exercises = None
-    
+    if request.method == 'POST':
+        for exercise in exercises:
+            weight = request.POST.get('peso_ex{}')
+            if weight is not None and weight != '':
+                exercise.weight = weight
+                exercise.save()
+
+            #exercise.weight = Exercise(weight=weight)
+    #exercise.weight.save()
+
     context = {
         'option': option.capitalize(),
         'exercises': exercises,
     }
-    
+
     return render(request, 'galeria/treino_selecionado2.html', context)
 def home(request):
     return render(request, 'galeria/home.html')

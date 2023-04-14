@@ -14,4 +14,5 @@ urlpatterns = [
     path('treino_selecionado2/<str:option>', treino_selecionado2, name='treino_selecionado2'),
     path('sono2',sono2, name='sono2'),
 
+
 ]
