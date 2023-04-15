@@ -56,7 +56,7 @@ def treino_selecionado2(request, option):
         exercises = None
     if request.method == 'POST':
         for exercise in exercises:
-            weight = request.POST.get('peso_ex{}')
+            weight = request.POST.get('peso_ex_{}'.format(exercise.pk))
             if weight is not None and weight != '':
                 exercise.weight = weight
                 exercise.save()
