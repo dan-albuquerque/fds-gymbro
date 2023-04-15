@@ -21,7 +21,7 @@ Keep your data updated and mark all the workouts you do. Gymbro will show your p
 
 ## Development 
 
-Throughout the course of our dev time, it's always important to use the agile software XP method known as pair programming, where two people work together to design, test and code user stories. We achieved this by separating our team in groups of 2: Arthur Paixao and Carlos Augusto, Gabriel Pires and Danilo Albuquerque and last but not least, Bernardo Coutinho and Gabriel Rossiter. You can see how we managed our user stories to each group on our Jira page, linked below.
+Throughout the course of our dev time, It’s always important to use pair programming, a type of Agile Software XP Method method where two people work together to design, test and code user stories. We achieved this by separating our team in groups of 2: Arthur Paixao and Carlos Augusto, Gabriel Pires and Danilo Albuquerque and last but not least, Bernardo Coutinho and Gabriel Rossiter. You can see how we managed our user stories to each group on our Jira page, linked below.
 
 Using tools like discord for calls as well as meetings in person, we managed to, whenever possible, have these duos work together, assigning the duties of navigator and driver, understanding the limitations of each of us in Django, Html, Css and JavaScript, as we helped each other learn new things, seeing as how we´re still a long way from mastering all of these.
 
