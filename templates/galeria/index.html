@@ -8,7 +8,7 @@
               <img src="{% static 'img/logo.jpg' %}" class="img-fluid" alt="logo">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form method="post" class="from-group">
+              <form method="post" class="from-group", action="{% url 'home' %}">
                 {% csrf_token %}
                 {{form}}
                 <!-- Email input -->
