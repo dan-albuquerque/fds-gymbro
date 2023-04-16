@@ -1,5 +1,5 @@
 from django.urls import path, include
-from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, treinos2, sono2
+from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, treinos2, sono2, sono_selecionado
 
 urlpatterns = [
     path('home', home, name='home'),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('register', register, name='register' ),
     path('treino_selecionado2/<str:option>', treino_selecionado2, name='treino_selecionado2'),
     path('sono2',sono2, name='sono2'),
+    path('sono_selecionado', sono_selecionado, name="sono_selecionado")
 ]
