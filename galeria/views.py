@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from galeria.models import Treinos, Exercise
+from galeria.models import Treinos, Exercise, Sono
 from .forms import RegisterForm
 
 # Create your views here.
@@ -70,5 +70,25 @@ def treino_selecionado2(request, option):
     }
 
     return render(request, 'galeria/treino_selecionado2.html', context)
+
 def home(request):
     return render(request, 'galeria/home.html')
+
+
+
+def sono_selecionado(request):
+    sono = Sono.objects.get(pk=1)
+    if request.method == 'POST':
+        dormiu = request.POST.get('dormiu')
+        acordou = request.POST.get('acordou')
+        sono.dormiu = dormiu
+        sono.acordou = acordou
+        sono.save()
+    return render(request, 'galeria/sono.html', {'sono': sono})
+
+
+
+
+
+
+

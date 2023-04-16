@@ -1,8 +1,9 @@
 from django.contrib import admin
-from galeria.models import Treinos, Exercise
+from galeria.models import Treinos, Exercise, Sono
 
 admin.site.register(Treinos)
 admin.site.register(Exercise)
+admin.site.register(Sono)
 
 class ListandoTreinos(admin.ModelAdmin):
     list_display = ('id', 'nome_treino', 'legenda')

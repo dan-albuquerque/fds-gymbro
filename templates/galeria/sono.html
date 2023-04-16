@@ -46,32 +46,25 @@ label {
 
 </style>
 
-<head>
-    <title>monitorar sono</title>
-</head>
-<body>
-    <div style="text-align: center;">
-        <h1>Monitoramento do seu sono</h1>
-        <p class="subtitulo">como melhorar o acompanhamento do seu sono</p>
-    </div>
-    <br>
-    <br>
-    <div>
-        <h2>Você pretende dormir quantas horas por dia?</h2>
-        <label for="tempo_sono">Quantas horas?</label>
-        <input type="text" id="tempo_sono" name="tempo_sono">
-    </div>
-    <br>
-    <br>
-    <div>
-        <h2>Qual horário você pretende dormir?</h2>
-        <label for="hora_dormir">Qual horário</label>
-        <input type="text" id="hora_dormir" name="hora_dormir">
-    </div>
-    <br>
-    <br>
-    <div>
-        <a href="{% url 'sono2' %}" class="botao">Registrar</a>
-    </div>
-</body>
+
+  <title>monitorar sono</title>
+
+  <div style="text-align: center;">
+      <h1>Monitoramento do seu sono</h1>
+      <p class="subtitulo">como melhorar o acompanhamento do seu sono</p>
+  </div>
+  <br>
+  <br>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="dormiu">Dormir: </label>
+    <input id="dormiu" type="number" name="dormiu" value="{{ sono.dormiu }}">
+    <label for="acordou">Acorda: </label>
+    <input id="acordou" type="number" name="acordou" value="{{ sono.acordou }}">
+    <button type="submit">Enviar</button>
+  </form>
+  
+
+
+
 {% endblock %}

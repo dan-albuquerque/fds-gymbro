@@ -25,3 +25,7 @@ class Exercise(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Sono(models.Model):
+    dormiu = models.IntegerField(default=2)
+    acordou = models.IntegerField(default=2)
