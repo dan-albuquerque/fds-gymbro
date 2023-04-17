@@ -1,9 +1,10 @@
 from django.urls import path, include
-from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, treinos2, sono2, sono_selecionado
+from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, treinos2, sono2, sono_selecionado, logout_view
 
 urlpatterns = [
     path('home', home, name='home'),
     path('', index, name='index'),
+    path('logout', logout_view, name='logout'),
     path('treinos', treinos, name='treinos'),
     path('treinos2/', treinos2, name='treinos2'),
     path('sono', sono, name='sono'),
