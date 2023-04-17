@@ -3,9 +3,23 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from galeria.models import Treinos, Exercise, Sono
 from .forms import RegisterForm
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if username and password:
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'You have been logged in successfully!')
+                return redirect('home.html')
+            else:
+                messages.error(request, 'Invalid username or password!')
+        else:
+            messages.error(request, 'Please enter a valid username and password.')
     return render(request, 'galeria/index.html')
 
 def treinos(request):
