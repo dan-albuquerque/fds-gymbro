@@ -41,14 +41,8 @@ label {
   font-weight: bold;
   margin-bottom: 5px;
 }
-
-
-
-
 </style>
 
-
-  <title>monitorar sono</title>
 
   <div style="text-align: center;">
       <h1>Monitoramento do seu sono</h1>
@@ -56,8 +50,8 @@ label {
   </div>
   <br>
   <br>
-  <form method="POST" action = "{% url 'sono_selecionado' id_sono=sono.id %}">
-    {% csrf_token %}
+  <form method="POST" action="">
+      {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Enviar</button>
 </form>

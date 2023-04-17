@@ -26,7 +26,7 @@ def index(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('index.html')
+    return redirect('galeria/index.html')
 
 @login_required(login_url='/')
 def treinos(request):
