@@ -17,8 +17,6 @@ urlpatterns = [
     path('', include("django.contrib.auth.urls")),
     path('register', register, name='register' ),
     path('sono2',sono2, name='sono2'),
-
     path('sono_selecionado/<int:id_sono>/',sono_selecionado, name='sono_selecionado'),
-
     path('treino_selecionado2/<str:option>/', treino_selecionado2, name='treino_selecionado2'), 
 ]
