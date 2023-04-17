@@ -16,7 +16,7 @@ class Treinos(models.Model):
     grupo = models.CharField(max_length=100, null=False, blank=False, default='')
 
 class Exercise(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     group = models.CharField(max_length=50)
     sets = models.IntegerField()

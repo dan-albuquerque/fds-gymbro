@@ -46,13 +46,12 @@ def register(request):
     return render(request, 'galeria/register.html', {'form': form})
 
 def treino_selecionado2(request, option):
-    user = request.user
     if option == 'peitoral':
-        exercises = Exercise.objects.filter(user=user, group='peitoral')
+        exercises = Exercise.objects.filter(group='peitoral')
     elif option == 'costas':
-        exercises = Exercise.objects.filter(user=user, group='costas')
+        exercises = Exercise.objects.filter(group='costas')
     elif option == 'perna':
-        exercises = Exercise.objects.filter(user=user, group='perna')
+        exercises = Exercise.objects.filter(group='perna')
     else:
         exercises = None
 
