@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 
 # Create your models here.
 
@@ -16,16 +16,35 @@ class Treinos(models.Model):
     grupo = models.CharField(max_length=100, null=False, blank=False, default='')
 
 class Exercise(models.Model):
-    name = models.CharField(max_length=100) # exercise name
-    group = models.CharField(max_length=50) # group ?= peitoral, costas ou perna
-    sets = models.IntegerField() # sets number
-    reps = models.IntegerField() # reps number
-    rest = models.IntegerField(default=40) # rest time in secs
-    weight = models.IntegerField(default=1) # weight in kg
-    
-    def __str__(self):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    group = models.CharField(max_length=50)
+    sets = models.IntegerField()
+    reps = models.IntegerField()
+    rest = models.IntegerField(default=40)
+    weight = models.IntegerField(default=1)
+
+    def str(self):
         return self.name
     
 class Sono(models.Model):
     dormiu = models.IntegerField(default=2)
     acordou = models.IntegerField(default=2)
+    total_sono = models.IntegerField(null= True, blank=True)
+
+    def calcular_horas(self):
+        dormiu = int(self.dormiu)
+        acordou = int(self.acordou)
+        cont = 0
+
+        while dormiu <= 24 and dormiu > acordou:
+            cont = cont + 1
+            dormiu = dormiu + 1
+            if dormiu == 24:
+                dormiu = 1
+        while dormiu < acordou:
+            cont = cont + 1
+            dormiu = dormiu + 1
+        
+        self.total_sono = cont
+        self.save()

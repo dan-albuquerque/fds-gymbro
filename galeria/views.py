@@ -46,23 +46,22 @@ def register(request):
     return render(request, 'galeria/register.html', {'form': form})
 
 def treino_selecionado2(request, option):
+    user = request.user
     if option == 'peitoral':
-        exercises = Exercise.objects.filter(group='peitoral')
+        exercises = Exercise.objects.filter(user=user, group='peitoral')
     elif option == 'costas':
-        exercises = Exercise.objects.filter(group='costas')
+        exercises = Exercise.objects.filter(user=user, group='costas')
     elif option == 'perna':
-        exercises = Exercise.objects.filter(group='perna')
+        exercises = Exercise.objects.filter(user=user, group='perna')
     else:
         exercises = None
+
     if request.method == 'POST':
         for exercise in exercises:
             weight = request.POST.get('peso_ex_{}'.format(exercise.pk))
             if weight is not None and weight != '':
                 exercise.weight = weight
                 exercise.save()
-
-            #exercise.weight = Exercise(weight=weight)
-    #exercise.weight.save()
 
     context = {
         'option': option.capitalize(),
@@ -83,12 +82,7 @@ def sono_selecionado(request):
         acordou = request.POST.get('acordou')
         sono.dormiu = dormiu
         sono.acordou = acordou
+        sono.calcular_horas()
         sono.save()
-    return render(request, 'galeria/sono.html', {'sono': sono})
-
-
-
-
-
-
+    return render(request, 'galeria/sono_selecionado.html', {'sono': sono})
 

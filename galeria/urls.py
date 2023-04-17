@@ -10,7 +10,7 @@ urlpatterns = [
     path('treino_selecionado/<int:treino_id>', treino_selecionado, name='treino_selecionado'),
     path('', include("django.contrib.auth.urls")),
     path('register', register, name='register' ),
-    path('treino_selecionado2/<str:option>', treino_selecionado2, name='treino_selecionado2'),
     path('sono2',sono2, name='sono2'),
-    path('sono_selecionado', sono_selecionado, name="sono_selecionado")
+    path('sono_selecionado', sono_selecionado, name="sono_selecionado"),
+    path('treino_selecionado2/<str:option>/', treino_selecionado2, name='treino_selecionado2'), 
 ]

@@ -24,7 +24,7 @@
     </tr>
 
     {% if exercises %}
-    {% for exercise in exercises %}
+{% for exercise in exercises %}
 <tr>
   <td>{{ exercise.name }}</td>
   <td>{{ exercise.sets }}</td>
@@ -40,11 +40,9 @@
   </td>
 </tr>
 {% endfor %}
-
-
-    {% else %}
-        <li>Opção inválida.</li>
-    {% endif %}
+{% else %}
+    <li>Opção inválida.</li>
+{% endif %}
 
 {% endblock %}
 <!--
