@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<form method="POST" class="form-group", action="{% url 'home' %}">
+<form method="POST" class="form-group">
 	{% csrf_token %}
 	{{ form}}
 	<button type="submit" class="btn btn-success">Register</button>

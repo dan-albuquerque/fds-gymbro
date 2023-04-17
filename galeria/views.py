@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from galeria.models import Treinos, Exercise, Sono
 from .forms import RegisterForm
 from django.contrib import messages
@@ -8,19 +8,20 @@ from django.contrib import messages
 # Create your views here.
 def index(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        if username and password:
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 messages.success(request, 'You have been logged in successfully!')
-                return redirect('home.html')
-            else:
-                messages.error(request, 'Invalid username or password!')
+                return redirect('home')
         else:
-            messages.error(request, 'Please enter a valid username and password.')
-    return render(request, 'galeria/index.html')
+            messages.error(request, 'Invalid username or password!')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'galeria/index.html', {'form': form})
 
 def treinos(request):
     treinos = Treinos.objects.all()
