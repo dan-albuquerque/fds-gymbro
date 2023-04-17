@@ -35,8 +35,8 @@ class Exercise(models.Model):
 
 class Sono(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    dormiu = models.IntegerField(default=None)
-    acordou = models.IntegerField(default=None)
+    dormiu = models.IntegerField(default= None)
+    acordou = models.IntegerField(default= None)
     total_sono = models.IntegerField(null=True, blank=True)
 
     def calcular_horas(self):
@@ -44,11 +44,12 @@ class Sono(models.Model):
         acordou = int(self.acordou)
         cont = 0
 
-        while dormiu <= 24 and dormiu > acordou:
-            cont = cont + 1
-            dormiu = dormiu + 1
-            if dormiu == 24:
-                dormiu = 1
+        while dormiu <= 23 and dormiu > acordou:
+            if dormiu == 23:
+                dormiu=0
+                cont = cont+1
+            cont=cont+1
+            dormiu=dormiu+1
         while dormiu < acordou:
             cont = cont + 1
             dormiu = dormiu + 1

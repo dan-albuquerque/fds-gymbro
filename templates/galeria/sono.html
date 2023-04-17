@@ -55,7 +55,11 @@ label {
     {{ form.as_p }}
     <button type="submit">Enviar</button>
 </form>
-  
 
+{% if sono.dormiu and sono.acordou %}
+<div style="text-align: center;">
+    <p>Da última vez você dormiu {{ sono.dormiu }} horas e acordou {{ sono.acordou }} horas</p>
+</div>
+{% endif %}
 
 {% endblock %}

@@ -39,6 +39,7 @@ def treinos2(request):
     return render(request, 'galeria/treinos2.html')
 
 @login_required(login_url='/')
+@login_required(login_url='/')
 def sono(request):
     if request.method == 'POST':
         form = SonoForm(request.POST)
@@ -50,7 +51,12 @@ def sono(request):
             return redirect('sono_selecionado', id_sono=sono.id)
     else:
         form = SonoForm()
-    return render(request, 'galeria/sono.html', {'form': form})
+
+    latest_sono = Sono.objects.filter(user=request.user).last()
+
+    context = {'form': form, 'sono': latest_sono}
+
+    return render(request, 'galeria/sono.html', context)
 
 @login_required(login_url='/')
 def sono2(request):
