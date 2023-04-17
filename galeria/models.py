@@ -28,7 +28,6 @@ class Exercise(models.Model):
         return self.name
     
 class Sono(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     dormiu = models.IntegerField(default=None)
     acordou = models.IntegerField(default=None)
     total_sono = models.IntegerField(null= True, blank=True)

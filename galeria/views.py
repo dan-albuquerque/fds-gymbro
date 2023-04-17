@@ -102,7 +102,7 @@ def home(request):
 
 @login_required(login_url='/')
 def sono_selecionado(request):
-    sono = Sono.objects.filter(user=request.user).first()
+    sono = Sono.objects.get(pk=1)
     if request.method == 'POST':
         dormiu = request.POST.get('dormiu')
         acordou = request.POST.get('acordou')
