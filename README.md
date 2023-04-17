@@ -32,8 +32,7 @@ It is important to note that we swapped these jobs frequently, meaning we all go
 <a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
 <a href ="https://www.figma.com/proto/QEgeAOpzAlOgq7QZUUuQcW/gymbro-lo-fi?node-id=3-147&scaling=contain&page-id=0%3A1&starting-point-node-id=3%3A147&show-proto-sidebar=1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /> </a>
 
-Diagrama de atividades do sistema:
-<a href ="https://drive.google.com/file/d/1enzPE6KNYdQgluP1sPGaetvsSIMETtqX/view"></a>
+<a href ="https://drive.google.com/file/d/1enzPE6KNYdQgluP1sPGaetvsSIMETtqX/view">Diagrama de atividades do sistema:</a>
 
 ## License
 
