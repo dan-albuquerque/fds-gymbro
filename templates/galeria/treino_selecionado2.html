@@ -24,25 +24,38 @@
     </tr>
 
 {% if exercises %}
-{% for exercise in exercises %}
-<tr>
-  <td>{{ exercise.name }}</td>
-  <td>{{ exercise.sets }}</td>
-  <td>{{ exercise.reps }}</td>
-  <td>{{ exercise.rest }}</td>
-  <td>
-    <form method="post" action="">
-      {% csrf_token %}
-      <label for="peso_ex_{{ exercise.pk }}">Insira peso: </label>
-      <input id="peso_ex_{{ exercise.pk }}" type="text" name="peso_ex_{{ exercise.pk }}" value="{{ exercise.weight }}">
-      <input type="submit" value="OK">
-    </form>
-  </td>
-</tr>
-{% endfor %}
-{% else %}
-    <li>Opção inválida.</li>
-{% endif %}
+    <table>
+      <thead>
+        <tr>
+          <th>Exercise</th>
+          <th>Sets</th>
+          <th>Reps</th>
+          <th>Rest</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for exercise in exercises %}
+          <tr>
+            <td>{{ exercise.name }}</td>
+            <td>{{ exercise.sets }}</td>
+            <td>{{ exercise.reps }}</td>
+            <td>{{ exercise.rest }}</td>
+            <td>
+              <form method="post" action="">
+                {% csrf_token %}
+                <label for="peso_ex_{{ exercise.pk }}">Weight: </label>
+                <input id="peso_ex_{{ exercise.pk }}" type="text" name="peso_ex_{{ exercise.pk }}" value="{{ exercise.weight }}">
+                <input type="submit" value="OK">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No exercises found.</p>
+  {% endif %}
 
 {% endblock %}
 <!--

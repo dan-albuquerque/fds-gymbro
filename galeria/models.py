@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
+from django.db import models
 
-# Create your models here.
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 class Treinos(models.Model):
     OPCOES_TREINOS = [
@@ -16,7 +21,7 @@ class Treinos(models.Model):
     grupo = models.CharField(max_length=100, null=False, blank=False, default='')
 
 class Exercise(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     group = models.CharField(max_length=50)
     sets = models.IntegerField()
@@ -24,13 +29,15 @@ class Exercise(models.Model):
     rest = models.IntegerField(default=40)
     weight = models.IntegerField(default=1)
 
-    def str(self):
+    def __str__(self):
         return self.name
-    
+
+
 class Sono(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     dormiu = models.IntegerField(default=None)
     acordou = models.IntegerField(default=None)
-    total_sono = models.IntegerField(null= True, blank=True)
+    total_sono = models.IntegerField(null=True, blank=True)
 
     def calcular_horas(self):
         dormiu = int(self.dormiu)
@@ -45,6 +52,6 @@ class Sono(models.Model):
         while dormiu < acordou:
             cont = cont + 1
             dormiu = dormiu + 1
-        
+
         self.total_sono = cont
         self.save()

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from galeria.models import Treinos, Exercise, Sono
-from .forms import RegisterForm
+from .forms import RegisterForm, SonoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -40,7 +40,17 @@ def treinos2(request):
 
 @login_required(login_url='/')
 def sono(request):
-    return render(request, 'galeria/sono.html')
+    if request.method == 'POST':
+        form = SonoForm(request.POST)
+        if form.is_valid():
+            sono = form.save(commit=False)
+            sono.user = request.user  # Associando o usuário atualmente autenticado à instância de Sono
+            sono.calcular_horas()
+            sono.save()
+            return redirect('sono_selecionado', id_sono=sono.id)
+    else:
+        form = SonoForm()
+    return render(request, 'galeria/sono.html', {'form': form})
 
 @login_required(login_url='/')
 def sono2(request):
@@ -74,11 +84,11 @@ def register(request):
 @login_required(login_url='/')
 def treino_selecionado2(request, option):
     if option == 'peitoral':
-        exercises = Exercise.objects.filter(group='peitoral')
+        exercises = Exercise.objects.filter(user=request.user, group='peitoral')
     elif option == 'costas':
-        exercises = Exercise.objects.filter(group='costas')
+        exercises = Exercise.objects.filter(user=request.user, group='costas')
     elif option == 'perna':
-        exercises = Exercise.objects.filter(group='perna')
+        exercises = Exercise.objects.filter(user=request.user, group='perna')
     else:
         exercises = None
 
@@ -100,18 +110,8 @@ def treino_selecionado2(request, option):
 def home(request):
     return render(request, 'galeria/home.html')
 
-@login_required(login_url='/')
-def sono_selecionado(request):
-    sono = Sono.objects.get(pk=1)
-    if request.method == 'POST':
-        dormiu = request.POST.get('dormiu')
-        acordou = request.POST.get('acordou')
-        if sono:
-            sono.dormiu = dormiu
-            sono.acordou = acordou
-        else:
-            sono = Sono(user=request.user, dormiu=dormiu, acordou=acordou)
-        sono.calcular_horas()
-        sono.save()
-    return render(request, 'galeria/sono_selecionado.html', {'sono': sono})
 
+@login_required(login_url='/')
+def sono_selecionado(request, id_sono):
+    sono = Sono.objects.get(id=id_sono)
+    return render(request, 'galeria/sono_selecionado.html', {'sono': sono})

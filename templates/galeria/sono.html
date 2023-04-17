@@ -56,14 +56,11 @@ label {
   </div>
   <br>
   <br>
-  <form method="POST" action="{% url 'sono_selecionado' %}">
+  <form method="POST" action = "{% url 'sono_selecionado' id_sono=sono.id %}">
     {% csrf_token %}
-    <label for="dormiu">Dormir(De 1 até 24): </label>
-    <input id="dormiu" type="number" name="dormiu" value="{{ sono.dormiu }}">
-    <label for="acordou">Acorda(De 1 até 24): </label>
-    <input id="acordou" type="number" name="acordou" value="{{ sono.acordou }}">
+    {{ form.as_p }}
     <button type="submit">Enviar</button>
-  </form>
+</form>
   
 
 
