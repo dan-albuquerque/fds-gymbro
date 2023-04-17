@@ -5,6 +5,7 @@ from galeria.models import Treinos, Exercise, Sono
 from .forms import RegisterForm, SonoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 # Create your views here.
 def index(request):
@@ -26,7 +27,7 @@ def index(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('galeria/index.html')
+    return redirect(reverse('index'))
 
 @login_required(login_url='/')
 def treinos(request):
