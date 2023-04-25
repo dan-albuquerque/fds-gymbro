@@ -1,5 +1,5 @@
 from django.urls import path, include
-from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, treinos2, sono2, sono_selecionado, logout_view
+from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, treinos2, sono2, sono_selecionado, logout_view, planejamento
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 
@@ -19,4 +19,6 @@ urlpatterns = [
     path('sono2',sono2, name='sono2'),
     path('sono_selecionado/<int:id_sono>/',sono_selecionado, name='sono_selecionado'),
     path('treino_selecionado2/<str:option>/', treino_selecionado2, name='treino_selecionado2'), 
+    path('planejamento', planejamento, name='planejamento'),
+
 ]

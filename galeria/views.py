@@ -122,3 +122,7 @@ def home(request):
 def sono_selecionado(request, id_sono):
     sono = Sono.objects.get(id=id_sono)
     return render(request, 'galeria/sono_selecionado.html', {'sono': sono})
+
+#@login_required(login_url='/') VER DEPOIS
+def planejamento(request):
+    return render(request, 'galeria/planejamento.html')

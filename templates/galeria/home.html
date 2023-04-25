@@ -27,11 +27,13 @@
         </div>
         <div class="col">
           <div class="card">
-            <img src="{% static 'img/istockphoto-1339195913-1024x1024.webp '%}" class="card-img-top" alt="imagem de um braço musculoso" />
-            <div class="card-body">
-              <h5 class="card-title" id="Planejamento">Planejamento</h5>
-              <p class="card-text">
-                Planeje a melhor forma de treinar!</p>
+            <a href="{% url 'planejamento' %}">
+              <img src="{% static 'img/istockphoto-1339195913-1024x1024.webp '%}" class="card-img-top" alt="imagem de um braço musculoso" />
+              <div class="card-body">
+                <h5 class="card-title" id="Planejamento">Planejamento</h5>
+                <p class="card-text">
+                  Planeje a melhor forma de treinar!</p>
+              </a>
             </div>
           </div>
         </div>
