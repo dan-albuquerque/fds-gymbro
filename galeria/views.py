@@ -29,6 +29,9 @@ def logout_view(request):
     logout(request)
     return redirect(reverse('index'))
 
+def execução(request):
+    return render(request, 'galeria/execução.html')
+
 @login_required(login_url='/')
 def treinos(request):
     treinos = Treinos.objects.all()
