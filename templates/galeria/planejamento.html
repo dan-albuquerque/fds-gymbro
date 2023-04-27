@@ -30,43 +30,79 @@
     td input[type="text"]:focus {
         outline: none;
       }
-    /* Adicione mais estilos de acordo com suas necessidades */
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="time"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+    
+    .meus-planejamentos {
+        background-color: #4CAF50; 
+        border: none; 
+        color: black; 
+        padding: 10px 20px; 
+        text-align: center; 
+        text-decoration: none; 
+        display: inline-block; 
+        font-size: 16px; 
+        border-radius: 5px; 
+        cursor: pointer; 
+    }
+
     </style>
-<body>
-  <table>
-    <tr>
-      <th>Dia da semana</th>
-      <th>Horários</th>
-    </tr>
-    <tr>
-      <td>Segunda-feira</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-    <tr>
-      <td>Terça-feira</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-    <tr>
-      <td>Quarta-feira</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-    <tr>
-      <td>Quinta-feira</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-    <tr>
-      <td>Sexta-feira</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-    <tr>
-      <td>Sábado</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-    <tr>
-      <td>Domingo</td>
-      <td><input type="text" placeholder="Horário 1"></td>
-    </tr>
-  </table>
-</body>
+<table>
+  <tr>
+    <th>Dia da semana</th>
+    <th>Horários</th>
+    <th>Confirmar</th>
+  </tr>
+  <tr>
+    <td>Segunda-feira</td>
+    <td><input type="time" name="segunda_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('segunda_horario1')">Confirmar</button></td>
+  </tr>
+  <tr>
+    <td>Terça-feira</td>
+    <td><input type="time" name="terca_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('terca_horario1')">Confirmar</button></td>
+  </tr>
+  <tr>
+    <td>Quarta-feira</td>
+    <td><input type="time" name="quarta_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('quarta_horario1')">Confirmar</button></td>
+  </tr>
+  <tr>
+    <td>Quinta-feira</td>
+    <td><input type="time" name="quinta_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('quinta_horario1')">Confirmar</button></td>
+  </tr>
+  <tr>
+    <td>Sexta-feira</td>
+    <td><input type="time" name="sexta_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('sexta_horario1')">Confirmar</button></td>
+  </tr>
+  <tr>
+    <td>Sábado</td>
+    <td><input type="time" name="sabado_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('sabado_horario1')">Confirmar</button></td>
+  </tr>
+  <tr>
+    <td>Domingo</td>
+    <td><input type="time" name="domingo_horario1"></td>
+    <td><button type="button" onclick="confirmarHorario('domingo_horario1')">Confirmar</button></td>
+  </tr>
+</table>
+<br>
+<center>
+  <button class="meus-planejamentos" type="button">Meus planejamentos</button>
+</center>  
+
 
 {% endblock %}
