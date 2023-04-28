@@ -13,9 +13,6 @@
    color: #333;}
 </style>
 
-
-
-
 {% if exercises %}
     <table>
       <thead>
@@ -44,7 +41,7 @@
               </form>
               </td>
               <td>
-              <form method="post" action="{% url 'execução' %}">
+              <form method="post" action="{% url 'execução' exercise_id=exercise.id %}">
                 {% csrf_token %}
                 <button type="submit">Execução</button>
               </form>
@@ -58,27 +55,3 @@
   {% endif %}
 
 {% endblock %}
-<!--
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Treino de {{ option }}</title>
-</head>
-<body>
-    <h1>Treino de {{ option }}</h1>
-    <ul>
-    {% if exercises %}
-        {% for exercise in exercises %}
-            <li>{{ exercise.name }}</li>
-        {% empty %}
-            <li>Nenhum exercício encontrado.</li>
-        {% endfor %}
-    {% else %}
-        <li>Opção inválida.</li>
-    {% endif %}
-    </ul>
-</body>
-</html>
-
--->

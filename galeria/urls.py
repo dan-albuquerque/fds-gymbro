@@ -6,7 +6,7 @@ from django.contrib.auth.views import LogoutView
 admin.site.logout_template = 'admin/logout.html' 
 admin.site.logout_view = LogoutView.as_view(next_page='/admin/login/')
 urlpatterns = [
-    path('execução', execução, name='execução'),
+    path('execução/<int:exercise_id>/', execução, name='execução'),
     path('home', home, name='home'),
     path('', index, name='index'),
     path('logout/', logout_view, name='logout'),

@@ -5,11 +5,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Sua execução</title>
+    <title>{{ exercise.name }}</title>
 </head>
 <body>
-<h1>sua execução!</h1>
-<iframe width="700" height="400" src="https://www.youtube.com/embed/sqOw2Y6uDWQ?controls=0&amp;start=10" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<h1><b style="padding-left: 50px;padding-bottom: 200px;color: #32CD32";>{{exercise.name}}</b></h1>
+<div class="video-container" style="float:left; padding-right: 20px;">
+    <iframe width="700" height="400" src="{{ exercise.link }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+<h1 style = "color: #ffffff"><b>execução correta:</b></h1>
+<p style="padding-left: 50px; margin-top: 20px; font-size: 20px">{{ exercise.description }}</p>
 </body>
 </html>
 {% endblock %}
