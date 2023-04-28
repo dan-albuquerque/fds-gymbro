@@ -28,6 +28,8 @@ class Exercise(models.Model):
     reps = models.IntegerField()
     rest = models.IntegerField(default=40)
     weight = models.IntegerField(default=1)
+    description = models.CharField(max_length=3000)
+    link = models.TextField(max_length=3000)
 
     def __str__(self):
         return self.name
