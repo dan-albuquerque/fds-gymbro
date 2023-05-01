@@ -136,7 +136,9 @@ def treino_selecionado2(request, option):
 
 @login_required(login_url='/')
 def home(request):
-   return render(request, 'galeria/home.html')
+    latest_sono = Sono.objects.filter(user=request.user).last()
+    context = {'sono': latest_sono}
+    return render(request, 'galeria/home.html', context)
 
 
 

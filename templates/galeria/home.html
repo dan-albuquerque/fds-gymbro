@@ -11,6 +11,10 @@
 </head>
 <body>
     <h1><b style="padding-left: 50px;padding-bottom: 200px;color: #32CD32";>Seja bem vindo, bro!</b></h1>
+    {% if sono.dormiu %}
+    <p style= "padding-left:50px; font-size:18px ":>Se lembre de dormir às {{ sono.dormiu }}. <b style="color: #32CD32">Manter um bom horário de sono é essencial para atingir seus objetivos!</b></p>
+    <p style= "padding-left:50px; font-size:18px ":>Depois seria interessante a gente botar o horario de treino aqui também</p>
+    {% endif %}
 
 <div class="row row-cols-2 g-3">
         <div class="col">
