@@ -5,7 +5,6 @@
 <h1 style="padding-left: 50px" ;><b>Seus treinos</b></h1><br>
 <div class="row row-cols-2 g-3">
   <div class="col">
-    {% if cards %}
     {% for treino in cards %}
     <div class="card">
       <a href="{% url 'treino_selecionado2' treino.grupo %}" class="navbar-brand">
@@ -15,9 +14,9 @@
         </div>
       </a>
     </div>
+    {% empty %}
+    <p>No cards to display.</p>
     {% endfor %}
-    {% else %}
-    {% endif %}
   </div>
 </div>
 
@@ -45,6 +44,9 @@
     </div>
     <button type="submit" class="btn btn-primary">Selecionar</button>
   </form>
+
+  <h1 style="padding-left: 50px" ;><b>Seus treinos</b></h1><br>
+  <div class="row row-cols-2 g-3">
 </div>
 
 {% endblock %}

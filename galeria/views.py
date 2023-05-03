@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from galeria.models import Treinos, Exercise, Sono
+from galeria.models import Treinos, Exercise, Sono, UserObjective
 from .forms import RegisterForm, SonoForm, ObjetivoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -37,8 +37,19 @@ def execução(request, exercise_id):
 
 @login_required(login_url='/')
 def treinos(request):
-   treinos = Treinos.objects.all()
-   return render(request, 'galeria/treinos.html', {'cards': treinos})
+    if request.method == "POST":
+        objetivo = request.POST.get("objetivo")
+        if objetivo:
+            user_objective, created = UserObjective.objects.get_or_create(user=request.user)
+            user_objective.selected_objective = objetivo
+            user_objective.save()
+            treinos = Treinos.objects.filter(objetivo=objetivo)
+        else:
+            treinos = Treinos.objects.all() 
+    else:
+        treinos = Treinos.objects.all()
+    return render(request, 'galeria/treinos.html', {'cards': treinos})
+
 
 @login_required(login_url='/')
 def sono(request):
@@ -46,7 +57,7 @@ def sono(request):
        form = SonoForm(request.POST)
        if form.is_valid():
            sono = form.save(commit=False)
-           sono.user = request.user  # Associando o usuário atualmente autenticado à instância de Sono
+           sono.user = request.user
            sono.calcular_horas()
            sono.save()
            return redirect(request.path)

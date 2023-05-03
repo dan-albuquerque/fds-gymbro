@@ -19,6 +19,13 @@ class Treinos(models.Model):
     descricao = models.TextField(null=False, blank=False)
     categoria = models.CharField(max_length=100, choices=OPCOES_TREINOS, default='')
     grupo = models.CharField(max_length=100, null=False, blank=False, default='')
+    OBJETIVOS_CHOICES = [
+        ("hipertrofia", "Hipertrofia"),
+        ("resistencia", "Resistência"),
+        ("forca", "Força"),
+    ]
+    objetivo = models.CharField(max_length=100, choices=OBJETIVOS_CHOICES, default='hipertrofia')
+
 
 class Exercise(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -58,3 +65,7 @@ class Sono(models.Model):
 
         self.total_sono = cont
         self.save()
+        
+class UserObjective(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    selected_objective = models.CharField(max_length=100, choices=Treinos.OBJETIVOS_CHOICES, default='hipertrofia')
