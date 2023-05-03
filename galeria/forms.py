@@ -2,12 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from galeria.models import Sono, Exercise
-'''
-class ExercicioForm(forms.ModelForm):
-    class Meta:
-        model = Exercicio
-        fields = ['nome_exercicio']
-'''
+
 class SonoForm(forms.ModelForm):
     class Meta:
         model = Sono
@@ -40,8 +35,6 @@ class RegisterForm(UserCreationForm):
         Exercise.objects.create(user=user, name='cadeira abdutora', group='perna', sets=3, reps=12, rest=45, weight=15,description = 'Sente-se na máquina, posicione os pés nos apoios, suba a trava e una as pernas vagarosamente. Para o movimento de abdução, você deve fazer força empurrando a máquina para fora, afastando os joelhos. Depois você deve voltar à posição inicial lentamente, mantendo a tensão dos músculos em vez de soltar o peso da máquina de uma vez.', link = 'https://www.youtube.com/embed/yVZ0Vs7j6EM?start=43')# title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
         Exercise.objects.create(user=user, name='elevação panturrilha', group='perna', sets=3, reps=12, rest=45, weight=15,description = 'De pé, coloque uma mão na cintura e outra nas costas da cadeira servindo como apoio. Coloque o peso do corpo sobre a planta de um dos pés e eleve o calcanhar o mais alto que conseguir até a outra perna sair do chão, depois retorne a posição inicial lentamente', link = 'https://www.youtube.com/embed/h7bZ4XbuZLg?start=43')# title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
 
-
-
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
@@ -49,3 +42,11 @@ class RegisterForm(UserCreationForm):
             user.save()
             self.create_exercises(user)
         return user
+
+class ObjetivoForm(forms.Form):
+    OBJETIVO_CHOICES = [
+        ('hipertrofia', 'Hipertrofia'),
+        ('resistencia', 'Resistência'),
+        ('forca', 'Força')
+    ]
+    objetivo = forms.ChoiceField(choices=OBJETIVO_CHOICES)

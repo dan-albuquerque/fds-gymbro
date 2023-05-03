@@ -2,15 +2,15 @@
 {% load static %}
 {% block content %}
 
-<h1 style="padding-left: 50px";><b>Seus treinos</b></h1><br>
-<div class="row row-cols-2 g-3" >
+<h1 style="padding-left: 50px" ;><b>Seus treinos</b></h1><br>
+<div class="row row-cols-2 g-3">
   <div class="col">
     {% if cards %}
     {% for treino in cards %}
-    <div class="card">      
+    <div class="card">
       <a href="{% url 'treino_selecionado2' treino.grupo %}" class="navbar-brand">
-        <img class="card-img-top" src="{{treino.foto.url}}"  alt="imagem de um supino" />
-        <div class="card-body"> 
+        <img class="card-img-top" src="{{treino.foto.url}}" alt="imagem de um supino" />
+        <div class="card-body">
           <h5 class="card-title" id="Treine">{{treino.nome_treino}}</h5>
         </div>
       </a>
@@ -20,4 +20,31 @@
     {% endif %}
   </div>
 </div>
+
+<div class="col">
+  <form action="{% url 'escolher_objetivo' %}" method="post">
+    {% csrf_token %}
+    <h2>Escolha seu objetivo:</h2>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="objetivo" id="hipertrofia" value="hipertrofia">
+      <label class="form-check-label" for="hipertrofia">
+        Hipertrofia
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="objetivo" id="resistencia" value="resistencia">
+      <label class="form-check-label" for="resistencia">
+        Resistência
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="objetivo" id="forca" value="forca">
+      <label class="form-check-label" for="forca">
+        Força
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Selecionar</button>
+  </form>
+</div>
+
 {% endblock %}

@@ -21,8 +21,6 @@
         <form method="post" class="form-group" action="{% url 'index' %}">
           {% csrf_token %}
           {{ form.as_p }}
-        
-
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="btn btn-success"
               style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
