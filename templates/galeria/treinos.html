@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 
-<h1 style="padding-left: 50px" ;><b>Seus treinos</b></h1><br>
+
 <div class="row row-cols-2 g-3">
   <div class="col">
     {% for treino in cards %}
@@ -20,10 +20,10 @@
   </div>
 </div>
 
-<div class="col">
+<div style="position: absolute; top: 150px; right: 100px;">
   <form action="{% url 'treinos' %}" method="post">
     {% csrf_token %}
-    <h2>Escolha seu objetivo:</h2>
+    <h1><b>Escolha seu objetivo:</b></h1>
     <div class="form-check">
       <input class="form-check-input" type="radio" name="objetivo" id="hipertrofia" value="hipertrofia">
       <label class="form-check-label" for="hipertrofia">
@@ -44,9 +44,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Selecionar</button>
   </form>
-
-  <h1 style="padding-left: 50px" ;><b>Seus treinos</b></h1><br>
-  <div class="row row-cols-2 g-3">
 </div>
 
 {% endblock %}
