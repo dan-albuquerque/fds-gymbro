@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from galeria.models import Treinos, Exercise, Sono, UserObjective
-from .forms import RegisterForm, SonoForm, ObjetivoForm
+from .forms import RegisterForm, SonoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -37,18 +37,41 @@ def execução(request, exercise_id):
 
 @login_required(login_url='/')
 def treinos(request):
+    treinos = Treinos.objects.all()
+    user_objective, created = UserObjective.objects.get_or_create(user=request.user)
+
+    print(user_objective.selected_objective)#não estou conseguindo visualizar
+
     if request.method == "POST":
         objetivo = request.POST.get("objetivo")
         if objetivo:
-            user_objective, created = UserObjective.objects.get_or_create(user=request.user)
             user_objective.selected_objective = objetivo
             user_objective.save()
-            treinos = Treinos.objects.filter(objetivo=objetivo)
-        else:
-            treinos = Treinos.objects.all() 
+            
+    exercises = Exercise.objects.filter(user=request.user)
+
+    if user_objective.selected_objective == 'hipertrofia':
+        # repetições dos exercícios passam a ser 12
+        for exercise in exercises:
+            exercise.reps = 12
+            exercise.rest = '30s'
+            exercise.save()
+
+    elif user_objective.selected_objective == 'resistencia':
+        # repetições dos exercícios passam a ser 15
+        for exercise in exercises:
+            exercise.reps = 15
+            exercise.rest = '60s'
+            exercise.save()
+
     else:
-        treinos = Treinos.objects.all()
-    return render(request, 'galeria/treinos.html', {'cards': treinos})
+        # repetições dos exercícios passam a ser 10
+        for exercise in exercises:
+            exercise.reps = 8
+            exercise.rest = '120s'
+            exercise.save()
+
+    return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective})
 
 
 @login_required(login_url='/')
@@ -133,36 +156,3 @@ def sono_selecionado(request, id_sono):
 @login_required(login_url='/')
 def planejamento(request):
    return render(request, 'galeria/planejamento.html')
-
-@login_required(login_url='/')
-def escolher_objetivo(request):
-    if request.method == 'POST':
-        form = ObjetivoForm(request.POST)
-        if form.is_valid():
-            objetivo = form.cleaned_data['objetivo']
-            exercises = Exercise.objects.all()
-
-            if objetivo == 'hipertrofia':
-                # repetições dos exercícios passam a ser 12
-                for exercise in exercises:
-                    exercise.reps = 12
-                    exercise.save()
-
-            elif objetivo == 'resistência':
-                # repetições dos exercícios passam a ser 15
-                for exercise in exercises:
-                    exercise.reps = 15
-                    exercise.save()
-
-            else:
-                # repetições dos exercícios passam a ser 10
-                for exercise in exercises:
-                    exercise.reps = 10
-                    exercise.save()
-
-            exercises = Exercise.objects.all()
-
-            return render(request, 'galeria/treinos.html', {'objetivo': objetivo, 'exercises': exercises})
-    else:
-        form = ObjetivoForm()
-    return render(request, 'galeria/treinos.html', {'form': form})

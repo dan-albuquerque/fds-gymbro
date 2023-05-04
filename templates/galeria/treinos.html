@@ -21,6 +21,16 @@
 </div>
 
 <div style="position: absolute; top: 150px; right: 100px;">
+  <p>
+    <b style="color:#2bff00">Seu objetivo atual:</b>
+    {% if user_objective.selected_objective == 'hipertrofia' %}
+        <h1 style="color:#ffffff;">Hipertrofia</h1>
+    {% elif user_objective.selected_objective == 'resistencia' %}
+        <h1 style="color:#ffffff;">Resistência</h1>
+    {% elif user_objective.selected_objective == 'forca' %}
+        <h1 style="color:#ffffff;">Força</h1>
+    {% endif %}
+  </p>
   <form action="{% url 'treinos' %}" method="post">
     {% csrf_token %}
     <h1><b>Escolha seu objetivo:</b></h1>
