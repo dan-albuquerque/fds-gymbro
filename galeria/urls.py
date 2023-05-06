@@ -5,6 +5,7 @@ from django.contrib.auth.views import LogoutView
 
 admin.site.logout_template = 'admin/logout.html' 
 admin.site.logout_view = LogoutView.as_view(next_page='/admin/login/')
+
 urlpatterns = [
     path('execução/<int:exercise_id>/', execução, name='execução'),
     path('home', home, name='home'),
@@ -12,7 +13,6 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('treinos', treinos, name='treinos'),
     path('sono', sono, name='sono'),
-    path('sono/', sono, name='sono'),
     path('treino_selecionado/<int:treino_id>', treino_selecionado, name='treino_selecionado'),
     path('', include("django.contrib.auth.urls")),
     path('register', register, name='register' ),

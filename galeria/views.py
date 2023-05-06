@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from galeria.models import Treinos, Exercise, Sono, UserObjective
-from .forms import RegisterForm, SonoForm
+from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento
+from .forms import RegisterForm, SonoForm, PlanejamentoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
@@ -73,7 +73,7 @@ def treinos(request):
 
     return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective})
 
-
+####
 @login_required(login_url='/')
 def sono(request):
    if request.method == 'POST':
@@ -155,4 +155,15 @@ def sono_selecionado(request, id_sono):
 
 @login_required(login_url='/')
 def planejamento(request):
-   return render(request, 'galeria/planejamento.html')
+    if request.method == 'POST':
+        form = PlanejamentoForm(request.POST)
+        if form.is_valid():
+            planos = form.save(commit=False)
+            planos.user = request.user
+            planos.save()
+            return redirect(request.path)
+    else:
+        form = PlanejamentoForm()
+
+    horarios = Planejamento.objects.filter(user=request.user).last()
+    return render(request, 'galeria/planejamento.html', {'form': form, 'planejamentos': horarios})

@@ -67,3 +67,9 @@ class UserObjective(models.Model):
         ("forca", "Força"),
     ]
     selected_objective = models.CharField(max_length=100, choices=OBJETIVOS_CHOICES, default='hipertrofia')
+
+class Planejamento(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    data = models.DateField()
+    horario = models.TimeField()
+    

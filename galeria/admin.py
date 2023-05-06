@@ -1,10 +1,11 @@
 from django.contrib import admin
-from galeria.models import Treinos, Exercise, Sono, UserObjective
+from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento
 
 admin.site.register(Treinos)
 admin.site.register(Exercise)
 admin.site.register(Sono)
 admin.site.register(UserObjective)
+admin.site.register(Planejamento)
 
 
 class ListandoTreinos(admin.ModelAdmin):

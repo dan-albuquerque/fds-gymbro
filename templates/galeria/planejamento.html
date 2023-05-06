@@ -2,61 +2,61 @@
 {% load static %}
 {% block content %}
 <style>
-   table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      
-    th, td {
-        border: 1px solid black;
-        padding: 12px;
-        text-align: center;
-      }
-      
-    th {
-        background-color: #4CAF50;
-        color: white;
-      }
-      
-    tr:nth-child(even) {
-        background-color: black;
-      }
-      
-    td input[type="text"] {
-        width: 100%;
-        border: none;
-      }
-      
-    td input[type="text"]:focus {
-        outline: none;
-      }
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    input[type="time"] {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
+  table {
+    border-collapse: collapse;
+    width: 100%;
     }
     
-    .meus-planejamentos {
-        background-color: #4CAF50; 
-        border: none; 
-        color: black; 
-        padding: 10px 20px; 
-        text-align: center; 
-        text-decoration: none; 
-        display: inline-block; 
-        font-size: 16px; 
-        border-radius: 5px; 
-        cursor: pointer; 
+  th, td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: center;
+    }
+    
+  th {
+    background-color: #4CAF50;
+    color: white;
+    }
+    
+  tr:nth-child(even) {
+    background-color: black;
+    }
+    
+  td input[type="text"] {
+    width: 100%;
+    border: none;
+    }
+    
+  td input[type="text"]:focus {
+    outline: none;
     }
 
-    </style>
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input[type="time"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .meus-planejamentos {
+    background-color: #4CAF50; 
+    border: none; 
+    color: black; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+</style>
+
 <table>
   <tr>
     <th>Dia da semana</th>
@@ -102,7 +102,8 @@
 <br>
 <center>
   <button class="meus-planejamentos" type="button">Meus planejamentos</button>
-</center>  
+</center>
+
 
 
 {% endblock %}

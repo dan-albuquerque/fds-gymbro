@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from galeria.models import Sono, Exercise
+from galeria.models import Sono, Exercise, Planejamento
 
 class SonoForm(forms.ModelForm):
     class Meta:
@@ -42,3 +42,8 @@ class RegisterForm(UserCreationForm):
             user.save()
             self.create_exercises(user)
         return user
+
+class PlanejamentoForm(forms.ModelForm):
+    class Meta:
+        model = Planejamento
+        fields = ('data', 'horario')
