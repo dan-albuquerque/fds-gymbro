@@ -57,48 +57,57 @@
   }
 </style>
 
-<table>
-  <tr>
-    <th>Dia da semana</th>
-    <th>Horários</th>
-    <th>Confirmar</th>
-  </tr>
-  <tr>
-    <td>Segunda-feira</td>
-    <td><input type="time" name="segunda_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('segunda_horario1')">Confirmar</button></td>
-  </tr>
-  <tr>
-    <td>Terça-feira</td>
-    <td><input type="time" name="terca_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('terca_horario1')">Confirmar</button></td>
-  </tr>
-  <tr>
-    <td>Quarta-feira</td>
-    <td><input type="time" name="quarta_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('quarta_horario1')">Confirmar</button></td>
-  </tr>
-  <tr>
-    <td>Quinta-feira</td>
-    <td><input type="time" name="quinta_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('quinta_horario1')">Confirmar</button></td>
-  </tr>
-  <tr>
-    <td>Sexta-feira</td>
-    <td><input type="time" name="sexta_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('sexta_horario1')">Confirmar</button></td>
-  </tr>
-  <tr>
-    <td>Sábado</td>
-    <td><input type="time" name="sabado_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('sabado_horario1')">Confirmar</button></td>
-  </tr>
-  <tr>
-    <td>Domingo</td>
-    <td><input type="time" name="domingo_horario1"></td>
-    <td><button type="button" onclick="confirmarHorario('domingo_horario1')">Confirmar</button></td>
-  </tr>
-</table>
+<form method="POST" action="{% url 'planejamento' %}">
+  {% csrf_token %}
+  <table>
+    <thead>
+      <tr>
+        <th>Dia da semana</th>
+        <th>Horários</th>
+        <th>Confirmar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Segunda-feira</td>
+        <td><input type="time" name="segunda_horario1"></td>
+        <td><button type="submit" name="confirmar_segunda1" value="segunda_horario1">Confirmar</button></td>
+      </tr>
+      <tr>
+        <td>Terça-feira</td>
+        <td><input type="time" name="terca_horario1"></td>
+        <td><button type="submit" name="confirmar_terca1" value="terca_horario1">Confirmar</button></td>
+      </tr>
+      <tr>
+        <td>Quarta-feira</td>
+        <td><input type="time" name="quarta_horario1"></td>
+        <td><button type="submit" name="confirmar_quarta1" value="quarta_horario1">Confirmar</button></td>
+      </tr>
+      <tr>
+        <td>Quinta-feira</td>
+        <td><input type="time" name="quinta_horario1"></td>
+        <td><button type="submit" name="confirmar_quinta1" value="quinta_horario1">Confirmar</button></td>
+      </tr>
+      <tr>
+        <td>Sexta-feira</td>
+        <td><input type="time" name="sexta_horario1"></td>
+        <td><button type="submit" name="confirmar_sexta1" value="sexta_horario1">Confirmar</button></td>
+      </tr>
+      <tr>
+        <td>Sábado</td>
+        <td><input type="time" name="sabado_horario1"></td>
+        <td><button type="submit" name="confirmar_sabado1" value="sabado_horario1">Confirmar</button></td>
+      </tr>
+      <tr>
+        <td>Domingo</td>
+        <td><input type="time" name="domingo_horario1"></td>
+        <td><button type="submit" name="confirmar_domingo1" value="domingo_horario1">Confirmar</button></td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+
 <br>
 <center>
   <button class="meus-planejamentos" type="button">Meus planejamentos</button>

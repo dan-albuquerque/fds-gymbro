@@ -6,6 +6,7 @@ from .forms import RegisterForm, SonoForm, PlanejamentoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from datetime import date
 
 # Create your views here.
 def index(request):
@@ -156,14 +157,43 @@ def sono_selecionado(request, id_sono):
 @login_required(login_url='/')
 def planejamento(request):
     if request.method == 'POST':
-        form = PlanejamentoForm(request.POST)
-        if form.is_valid():
-            planos = form.save(commit=False)
-            planos.user = request.user
-            planos.save()
+        # Verifica se algum botão de "confirmar" foi clicado
+        if 'confirmar_segunda1' in request.POST:
+            horario = request.POST['segunda_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
             return redirect(request.path)
-    else:
-        form = PlanejamentoForm()
+        elif 'confirmar_terca1' in request.POST:
+            horario = request.POST['terca_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
+            return redirect(request.path)
+        elif 'confirmar_quarta1' in request.POST:
+            horario = request.POST['quarta_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
+            return redirect(request.path)
+        elif 'confirmar_quinta1' in request.POST:
+            horario = request.POST['quinta_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
+            return redirect(request.path)
+        elif 'confirmar_sexta1' in request.POST:
+            horario = request.POST['sexta_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
+            return redirect(request.path)
+        elif 'confirmar_sabado1' in request.POST:
+            horario = request.POST['sabado_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
+            return redirect(request.path)
+        elif 'confirmar_domingo1' in request.POST:
+            horario = request.POST['domingo_horario1']
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario)
+            # redireciona para a mesma página
+            return redirect(request.path)
 
-    horarios = Planejamento.objects.filter(user=request.user).last()
-    return render(request, 'galeria/planejamento.html', {'form': form, 'planejamentos': horarios})
+    # renderiza a página com o formulário
+    form = PlanejamentoForm()
+    return render(request, 'galeria/planejamento.html', {'form': form})
