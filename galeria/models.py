@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 from django.db import models
-
+from datetime import datetime
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -72,4 +72,6 @@ class Planejamento(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateField()
     horario = models.TimeField()
+    data_horario = models.DateTimeField(default=datetime.now(), blank=False) #armazena hj
+    dia_semana = models.CharField(default='segunda', max_length=40)
     

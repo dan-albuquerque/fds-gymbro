@@ -48,7 +48,7 @@ class RegisterForm(UserCreationForm):
             user.save()
             self.create_exercises(user)
         return user
-
+    
 class PlanejamentoForm(forms.ModelForm):
     class Meta:
         model = Planejamento
