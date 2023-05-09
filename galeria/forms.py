@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -9,12 +10,17 @@ class SonoForm(forms.ModelForm):
         fields = ['dormiu', 'acordou']
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(max_length=254, required=True, help_text='Required. Enter a valid email address.')
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}),max_length=254, required=True, help_text='Required. Enter a valid email address.')
 
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
+    def __init__(self, *args, **kwargs):
+        super(RegisterForm, self).__init__(*args, **kwargs)
 
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
     def create_exercises(self, user):
         #olhar DEPOIS questao de sets, reps, etc
         Exercise.objects.create(user=user, name='supino reto barra', group='peitoral', sets=3, reps=10, rest='40s', weight=10,description = 'uma flexão de ombro horizontal seguida por uma extensão de cotovelo enquanto segura a barra na linha do pescoço, realizar esse movimento empurrando a barra para cima, em seguida, de forma lenta e controlada, retornar a posição inicial', link = 'https://www.youtube.com/embed/sqOw2Y6uDWQ')# title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>')
