@@ -5,10 +5,35 @@
 {% endblock %}
 
 {% block content %}
-
+<header>
+<div class="container" id="nav-container">
+  <nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+      <a href="{% url 'index' %}" class="navbar-brand">
+        <img id="logo" src="{% static 'img/logo2.png' %}" alt="logo do produto Gym Bro"><b>Gym Bro</b>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#Login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="#Sobre">Sobre</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+</header>
 <section class="vh-100">
+<div id="Login">
  <div style="padding-bottom: 150px " class="container-fluid h-custom">
    <div class="row d-flex justify-content-center align-items-center h-100">
+    
      <div class="col-md-9 col-lg-6 col-xl-5">
        <img src="{% static 'img/bro.gif' %}" width="40%" height="40%" style="margin-left: 300px;" class="img-fluid" alt="img de garota">
      </div>
@@ -32,18 +57,20 @@
          </div>
        </form>
      </div>
+    
    </div>
  </div>
+</div>
 </section>
 
 
 
-
-<div class="container">
- <div class="row" style="margin-top: -50px;">
-   <div class="col-md-6">
-     <div style="margin-top: 230px;">
-       <img src="{% static 'img/carlos png boy 03(1).png' %}" alt="img de garoto">
+<div id="Sobre">
+  <div class="container">
+    <div class="row" style="margin-top: -50px;">
+      <div class="col-md-6">
+        <div style="margin-top: 230px;">
+          <img src="{% static 'img/carlos png boy 03(1).png' %}" alt="img de garoto">
 
 
      </div>
@@ -74,29 +101,43 @@
 
            Crie sua conta e venha ser marombeiro com a gente!
          </p>
-       </div>
-     </div>
-   </div>
- </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 </div>
-<div
- class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-black">
- <!-- Right -->
- <div>
-   <a href="#!" class="text-white me-4">
-     <i class="fab fa-facebook-f"></i>
-   </a>
-   <a href="#!" class="text-white me-4">
-     <i class="fab fa-twitter"></i>
-   </a>
-   <a href="#!" class="text-white me-4">
-     <i class="fab fa-google"></i>
-   </a>
-   <a href="#!" class="text-white">
-     <i class="fab fa-linkedin-in"></i>
-   </a>
- </div>
- <!-- Right -->
+<script>
+  // Função para manipular o scroll ao clicar no link do navbar
+  function scrollToElement(elementId, offset) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const loginLink = document.querySelector('a[href="#Login"]');
+    const sobreLink = document.querySelector('a[href="#Sobre"]');
+
+    loginLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      scrollToElement("Login", 100);
+    });
+
+    sobreLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      scrollToElement("Sobre", 100);
+    });
+  });
+</script>
 
 
  {% endblock %}
