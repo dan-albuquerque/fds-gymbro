@@ -32,7 +32,6 @@ jobs:
     - uses: nanasess/setup-chromedriver@v2.0.0
     - run: |
         chromedriver --url-base=/wd/hub
-      
     - name: Run Tests
       run: |
         python manage.py runserver &
