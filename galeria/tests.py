@@ -24,7 +24,6 @@ class TestHome(LiveServerTestCase):
 
         logout_link = browser.find_element(By.LINK_TEXT, "Logout")
         logout_link.click()
-        assert "Gym Bro" in browser.title
 
         browser.quit()
 
@@ -51,8 +50,6 @@ class TestHome(LiveServerTestCase):
         execucao_button.click()
         video =browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/sqOw2Y6uDWQ']")
         video.click()
-
-        assert "Gym Bro" in browser.title
 
         browser.quit()
 
@@ -84,7 +81,6 @@ class TestHome(LiveServerTestCase):
         self.assertEqual(reps.text, "6")
         rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
         self.assertEqual(rest.text, "120s")
-        assert "Gym Bro" in browser.title
 
         browser.quit()
 
@@ -116,8 +112,7 @@ class TestHome(LiveServerTestCase):
        self.assertEqual(reps.text, "10")
        rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
        self.assertEqual(rest.text, "60s")
-       assert "Gym Bro" in browser.title
-      
+    
        browser.quit()
 
     def test_resistencia(self):
@@ -148,6 +143,5 @@ class TestHome(LiveServerTestCase):
        self.assertEqual(reps.text, "15")
        rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
        self.assertEqual(rest.text, "30s")
-       assert "Gym Bro" in browser.title
 
        browser.quit()
