@@ -54,21 +54,21 @@ def treinos(request):
     if user_objective.selected_objective == 'hipertrofia':
         # repetições dos exercícios passam a ser 12
         for exercise in exercises:
-            exercise.reps = 12
-            exercise.rest = '30s'
+            exercise.reps = 10
+            exercise.rest = '60s'
             exercise.save()
 
     elif user_objective.selected_objective == 'resistencia':
         # repetições dos exercícios passam a ser 15
         for exercise in exercises:
             exercise.reps = 15
-            exercise.rest = '60s'
+            exercise.rest = '30s'
             exercise.save()
 
     else:
         # repetições dos exercícios passam a ser 10
         for exercise in exercises:
-            exercise.reps = 8
+            exercise.reps = 6
             exercise.rest = '120s'
             exercise.save()
 
