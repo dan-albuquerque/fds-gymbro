@@ -148,45 +148,7 @@ class TestHome(LiveServerTestCase):
        self.assertEqual(rest.text, "30s")
 
        browser.quit()
-    
-    def test_planejamentos(self):
-        browser = webdriver.Chrome()
-        browser.get("http://127.0.0.1:8000/")
 
-        username_input = browser.find_element(By.NAME, "username")
-        password_input = browser.find_element(By.NAME, "password")
-        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
-
-        username_input.send_keys("novo")
-        password_input.send_keys("senha123@")
-        submit_button.click()
-
-        treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
-        treino_link.click()
-        time.sleep(5)
-
-        # Select the time input in the second table and enter "10:15"
-        table = browser.find_elements(By.XPATH, "//table")[0] # Second table on the page
-        time_input = table.find_element(By.CSS_SELECTOR, "input[type='time']")
-        time_input.clear()
-        time_input.send_keys("10:15")
-        time.sleep(3)
-
-        # Click on the "confirmar" button
-        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
-        confirmar_button.click()
-
-        # Verify that the selected time and day are displayed in the plan details
-        planejamentos = browser.find_elements(By.CLASS_NAME, "planejamento-item")
-        found_selected_time = False
-        found_selected_day = False
-        for planejamento in planejamentos:
-            if "10:15" in planejamento.text:
-                found_selected_time = True
-            if "segunda-feira" in planejamento.text:
-                found_selected_day = True
-
-        assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
     def test_sono(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -231,3 +193,76 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
+def test_planejamentos(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("novo")
+        password_input.send_keys("senha123@")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
+        treino_link.click()
+        time.sleep(5)
+
+        # Select the time input in the second table and enter "10:15"
+        table = browser.find_elements(By.XPATH, "//table")[0] # Second table on the page
+        time_input = table.find_element(By.CSS_SELECTOR, "input[type='time']")
+        time_input.clear()
+        time_input.send_keys("10:15")
+        time.sleep(3)
+
+        # Click on the "confirmar" button
+        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
+        confirmar_button.click()
+
+        # Verify that the selected time and day are displayed in the plan details
+        planejamentos = browser.find_elements(By.CLASS_NAME, "planejamento-item")
+        found_selected_time = False
+        found_selected_day = False
+        for planejamento in planejamentos:
+            if planejamento.text == 'segunda-feira - 10:15 a.m.':
+                found_selected_time = True
+                found_selected_day = True
+        assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
+        
+def test_planejamentos_2(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("novo")
+        password_input.send_keys("senha123@")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
+        treino_link.click()
+        time.sleep(5)
+
+        # Select the time input in the second table and enter "10:15"
+        table = browser.find_elements(By.XPATH, "//table")[5] # Second table on the page
+        time_input = table.find_element(By.CSS_SELECTOR, "input[type='time']")
+        time_input.clear()
+        time_input.send_keys("11:00")
+        time.sleep(3)
+
+        # Click on the "confirmar" button
+        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
+        confirmar_button.click()
+
+        # Verify that the selected time and day are displayed in the plan details
+        planejamentos = browser.find_elements(By.CLASS_NAME, "planejamento-item")
+        found_selected_time = False
+        found_selected_day = False
+        for planejamento in planejamentos:
+            if planejamento.text == 'sabado - 11 a.m.':
+                found_selected_time = True
+                found_selected_day = True
+        assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
