@@ -12,7 +12,7 @@ class TestHome(LiveServerTestCase):
         browser.get('http://127.0.0.1:8000/')
         assert "Gym Bro" in browser.title
         browser.quit()
-
+    
     def test_user(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -193,7 +193,7 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
-def test_planejamentos(self):
+    def test_planejamentos(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
@@ -230,7 +230,7 @@ def test_planejamentos(self):
                 found_selected_day = True
         assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
         
-def test_planejamentos_2(self):
+    def test_planejamentos_2(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
@@ -266,3 +266,97 @@ def test_planejamentos_2(self):
                 found_selected_time = True
                 found_selected_day = True
         assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
+
+    def test_pesos(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("novo")
+        password_input.send_keys("senha123@")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
+        treino_link.click()
+        time.sleep(5)
+
+        treino_peitoral = browser.find_elements(By.XPATH, "//*[@id='Treine']")[0]
+        treino_peitoral.click() 
+        time.sleep(5)
+        wait = WebDriverWait(browser, 10)
+        peso1_input = browser.find_element(By.ID, "peso_ex_1")
+        peso1_input.send_keys("200")
+        peso2_input = browser.find_element(By.ID, "peso_ex_2")
+        peso2_input.send_keys("300")
+        peso3_input = browser.find_element(By.ID, "peso_ex_3")
+        peso3_input.send_keys("150")
+        peso4_input = browser.find_element(By.ID, "peso_ex_4")
+        peso4_input.send_keys("70")
+        peso5_input = browser.find_element(By.ID, "peso_ex_5")
+        peso5_input.send_keys("86")
+        peso6_input = browser.find_element(By.ID, "peso_ex_6")
+        peso6_input.send_keys("73")
+        peso7_input = browser.find_element(By.ID, "peso_ex_7")
+        peso7_input.send_keys("210")
+    
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(4) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(5) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(6) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(7) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        submit_button.click()
+
+
+        # Verify that the selected time and day are displayed in the plan details
+        expected_text = "200"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_1")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+        
+        expected_text = "300"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_2")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+        
+        expected_text = "150"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_3")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+
+        expected_text = "70"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_4")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+
+        expected_text = "86"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_5")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+
+        expected_text = "73"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_6")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+
+        expected_text = "210"
+        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_7")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+
+        browser.quit()
+
+
+
+
+        
