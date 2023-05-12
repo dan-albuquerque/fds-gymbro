@@ -218,5 +218,16 @@ class TestHome(LiveServerTestCase):
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
         submit_button.click()
 
+        # Verify that the selected time and day are displayed in the plan details
+        expected_text = "No momento, você está tendo 12 horas de sono"
+        result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/p/b")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+        
+        expected_text = " Da última vez você dormiu 22 horas e acordou 10 horas"
+        result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/div/p/b")))
+        result_text = result_element.get_attribute("innerHTML")
+        assert expected_text in result_text
+
         browser.quit()
 
