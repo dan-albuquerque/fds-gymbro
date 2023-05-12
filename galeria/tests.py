@@ -1,9 +1,10 @@
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 class TestHome(LiveServerTestCase):
-
+    
     def test_title(self):
         browser = webdriver.Chrome()
         browser.get('http://127.0.0.1:8000/')
@@ -145,3 +146,37 @@ class TestHome(LiveServerTestCase):
        self.assertEqual(rest.text, "30s")
 
        browser.quit()
+    
+    def test_sono(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("danilo")
+        password_input.send_keys("123")
+        submit_button.click()
+
+        wait = WebDriverWait(browser, 10)
+        sono_link = wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Sono")))
+        sono_link.click()
+
+        wait.until(EC.visibility_of_element_located((By.NAME, "dormiu")))
+        wait.until(EC.visibility_of_element_located((By.NAME, "acordou")))
+
+        dormiu_input = browser.find_element(By.NAME, "dormiu")
+        acordou_input = browser.find_element(By.NAME, "acordou")
+
+        dormiu_input.clear()  
+        dormiu_input.send_keys("22")
+
+        acordou_input.clear()  
+        acordou_input.send_keys("10")
+
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+        submit_button.click()
+
+        browser.quit()
+
