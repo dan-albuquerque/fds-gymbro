@@ -7,12 +7,14 @@ import time
 
 class TestHome(LiveServerTestCase):
     
+    # Teste arbitrário do título da página
     def test_title(self):
         browser = webdriver.Chrome()
         browser.get('http://127.0.0.1:8000/')
         assert "Gym Bro" in browser.title
         browser.quit()
     
+    # Teste de login e logout
     def test_user(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -30,6 +32,11 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
+    # AQUI INICIAM-SE OS TESTES DE VALIDAÇÂO A SEREM REALIZADOS PELO PO
+
+    # História: Como um iniciante, gostaria de ver as execuções dos exercícios que estou fazendo
+    # Cenário 1
+    '''Dado que estou na página de armazenar exercícios do treino de peitoral, quando eu selecionar “vídeo” do supino reto barra, então será exibido o vídeo ensinando como realizar o supino reto barra com suas especificações e sua descrição'''
     def test_execucao(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -56,6 +63,15 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
+    # História: Como um iniciante, gostaria de ver as execuções dos exercícios que estou fazendo
+    # Cenário 2
+    '''Dado que estou na página de armazenar exercícios do treino de perna, quando eu selecionar “vídeo” da extensora, então será exibido o vídeo ensinando como realizar a extensora com suas especificações e sua descrição'''
+    # CRIAR TESTE AQUI
+
+
+    # Como usuário, gostaria de inserir meu objetivo com a academia
+    # Cenário 3 - força
+    '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “resistência”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 6 repetições e tempo de descanso de 120s.'''
     def test_forca(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -87,6 +103,9 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
+    # Como usuário, gostaria de inserir meu objetivo com a academia
+    # Cenário 2 - hipertrofia
+    '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “hipertrofia”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 10 repetições e tempo de descanso de 60s.'''
     def test_hipertrofia(self):
        browser = webdriver.Chrome()
        browser.get("http://127.0.0.1:8000/")
@@ -118,6 +137,9 @@ class TestHome(LiveServerTestCase):
     
        browser.quit()
 
+    # Como usuário, gostaria de inserir meu objetivo com a academia
+    # Cenário 1 - resistência
+    '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “resistência”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 15 repetições e tempo de descanso de 30s.'''
     def test_resistencia(self):
        browser = webdriver.Chrome()
        browser.get("http://127.0.0.1:8000/")
@@ -149,6 +171,9 @@ class TestHome(LiveServerTestCase):
 
        browser.quit()
 
+    # História: Como usuário, gostaria de monitorar meu sono
+    # Cenário 1
+    '''Dado que estou na pagina de monitoramento do sono(sono),quando selecionar 22 no input “Dormiu“ e 6 no input “acordou“, então embaixo sera exibido 8 horas como meu tempo de sono.'''
     def test_sono(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -193,6 +218,9 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
+    # Como usuário, gostaria de planejar meus dias e horários de treinos.
+    # Cenário 1: Selecionar horário de treino na segunda-feira
+    '''Dado que estou na página de agendar o treino(planejamento), quando eu escolher 10:15 no input de horário na linha da segunda e pressionar “confirmar”, então será exibido “segunda-feira 10:15” embaixo de “planejamentos”'''
     def test_planejamentos(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -230,6 +258,9 @@ class TestHome(LiveServerTestCase):
                 found_selected_day = True
         assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
         
+    # Como usuário, gostaria de planejar meus dias e horários de treinos.
+    # Cenário 2: Selecionar horário de treino no sábado
+    '''Dado que estou na página de agendar o treino(planejamento), quando eu escolher 10:15 no input de horário na linha da segunda e pressionar “confirmar”, então será exibido “segunda-feira 10:15” embaixo de “planejamentos”'''
     def test_planejamentos_2(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -267,6 +298,9 @@ class TestHome(LiveServerTestCase):
                 found_selected_day = True
         assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
 
+    # Como usuário, gostaria de adicionar os pesos dos meus exercícios
+    # Cenário 1: adicionar 5 quilos no supino reto barra    
+    '''Dado que estou na tabela do treino de peitoral, quando eu inserir o peso de 5 kg no supino peitoral, então será armazenado 5 quilos no banco de dados nesse exercício'''
     def test_pesos(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
@@ -356,7 +390,23 @@ class TestHome(LiveServerTestCase):
 
         browser.quit()
 
+    # Como usuário, gostaria de adicionar os pesos dos meus exercícios
+    # Cenário 2: adicionar 10 quilos no supino reto barra    
+    '''Dado que estou na tabela do treino de costas, quando eu inserir o peso de 10 kg na puxada fechada, então será armazenado 10 quilos no banco de dados nesse exercício'''
+    # CRIAR TESTE AQUI
 
+    # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
+    # Cenário 1: selecionar treino de peitoral
+    '''Dado que estou na página de selecionar treinos, quando eu selecionar o treino de peitoral, então será exibido uma tabela com os exercícios do treino de peitoral com o nome do exercício, series, repetições, descanso e peso''' 
+    # CRIAR TESTE AQUI
 
+    # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
+    # Cenário 2: selecionar treino de costas:
+    '''Dado que estou na página de selecionar treinos(treinos), quando eu selecionar o treino de costas, então será exibido a tabela de exercícios do treino de perna com o nome do exercício, series, repetições, descanso e peso'''
+    # CRIAR TESTE AQUI
 
+    # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
+    # Cenário 3: selecionar treino de perna:
+    '''Dado que estou na página de selecionar treinos(treinos), quando eu selecionar o treino de perna, então será exibido a tabela de exercícios do treino de perna com o nome do exercício, series, repetições, descanso e peso'''
+    # CRIAR TESTE AQUI
         
