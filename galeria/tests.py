@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import time
+
 class TestHome(LiveServerTestCase):
     
     def test_title(self):
@@ -147,6 +149,44 @@ class TestHome(LiveServerTestCase):
 
        browser.quit()
     
+    def test_planejamentos(self):
+        browser = webdriver.Chrome()
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("novo")
+        password_input.send_keys("senha123@")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
+        treino_link.click()
+        time.sleep(5)
+
+        # Select the time input in the second table and enter "10:15"
+        table = browser.find_elements(By.XPATH, "//table")[0] # Second table on the page
+        time_input = table.find_element(By.CSS_SELECTOR, "input[type='time']")
+        time_input.clear()
+        time_input.send_keys("10:15")
+        time.sleep(3)
+
+        # Click on the "confirmar" button
+        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
+        confirmar_button.click()
+
+        # Verify that the selected time and day are displayed in the plan details
+        planejamentos = browser.find_elements(By.CLASS_NAME, "planejamento-item")
+        found_selected_time = False
+        found_selected_day = False
+        for planejamento in planejamentos:
+            if "10:15" in planejamento.text:
+                found_selected_time = True
+            if "segunda-feira" in planejamento.text:
+                found_selected_day = True
+
+        assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
     def test_sono(self):
         browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
