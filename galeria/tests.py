@@ -427,7 +427,27 @@ class TestHome(LiveServerTestCase):
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
     # Cenário 1: selecionar treino de peitoral
     '''Dado que estou na página de selecionar treinos, quando eu selecionar o treino de peitoral, então será exibido uma tabela com os exercícios do treino de peitoral com o nome do exercício, series, repetições, descanso e peso''' 
-    # CRIAR TESTE AQUI
+    def test_treinoPeitoral(self):
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
+        treino_link.click()
+
+        peitoral_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de Peitoral"]')
+        peitoral_button.click()
+
+        tabela_exercicios = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))
+        )
+        assert tabela_exercicios.is_displayed()
 
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
     # Cenário 2: selecionar treino de costas:
