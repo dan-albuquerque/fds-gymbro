@@ -3,34 +3,57 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from django.contrib.auth.models import User
 import time
 
+# Inicia o navegador
+browser = webdriver.Chrome()
+
 class TestHome(LiveServerTestCase):
-    
+    # Criando usuário que será usado para realizar os testes ou fazendo login com o usuário
+    @classmethod
+    def setUpClass(cls):
+        #Verifica se o usuário já existe
+        user, created = User.objects.get_or_create(username='usuario_de_teste', email='usuario_de_teste@gmail.com')
+
+        if created:
+            # Navegar até a página de registro
+            browser.get("http://127.0.0.1:8000/register")
+
+            # Preencher o formulário de registro
+            nome_input = browser.find_element(By.NAME, "username")
+            nome_input.send_keys("usuario_de_teste")
+
+            email_input = browser.find_element(By.NAME, "email")
+            email_input.send_keys("usuario_de_teste@gmail.com")
+
+            senha_input = browser.find_element(By.NAME, "password1")
+            senha_input.send_keys("senha123senha123#")
+
+            senha_input = browser.find_element(By.NAME, "password2")
+            senha_input.send_keys("senha123senha123#")
+
+            # Submeter o formulário para criar o usuário
+            submit_button = browser.find_element(By.XPATH, "//button[@type='submit']")
+            submit_button.click()
+
+            assert User.objects.filter(username='usuario_de_teste').first()
+
+    # AQUI SERVIRIA PARA DELETAR O USUÁRIO NO FINAL, MAS NÃO CONSEGUI. ENTÃO CRIEI LÁ EM BAIXO UM TESTE P ISSO
+   # def tearDown(self):
+    #    if self.created_instances == 10:
+    #        print("Deletando usuário de teste...")
+    #        try:
+    #            user = User.objects.get(username="usuario_de_teste")
+    #            user.delete()
+    #            print("Usuário deletado com sucesso!")
+    #        except User.DoesNotExist:
+    #            print("Usuário não encontrado no banco de dados.")'''
+
     # Teste arbitrário do título da página
     def test_title(self):
-        browser = webdriver.Chrome()
         browser.get('http://127.0.0.1:8000/')
         assert "Gym Bro" in browser.title
-        browser.quit()
-    
-    # Teste de login e logout
-    def test_user(self):
-        browser = webdriver.Chrome()
-        browser.get("http://127.0.0.1:8000/")
-
-        username_input = browser.find_element(By.NAME, "username")
-        password_input = browser.find_element(By.NAME, "password")
-        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
-
-        username_input.send_keys("danilo")
-        password_input.send_keys("123")
-        submit_button.click()
-
-        logout_link = browser.find_element(By.LINK_TEXT, "Logout")
-        logout_link.click()
-
-        browser.quit()
 
     # AQUI INICIAM-SE OS TESTES DE VALIDAÇÂO A SEREM REALIZADOS PELO PO
 
@@ -38,15 +61,14 @@ class TestHome(LiveServerTestCase):
     # Cenário 1
     '''Dado que estou na página de armazenar exercícios do treino de peitoral, quando eu selecionar “vídeo” do supino reto barra, então será exibido o vídeo ensinando como realizar o supino reto barra com suas especificações e sua descrição'''
     def test_execucao(self):
-        browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
         username_input = browser.find_element(By.NAME, "username")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-        username_input.send_keys("kanyewest")
-        password_input.send_keys("runaway.")
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
         submit_button.click()
 
         treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
@@ -61,27 +83,45 @@ class TestHome(LiveServerTestCase):
         video =browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/sqOw2Y6uDWQ']")
         video.click()
 
-        browser.quit()
 
     # História: Como um iniciante, gostaria de ver as execuções dos exercícios que estou fazendo
     # Cenário 2
     '''Dado que estou na página de armazenar exercícios do treino de perna, quando eu selecionar “vídeo” da extensora, então será exibido o vídeo ensinando como realizar a extensora com suas especificações e sua descrição'''
-    # CRIAR TESTE AQUI
-
-
-    # Como usuário, gostaria de inserir meu objetivo com a academia
-    # Cenário 3 - força
-    '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “resistência”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 6 repetições e tempo de descanso de 120s.'''
-    def test_forca(self):
-        browser = webdriver.Chrome()
+    def test_execucao2(self):
         browser.get("http://127.0.0.1:8000/")
 
         username_input = browser.find_element(By.NAME, "username")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-        username_input.send_keys("danilo")
-        password_input.send_keys("123")
+        username_input.send_keys("usuario_de_teste")  
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
+        treino_link.click()
+
+        treino_selecionado_link = browser.find_element(By.XPATH, "//div[@class='card']//h5[contains(text(), 'Treino de Perna')]")
+        treino_selecionado_link.click()
+
+        execucao_button = browser.find_element(By.XPATH, "//button[text()='video']")
+
+        execucao_button.click()
+        video =browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/1f1DjMr68hY']")
+        video.click()
+
+    # Como usuário, gostaria de inserir meu objetivo com a academia
+    # Cenário 3 - força
+    '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “resistência”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 6 repetições e tempo de descanso de 120s.'''
+    def test_forca(self):
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
         submit_button.click()
 
         treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
@@ -101,21 +141,19 @@ class TestHome(LiveServerTestCase):
         rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
         self.assertEqual(rest.text, "120s")
 
-        browser.quit()
 
     # Como usuário, gostaria de inserir meu objetivo com a academia
     # Cenário 2 - hipertrofia
     '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “hipertrofia”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 10 repetições e tempo de descanso de 60s.'''
     def test_hipertrofia(self):
-       browser = webdriver.Chrome()
        browser.get("http://127.0.0.1:8000/")
 
        username_input = browser.find_element(By.NAME, "username")
        password_input = browser.find_element(By.NAME, "password")
        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-       username_input.send_keys("danilo")
-       password_input.send_keys("123")
+       username_input.send_keys("usuario_de_teste")
+       password_input.send_keys("senha123senha123#")
        submit_button.click()
 
        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
@@ -135,21 +173,19 @@ class TestHome(LiveServerTestCase):
        rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
        self.assertEqual(rest.text, "60s")
     
-       browser.quit()
 
     # Como usuário, gostaria de inserir meu objetivo com a academia
     # Cenário 1 - resistência
     '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “resistência”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 15 repetições e tempo de descanso de 30s.'''
     def test_resistencia(self):
-       browser = webdriver.Chrome()
        browser.get("http://127.0.0.1:8000/")
 
        username_input = browser.find_element(By.NAME, "username")
        password_input = browser.find_element(By.NAME, "password")
        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-       username_input.send_keys("danilo")
-       password_input.send_keys("123")
+       username_input.send_keys("usuario_de_teste")
+       password_input.send_keys("senha123senha123#")
        submit_button.click()
 
        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
@@ -169,21 +205,19 @@ class TestHome(LiveServerTestCase):
        rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
        self.assertEqual(rest.text, "30s")
 
-       browser.quit()
 
     # História: Como usuário, gostaria de monitorar meu sono
     # Cenário 1
     '''Dado que estou na pagina de monitoramento do sono(sono),quando selecionar 22 no input “Dormiu“ e 6 no input “acordou“, então embaixo sera exibido 8 horas como meu tempo de sono.'''
     def test_sono(self):
-        browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
         username_input = browser.find_element(By.NAME, "username")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-        username_input.send_keys("danilo")
-        password_input.send_keys("123")
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
         submit_button.click()
 
         wait = WebDriverWait(browser, 10)
@@ -216,21 +250,19 @@ class TestHome(LiveServerTestCase):
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
 
-        browser.quit()
 
     # Como usuário, gostaria de planejar meus dias e horários de treinos.
     # Cenário 1: Selecionar horário de treino na segunda-feira
     '''Dado que estou na página de agendar o treino(planejamento), quando eu escolher 10:15 no input de horário na linha da segunda e pressionar “confirmar”, então será exibido “segunda-feira 10:15” embaixo de “planejamentos”'''
     def test_planejamentos(self):
-        browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
         username_input = browser.find_element(By.NAME, "username")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-        username_input.send_keys("novo")
-        password_input.send_keys("senha123@")
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
         submit_button.click()
 
         treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
@@ -262,15 +294,14 @@ class TestHome(LiveServerTestCase):
     # Cenário 2: Selecionar horário de treino no sábado
     '''Dado que estou na página de agendar o treino(planejamento), quando eu escolher 10:15 no input de horário na linha da segunda e pressionar “confirmar”, então será exibido “segunda-feira 10:15” embaixo de “planejamentos”'''
     def test_planejamentos_2(self):
-        browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
         username_input = browser.find_element(By.NAME, "username")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-        username_input.send_keys("novo")
-        password_input.send_keys("senha123@")
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
         submit_button.click()
 
         treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
@@ -301,16 +332,16 @@ class TestHome(LiveServerTestCase):
     # Como usuário, gostaria de adicionar os pesos dos meus exercícios
     # Cenário 1: adicionar 5 quilos no supino reto barra    
     '''Dado que estou na tabela do treino de peitoral, quando eu inserir o peso de 5 kg no supino peitoral, então será armazenado 5 quilos no banco de dados nesse exercício'''
+    
     def test_pesos(self):
-        browser = webdriver.Chrome()
         browser.get("http://127.0.0.1:8000/")
 
-        username_input = browser.find_element(By.NAME, "username")
+        username_input = browser.find_element(By.NAME, "usuario_de_teste")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-        username_input.send_keys("novo")
-        password_input.send_keys("senha123@")
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
         submit_button.click()
 
         treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
@@ -388,8 +419,6 @@ class TestHome(LiveServerTestCase):
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
 
-        browser.quit()
-
     # Como usuário, gostaria de adicionar os pesos dos meus exercícios
     # Cenário 2: adicionar 10 quilos no supino reto barra    
     '''Dado que estou na tabela do treino de costas, quando eu inserir o peso de 10 kg na puxada fechada, então será armazenado 10 quilos no banco de dados nesse exercício'''
@@ -409,4 +438,3 @@ class TestHome(LiveServerTestCase):
     # Cenário 3: selecionar treino de perna:
     '''Dado que estou na página de selecionar treinos(treinos), quando eu selecionar o treino de perna, então será exibido a tabela de exercícios do treino de perna com o nome do exercício, series, repetições, descanso e peso'''
     # CRIAR TESTE AQUI
-        
