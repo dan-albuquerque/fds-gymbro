@@ -80,7 +80,7 @@ class TestHome(LiveServerTestCase):
         execucao_button = browser.find_element(By.XPATH, "//button[text()='video']")
 
         execucao_button.click()
-        video =browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/sqOw2Y6uDWQ']")
+        video = browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/sqOw2Y6uDWQ']")
         video.click()
 
 
@@ -104,10 +104,11 @@ class TestHome(LiveServerTestCase):
         treino_selecionado_link = browser.find_element(By.XPATH, "//div[@class='card']//h5[contains(text(), 'Treino de Perna')]")
         treino_selecionado_link.click()
 
-        execucao_button = browser.find_element(By.XPATH, "//button[text()='video']")
+        execucao_button = browser.find_element(By.NAME, "extensora button")
 
         execucao_button.click()
-        video =browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/1f1DjMr68hY']")
+
+        video = browser.find_element(By.CSS_SELECTOR,"iframe[src*='https://www.youtube.com/embed/1f1DjMr68hY']")
         video.click()
 
     # Como usuário, gostaria de inserir meu objetivo com a academia
@@ -306,17 +307,16 @@ class TestHome(LiveServerTestCase):
 
         treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
         treino_link.click()
-        time.sleep(5)
+        time.sleep(2)
 
         # Select the time input in the second table and enter "10:15"
-        table = browser.find_elements(By.XPATH, "//table")[5] # Second table on the page
-        time_input = table.find_element(By.CSS_SELECTOR, "input[type='time']")
-        time_input.clear()
-        time_input.send_keys("11:00")
-        time.sleep(3)
+        date = browser.find_elements(By.NAME, "sabado_horario1")[0] # Second table on the page
+        date.clear()
+        date.send_keys("11:00")
+        time.sleep(2)
 
         # Click on the "confirmar" button
-        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
+        confirmar_button = browser.find_element(By.NAME, "confirmar_sabado1")
         confirmar_button.click()
 
         # Verify that the selected time and day are displayed in the plan details

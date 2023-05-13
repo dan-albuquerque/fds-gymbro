@@ -37,13 +37,13 @@
                 {% csrf_token %}
                 <label for="peso_ex_{{ exercise.pk }}">Peso: </label>
                 <input id="peso_ex_{{ exercise.pk }}" type="text" name="peso_ex_{{ exercise.pk }}" value="{{ exercise.weight }}">
-                <input type="submit" value="OK">
+                <input type="submit" value="OK">    
               </form>
               </td>
               <td>
               <form method="post" action="{% url 'execução' exercise_id=exercise.id %}">
                 {% csrf_token %}
-                <button type="submit">video</button>
+                <button type="submit" name="{{ exercise.name }} button">video</button>
               </form>
               </td>
           </tr>
