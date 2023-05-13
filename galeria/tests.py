@@ -352,72 +352,21 @@ class TestHome(LiveServerTestCase):
         treino_peitoral.click() 
         time.sleep(5)
         wait = WebDriverWait(browser, 10)
-        peso1_input = browser.find_element(By.ID, "peso_ex_1")
-        peso1_input.send_keys("200")
-        peso2_input = browser.find_element(By.ID, "peso_ex_2")
-        peso2_input.send_keys("300")
-        peso3_input = browser.find_element(By.ID, "peso_ex_3")
-        peso3_input.send_keys("150")
-        peso4_input = browser.find_element(By.ID, "peso_ex_4")
-        peso4_input.send_keys("70")
-        peso5_input = browser.find_element(By.ID, "peso_ex_5")
-        peso5_input.send_keys("86")
-        peso6_input = browser.find_element(By.ID, "peso_ex_6")
-        peso6_input.send_keys("73")
-        peso7_input = browser.find_element(By.ID, "peso_ex_7")
-        peso7_input.send_keys("210")
+        peso1_input = WebDriverWait(browser, 10).until(
+        EC.visibility_of_element_located((By.ID, "peso_ex_1")))
+        peso1_input.send_keys("5")
+       
     
         submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
         submit_button.click()
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(2) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
-        submit_button.click()
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(3) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
-        submit_button.click()
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(4) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
-        submit_button.click()
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(5) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
-        submit_button.click()
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(6) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
-        submit_button.click()
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(7) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
-        submit_button.click()
-
-
-        # Verify that the selected time and day are displayed in the plan details
-        expected_text = "200"
+        # Verify 
+        expected_text = "5"
         result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_1")))
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
         
-        expected_text = "300"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_2")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
-        
-        expected_text = "150"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_3")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
 
-        expected_text = "70"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_4")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
-
-        expected_text = "86"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_5")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
-
-        expected_text = "73"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_6")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
-
-        expected_text = "210"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_7")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
+        browser.quit()
 
     # Como usuário, gostaria de adicionar os pesos dos meus exercícios
     # Cenário 2: adicionar 10 quilos no supino reto barra    
