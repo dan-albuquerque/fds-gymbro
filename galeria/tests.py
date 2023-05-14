@@ -397,6 +397,7 @@ class TestHome(LiveServerTestCase):
         result_element = browser.find_element(By.ID, "puxada fechada")
         weight = result_element.get_attribute("value")
         assert weight == expected_weight, f"O valor encontrado foi {expected_weight}, mas esperava-se 10"
+    
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
     # Cenário 1: selecionar treino de peitoral
     '''Dado que estou na página de selecionar treinos, quando eu selecionar o treino de peitoral, então será exibido uma tabela com os exercícios do treino de peitoral com o nome do exercício, series, repetições, descanso e peso''' 
@@ -459,7 +460,7 @@ class TestHome(LiveServerTestCase):
         treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
         treino_link.click()
         
-        perna_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de perna"]')
+        perna_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de Perna"]')
         perna_button.click()
 
         tabela_exercicios = WebDriverWait(browser, 10).until(
