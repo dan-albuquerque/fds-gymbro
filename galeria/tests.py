@@ -425,9 +425,44 @@ class TestHome(LiveServerTestCase):
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
     # Cenário 2: selecionar treino de costas:
     '''Dado que estou na página de selecionar treinos(treinos), quando eu selecionar o treino de costas, então será exibido a tabela de exercícios do treino de perna com o nome do exercício, series, repetições, descanso e peso'''
-    # CRIAR TESTE AQUI
+    def test_treinoCostas(self):
+        browser.get("http://127.0.0.1:8000/")
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
+        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
+        treino_link.click()
+        costas_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de Costas"]')
+        costas_button.click()
+        tabela_exercicios = WebDriverWait(browser, 10).until(
+           EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))
+        )
+        assert tabela_exercicios.is_displayed()
 
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
     # Cenário 3: selecionar treino de perna:
     '''Dado que estou na página de selecionar treinos(treinos), quando eu selecionar o treino de perna, então será exibido a tabela de exercícios do treino de perna com o nome do exercício, series, repetições, descanso e peso'''
-    # CRIAR TESTE AQUI
+    def test_treinoPerna(self):
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
+        treino_link.click()
+        
+        perna_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de perna"]')
+        perna_button.click()
+
+        tabela_exercicios = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))
+        )
+        assert tabela_exercicios.is_displayed()
