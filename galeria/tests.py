@@ -235,18 +235,18 @@ class TestHome(LiveServerTestCase):
         dormiu_input.send_keys("22")
 
         acordou_input.clear()  
-        acordou_input.send_keys("10")
+        acordou_input.send_keys("6")
 
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
         submit_button.click()
 
         # Verify that the selected time and day are displayed in the plan details
-        expected_text = "No momento, você está tendo 12 horas de sono"
+        expected_text = "No momento, você está tendo 8 horas de sono"
         result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/p/b")))
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
         
-        expected_text = " Da última vez você dormiu 22 horas e acordou 10 horas"
+        expected_text = " Da última vez você dormiu 22 horas e acordou 6 horas"
         result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/div/p/b")))
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
@@ -367,7 +367,36 @@ class TestHome(LiveServerTestCase):
     # Cenário 2: adicionar 10 quilos na puxada fechada
     '''Dado que estou na tabela do treino de costas, quando eu inserir o peso de 10 kg na puxada fechada, então será armazenado 10 quilos no banco de dados nesse exercício'''
     # CRIAR TESTE AQUI
+    def test_pesos2(self):
+        browser.get("http://127.0.0.1:8000/")
 
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
+
+        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
+        treino_link.click()
+        time.sleep(5)
+
+        treino_costas = browser.find_elements(By.XPATH, "//*[@id='Treine']")[1]
+        treino_costas.click() 
+        time.sleep(5)
+        wait = WebDriverWait(browser, 10)
+        peso1_input = browser.find_elements(By.ID, "puxada fechada")
+        peso1_input[0].clear()
+        peso1_input[0].send_keys("10")
+
+        submit_button = browser.find_element(By.NAME, "OK-puxada fechada-button")
+        submit_button.click()
+        # Verify 
+        expected_weight = "10"
+        result_element = browser.find_element(By.ID, "puxada fechada")
+        weight = result_element.get_attribute("value")
+        assert weight == expected_weight, f"O valor encontrado foi {expected_weight}, mas esperava-se 10"
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
     # Cenário 1: selecionar treino de peitoral
     '''Dado que estou na página de selecionar treinos, quando eu selecionar o treino de peitoral, então será exibido uma tabela com os exercícios do treino de peitoral com o nome do exercício, series, repetições, descanso e peso''' 
