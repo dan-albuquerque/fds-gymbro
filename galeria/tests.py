@@ -332,11 +332,10 @@ class TestHome(LiveServerTestCase):
     # Como usuário, gostaria de adicionar os pesos dos meus exercícios
     # Cenário 1: adicionar 5 quilos no supino reto barra    
     '''Dado que estou na tabela do treino de peitoral, quando eu inserir o peso de 5 kg no supino peitoral, então será armazenado 5 quilos no banco de dados nesse exercício'''
-    
     def test_pesos(self):
         browser.get("http://127.0.0.1:8000/")
 
-        username_input = browser.find_element(By.NAME, "usuario_de_teste")
+        username_input = browser.find_element(By.NAME, "username")
         password_input = browser.find_element(By.NAME, "password")
         submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
@@ -352,24 +351,20 @@ class TestHome(LiveServerTestCase):
         treino_peitoral.click() 
         time.sleep(5)
         wait = WebDriverWait(browser, 10)
-        peso1_input = WebDriverWait(browser, 10).until(
-        EC.visibility_of_element_located((By.ID, "peso_ex_1")))
-        peso1_input.send_keys("5")
-       
-    
-        submit_button = browser.find_element(By.CSS_SELECTOR, "body > div:nth-child(2) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(5) > form:nth-child(1) > input:nth-child(4)")
+        peso1_input = browser.find_elements(By.ID, "supino reto barra")
+        peso1_input[0].clear()
+        peso1_input[0].send_keys("5")
+
+        submit_button = browser.find_element(By.NAME, "OK-supino reto barra-button")
         submit_button.click()
         # Verify 
-        expected_text = "5"
-        result_element = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#peso_ex_1")))
-        result_text = result_element.get_attribute("innerHTML")
-        assert expected_text in result_text
-        
-
-        browser.quit()
+        expected_weight = "5"
+        result_element = browser.find_element(By.ID, "supino reto barra")
+        weight = result_element.get_attribute("value")
+        assert weight == expected_weight, f"O valor encontrado foi {expected_weight}, mas esperava-se 5"
 
     # Como usuário, gostaria de adicionar os pesos dos meus exercícios
-    # Cenário 2: adicionar 10 quilos no supino reto barra    
+    # Cenário 2: adicionar 10 quilos na puxada fechada
     '''Dado que estou na tabela do treino de costas, quando eu inserir o peso de 10 kg na puxada fechada, então será armazenado 10 quilos no banco de dados nesse exercício'''
     # CRIAR TESTE AQUI
 

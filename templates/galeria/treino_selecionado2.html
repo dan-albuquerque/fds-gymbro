@@ -36,8 +36,8 @@
               <form method="post" action="">
                 {% csrf_token %}
                 <label for="peso_ex_{{ exercise.pk }}">Peso: </label>
-                <input id="peso_ex_{{ exercise.pk }}" type="text" name="peso_ex_{{ exercise.pk }}" value="{{ exercise.weight }}">
-                <input type="submit" value="OK">    
+                <input id="{{ exercise.name }}" type="text" name="peso_ex_{{ exercise.pk }}" value="{{ exercise.weight }}">
+                <input type="submit" value="OK" name="OK-{{ exercise.name }}-button">    
               </form>
               </td>
               <td>
