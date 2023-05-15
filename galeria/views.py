@@ -31,10 +31,10 @@ def logout_view(request):
    return redirect(reverse('index'))
 
 @login_required(login_url='/')
-def execução(request, exercise_id):
+def execucao(request, exercise_id):
    exercise = Exercise.objects.get(id=exercise_id)
    context = {'exercise': exercise}
-   return render(request, 'galeria/execução.html', context)
+   return render(request, 'galeria/execucao.html', context)
 
 @login_required(login_url='/')
 def treinos(request):

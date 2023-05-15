@@ -1,5 +1,5 @@
 from django.urls import path, include
-from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, sono_selecionado, logout_view, planejamento,execução
+from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, sono_selecionado, logout_view, planejamento,execucao
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -9,7 +9,7 @@ admin.site.logout_template = 'admin/logout.html'
 admin.site.logout_view = LogoutView.as_view(next_page='/admin/login/')
 
 urlpatterns = [
-    path('execução/<int:exercise_id>/', execução, name='execução'),
+    path('execucao/<int:exercise_id>/', execucao, name='execucao'),
     path('home', home, name='home'),
     path('', index, name='index'),
     path('logout/', logout_view, name='logout'),

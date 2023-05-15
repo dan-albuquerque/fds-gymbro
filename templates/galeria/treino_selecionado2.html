@@ -41,7 +41,7 @@
               </form>
               </td>
               <td>
-              <form method="post" action="{% url 'execução' exercise_id=exercise.id %}">
+              <form method="post" action="{% url 'execucao' exercise_id=exercise.id %}">
                 {% csrf_token %}
                 <button type="submit" name="{{ exercise.name }} button">video</button>
               </form>
