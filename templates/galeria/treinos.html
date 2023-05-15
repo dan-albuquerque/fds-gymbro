@@ -8,7 +8,6 @@
     {% for treino in cards %}
     <div class="card">
       <a href="{% url 'treino_selecionado2' treino.grupo %}" class="navbar-brand">
-        <img class="card-img-top" src="{{treino.foto.url}}" alt="imagem de um supino" />
         <div class="card-body">
           <h5 class="card-title" id="Treine">{{treino.nome_treino}}</h5>
         </div>
