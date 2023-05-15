@@ -40,7 +40,7 @@ Overall, pair programming proved to be an effective way for our team to work tog
 ## Links
 <a href="http://gymbro-01-env.eba-42qyc4qm.us-east-2.elasticbeanstalk.com/">Gymbro</a>
 <br>
-<a href ="https://drive.google.com/file/d/1enzPE6KNYdQgluP1sPGaetvsSIMETtqX/view">Diagrama de atividades do sistema</a>
+<a href ="https://miro.com/app/board/uXjVMJPXCYg=/">Diagrama de atividades do sistema</a>
 <a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
 <a href ="https://www.figma.com/proto/QEgeAOpzAlOgq7QZUUuQcW/gymbro-lo-fi?node-id=3-147&scaling=contain&page-id=0%3A1&starting-point-node-id=3%3A147&show-proto-sidebar=1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /> </a>
 
