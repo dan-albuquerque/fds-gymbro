@@ -44,6 +44,11 @@ Overall, pair programming proved to be an effective way for our team to work tog
 <a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
 <a href ="https://www.figma.com/proto/QEgeAOpzAlOgq7QZUUuQcW/gymbro-lo-fi?node-id=3-147&scaling=contain&page-id=0%3A1&starting-point-node-id=3%3A147&show-proto-sidebar=1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /> </a>
 
+## Screencasts:
+### Entrega 03 (15/05)
+Figma: https://drive.google.com/file/d/19p25ufgg-KVPRfRVTxW4u-0A9PZiMjvG/view
+Deploy das novas histórias: https://drive.google.com/file/d/1UnoB43XKESigCExGv5blwGLSjuLKe7iZ/view?usp=share_link
+Testes de Sistemas (E2E): https://drive.google.com/file/d/1DI2CPXkd2SQ_yftZSjyyUx9fnXf9rxQs/view?usp=sharing
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
