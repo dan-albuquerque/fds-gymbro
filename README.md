@@ -47,7 +47,9 @@ Overall, pair programming proved to be an effective way for our team to work tog
 ## Screencasts:
 ### Entrega 03 (15/05)
 Figma: https://drive.google.com/file/d/19p25ufgg-KVPRfRVTxW4u-0A9PZiMjvG/view
+
 Deploy das novas histórias: https://drive.google.com/file/d/1UnoB43XKESigCExGv5blwGLSjuLKe7iZ/view?usp=share_link
+
 Testes de Sistemas (E2E): https://drive.google.com/file/d/1DI2CPXkd2SQ_yftZSjyyUx9fnXf9rxQs/view?usp=sharing
 
 ## License
