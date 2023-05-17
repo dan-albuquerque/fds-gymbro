@@ -7,7 +7,12 @@ from django.contrib.auth.models import User
 import time
 
 # Inicia o navegador
-browser = webdriver.Chrome()
+
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-gpu")
+browser = webdriver.Chrome(options=chrome_options)
 
 class TestHome(LiveServerTestCase):
     # Criando usuário que será usado para realizar os testes ou fazendo login com o usuário
