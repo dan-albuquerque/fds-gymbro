@@ -10,7 +10,7 @@ import time
 
 chrome_options = webdriver.ChromeOptions()
 # chrome_options.add_argument("--no-sandbox") não sei pq mas quando coloco esse código dá erro
-chrome_options.add_argument("--headless") # não sei pq mas quando coloco esse código dá erro
+# chrome_options.add_argument("--headless") não sei pq mas quando coloco esse código dá erro
 chrome_options.add_argument("--disable-gpu")
 browser = webdriver.Chrome(options=chrome_options)
 
