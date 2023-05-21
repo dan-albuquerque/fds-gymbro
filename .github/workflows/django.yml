@@ -34,6 +34,9 @@ jobs:
         chromedriver --url-base=/wd/hub &
     - name: Run Tests
       run: |
+        export DISPLAY=:99
+        chromedriver --url-base=/wd/hub --headless --disable-gpu --no-sandbox &
+        sleep 5
         python manage.py runserver &
         sleep 5
         python manage.py test
