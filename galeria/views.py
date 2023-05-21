@@ -74,7 +74,6 @@ def treinos(request):
 
     return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective})
 
-####
 @login_required(login_url='/')
 def sono(request):
    if request.method == 'POST':
@@ -94,14 +93,6 @@ def sono(request):
 
    return render(request, 'galeria/sono.html', context)
 
-@login_required(login_url='/')
-def treino_selecionado(request, treino_id):
-   treino_escolhido = get_object_or_404(Treinos, pk=treino_id)
-   return render(request, 'galeria/treino_selecionado.html', {"treino": treino_escolhido})
-
-@login_required(login_url='/')
-def pesos(request):
-   return render(request, 'galeria/pesos.html')
 
 def register(request):
    if request.method == 'POST':
@@ -148,11 +139,6 @@ def home(request):
     latest_sono = Sono.objects.filter(user=request.user).last()
     context = {'sono': latest_sono}
     return render(request, 'galeria/home.html', context)
-
-@login_required(login_url='/')
-def sono_selecionado(request, id_sono):
-   sono = Sono.objects.get(id=id_sono)
-   return render(request, 'galeria/sono_selecionado.html', {'sono': sono})
 
 @login_required(login_url='/')
 def planejamento(request):
