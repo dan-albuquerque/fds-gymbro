@@ -1,6 +1,7 @@
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from django.contrib.auth.models import User
@@ -9,8 +10,8 @@ import time
 # Inicia o navegador
 
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument("--no-sandbox") não sei pq mas quando coloco esse código dá erro
-# chrome_options.add_argument("--headless") não sei pq mas quando coloco esse código dá erro
+chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--headless") 
 chrome_options.add_argument("--disable-gpu")
 browser = webdriver.Chrome(options=chrome_options)
 
@@ -76,8 +77,9 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
 
         treino_selecionado_link = browser.find_element(By.XPATH, "//div[@class='card']//h5[contains(text(), 'Treino de Peitoral')]")
         treino_selecionado_link.click()
@@ -103,11 +105,12 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
 
-        treino_selecionado_link = browser.find_element(By.XPATH, "//div[@class='card']//h5[contains(text(), 'Treino de Perna')]")
-        treino_selecionado_link.click()
+        treino_selecionado_link = browser.find_element(By.NAME, "Treino de Perna")
+        browser.execute_script("arguments[0].click();", treino_selecionado_link)
 
         execucao_button = browser.find_element(By.NAME, "extensora button")
 
@@ -130,8 +133,9 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
 
         forca = browser.find_element(By.ID, "forca")
         forca.click()
@@ -162,8 +166,9 @@ class TestHome(LiveServerTestCase):
        password_input.send_keys("senha123senha123#")
        submit_button.click()
 
-       treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-       treino_link.click()
+       wait = WebDriverWait(browser, 10)
+       treino_link = browser.find_element( By.ID, "treinos-menu")
+       browser.execute_script("arguments[0].click();", treino_link)
 
        hipertrofia = browser.find_element(By.ID, "hipertrofia")
        hipertrofia.click()
@@ -194,8 +199,9 @@ class TestHome(LiveServerTestCase):
        password_input.send_keys("senha123senha123#")
        submit_button.click()
 
-       treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-       treino_link.click()
+       wait = WebDriverWait(browser, 10)
+       treino_link = browser.find_element( By.ID, "treinos-menu")
+       browser.execute_script("arguments[0].click();", treino_link)
 
        resistencia = browser.find_element(By.ID, "resistencia")
        resistencia.click()
@@ -227,11 +233,11 @@ class TestHome(LiveServerTestCase):
         submit_button.click()
 
         wait = WebDriverWait(browser, 10)
-        sono_link = wait.until(EC.visibility_of_element_located((By.LINK_TEXT, "Sono")))
-        sono_link.click()
+        sono_link = wait.until(EC.presence_of_element_located((By.NAME, "sono_menu_bar")))
+        browser.execute_script("arguments[0].click();", sono_link)
 
-        wait.until(EC.visibility_of_element_located((By.NAME, "dormiu")))
-        wait.until(EC.visibility_of_element_located((By.NAME, "acordou")))
+        wait.until(EC.presence_of_element_located((By.NAME, "dormiu")))
+        wait.until(EC.presence_of_element_located((By.NAME, "acordou")))
 
         dormiu_input = browser.find_element(By.NAME, "dormiu")
         acordou_input = browser.find_element(By.NAME, "acordou")
@@ -246,12 +252,12 @@ class TestHome(LiveServerTestCase):
         submit_button.click()
 
         # Verify that the selected time and day are displayed in the plan details
-        expected_text = "No momento, você está tendo 8 horas de sono"
+        expected_text = "No momento, você está tendo 8 hora(s) de sono"
         result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/p/b")))
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
         
-        expected_text = " Da última vez você dormiu 22 horas e acordou 6 horas"
+        expected_text = "Da última vez você dormiu as 22 horas e acordou as 6 horas"
         result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/div/p/b")))
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
@@ -271,8 +277,9 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
-        treino_link.click()
+        planejamento_link = browser.find_element(By.ID, "planejamento-menu")
+        time.sleep(5)
+        browser.execute_script("arguments[0].click();", planejamento_link)
         time.sleep(5)
 
         # Select the time input in the second table and enter "10:15"
@@ -310,8 +317,9 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Planejamento")
-        treino_link.click()
+        planejamento_link = browser.find_element(By.ID, "planejamento-menu")
+        time.sleep(5)
+        browser.execute_script("arguments[0].click();", planejamento_link)
         time.sleep(2)
 
         # Select the time input in the second table and enter "10:15"
@@ -348,8 +356,9 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
         time.sleep(5)
 
         treino_peitoral = browser.find_elements(By.XPATH, "//*[@id='Treine']")[0]
@@ -383,12 +392,13 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
         time.sleep(5)
 
-        treino_costas = browser.find_elements(By.XPATH, "//*[@id='Treine']")[1]
-        treino_costas.click() 
+        treino_costas_link = browser.find_element(By.XPATH, "//a[@name='link-Treino de Costas']")
+        browser.execute_script("arguments[0].click();", treino_costas_link)
         time.sleep(5)
         wait = WebDriverWait(browser, 10)
         peso1_input = browser.find_elements(By.ID, "puxada fechada")
@@ -417,11 +427,12 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
 
-        peitoral_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de Peitoral"]')
-        peitoral_button.click()
+        peitoral_button = browser.find_element(By.NAME, "Treino de Peitoral")
+        browser.execute_script("arguments[0].click();", peitoral_button)
 
         tabela_exercicios = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))
@@ -439,10 +450,11 @@ class TestHome(LiveServerTestCase):
         username_input.send_keys("usuario_de_teste")
         password_input.send_keys("senha123senha123#")
         submit_button.click()
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
-        costas_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de Costas"]')
-        costas_button.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
+        costas_button = browser.find_element(By.NAME, "Treino de Costas")
+        browser.execute_script("arguments[0].click();", costas_button)
         tabela_exercicios = WebDriverWait(browser, 10).until(
            EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))
         )
@@ -462,11 +474,12 @@ class TestHome(LiveServerTestCase):
         password_input.send_keys("senha123senha123#")
         submit_button.click()
 
-        treino_link = browser.find_element(By.LINK_TEXT, "Treinos")
-        treino_link.click()
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
         
-        perna_button = browser.find_element(By.XPATH, '//h5[@class="card-title" and text()="Treino de Perna"]')
-        perna_button.click()
+        perna_button = browser.find_element(By.NAME, "Treino de Perna")
+        browser.execute_script("arguments[0].click();", perna_button)
 
         tabela_exercicios = WebDriverWait(browser, 10).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))

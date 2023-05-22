@@ -7,9 +7,9 @@
   <div class="col">
     {% for treino in cards %}
     <div class="card">
-      <a href="{% url 'treino_selecionado2' treino.grupo %}" class="navbar-brand">
+      <a href="{% url 'treino_selecionado2' treino.grupo %}" class="navbar-brand" name="link-{{ treino.nome_treino}}">
         <div class="card-body">
-          <h5 class="card-title" id="Treine">{{treino.nome_treino}}</h5>
+          <h5 class="card-title" id="Treine" name="{{ treino.nome_treino }}">{{treino.nome_treino}}</h5>
         </div>
       </a>
     </div>
