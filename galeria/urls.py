@@ -1,5 +1,5 @@
 from django.urls import path, include
-from galeria.views import home, index, treinos, sono,  register, treino_selecionado2, logout_view, planejamento,execucao
+from galeria.views import home, index, treinos, sono,  register, treino_selecionado2, logout_view, planejamento,execucao,historico
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -19,7 +19,10 @@ urlpatterns = [
     path('register', register, name='register' ),
     path('treino_selecionado2/<str:option>/', treino_selecionado2, name='treino_selecionado2'), 
     path('planejamento', planejamento, name='planejamento'),
+    path('historico',historico,name='historico'),
+    path('historico/',historico,name='historico')
 
     #oq eh isso?
     #path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
+    #n faço ideia meu brother -carlos
 ]

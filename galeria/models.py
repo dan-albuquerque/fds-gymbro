@@ -69,9 +69,15 @@ class UserObjective(models.Model):
     selected_objective = models.CharField(max_length=100, choices=OBJETIVOS_CHOICES, default='hipertrofia')
 
 class Planejamento(models.Model):
+    TIPO_CHOICES = (
+        ('perna', 'Perna'),
+        ('costas', 'Costas'),
+        ('peito', 'Peito'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateField()
     horario = models.TimeField()
     data_horario = models.DateTimeField(default=datetime.now(), blank=False) #armazena hj
     dia_semana = models.CharField(default='segunda', max_length=40)
+
     

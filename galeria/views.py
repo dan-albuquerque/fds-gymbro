@@ -176,3 +176,7 @@ def planejamento(request):
     planejamentos = Planejamento.objects.filter(user=request.user)
     context = {'form': form, 'planejamentos': planejamentos}
     return render(request, 'galeria/planejamento.html',context)
+
+@login_required(login_url='/')
+def historico(request):
+    return render(request, 'galeria/historico.html')
