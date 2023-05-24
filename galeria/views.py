@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from datetime import date, timedelta
+from django.http import HttpResponse
 
 # Create your views here.
 def index(request):
@@ -111,28 +112,36 @@ def register(request):
 
 @login_required(login_url='/')
 def treino_selecionado2(request, option):
-   if option == 'peitoral':
+    if option == 'peitoral':
        exercises = Exercise.objects.filter(user=request.user, group='peitoral')
-   elif option == 'costas':
+    elif option == 'costas':
        exercises = Exercise.objects.filter(user=request.user, group='costas')
-   elif option == 'perna':
+    elif option == 'perna':
        exercises = Exercise.objects.filter(user=request.user, group='perna')
-   else:
+    else:
        exercises = None
 
-   if request.method == 'POST':
-       for exercise in exercises:
-           weight = request.POST.get('peso_ex_{}'.format(exercise.pk))
-           if weight is not None and weight != '':
-               exercise.weight = weight
-               exercise.save()
-
-   context = {
-       'option': option.capitalize(),
-       'exercises': exercises,
-   }
-
-   return render(request, 'galeria/treino_selecionado2.html', context)
+    error_message = None # Valor padrão da mensagem de erro
+    if exercises is not None:
+        if request.method == 'POST':
+            for exercise in exercises:
+                weight = request.POST.get('peso_ex_{}'.format(exercise.pk))
+                if weight:
+                    if weight.isdigit(): # peso válido
+                        exercise.weight = weight
+                        exercise.save()
+                    else: 
+                        # O valor não é numérico, exibe uma mensagem de erro
+                        error_message = 'O valor do peso deve ser numérico! Informe um valor válido.'
+                        break
+                else:
+                    error_message = None
+    context = {
+        'option': option.capitalize(),
+        'exercises': exercises,
+        'error_message': error_message
+    }
+    return render(request, 'galeria/treino_selecionado2.html', context)
 
 @login_required(login_url='/')
 def home(request):
