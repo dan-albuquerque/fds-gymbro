@@ -128,7 +128,7 @@ def treino_selecionado2(request, option):
                 weight = request.POST.get('peso_ex_{}'.format(exercise.pk))
                 if weight:
                     try: 
-                        weight = float(weight)
+                        weight = float (weight)
                         exercise.weight = weight
                         exercise.save()
                     except: 

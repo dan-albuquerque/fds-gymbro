@@ -27,7 +27,7 @@ class Exercise(models.Model):
     sets = models.IntegerField()
     reps = models.IntegerField()
     rest = models.CharField(default='40s', max_length=30)
-    weight = models.IntegerField(default=1)
+    weight = models.FloatField(default=1)
     description = models.CharField(max_length=3000)
     link = models.TextField(max_length=3000)
 
