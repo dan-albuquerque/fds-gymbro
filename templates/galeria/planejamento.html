@@ -58,6 +58,12 @@
 }
 </style>
 
+{% if error_message %}
+<div class="error_message">
+  {{ error_message }} 
+</div>
+{% endif %}
+
 <form method="post", action="">
   {% csrf_token %}
   <table>
@@ -155,7 +161,7 @@
         </td>
         <td><button type="submit" name="confirmar_sabado1" value="sabado_horario1">Confirmar</button></td>
       </tr>
-      <tr>
+      <tr> 
         <td>Domingo</td>
         <td><input type="time" name="domingo_horario1" value="{{ planejamento.domingo_horario1 }}"></td>
         <td><div class="rectangle">

@@ -127,10 +127,11 @@ def treino_selecionado2(request, option):
             for exercise in exercises:
                 weight = request.POST.get('peso_ex_{}'.format(exercise.pk))
                 if weight:
-                    if weight.isdigit(): # peso válido
+                    try: 
+                        weight = float(weight)
                         exercise.weight = weight
                         exercise.save()
-                    else: 
+                    except: 
                         # O valor não é numérico, exibe uma mensagem de erro
                         error_message = 'O valor do peso deve ser numérico! Informe um valor válido.'
                         break
@@ -155,6 +156,7 @@ def planejamento(request):
     LIMITE_DIAS = 7
     data_limite = date.today() - timedelta(days=LIMITE_DIAS)
     Planejamento.objects.filter(user=request.user, data__lt=data_limite).delete()
+    horario = None # Valor padrão
 
     if request.method == 'POST':
         # Verifica se algum botão de "confirmar" foi clicado
@@ -179,12 +181,24 @@ def planejamento(request):
         elif 'confirmar_domingo1' in request.POST:
             horario = request.POST['domingo_horario1']
             dia_semana = "domingo"
-        Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+        if not horario:  # Verifica se horario é vazio ou None
+            error_message = "Por favor, escolha um horário válido."
+            form = PlanejamentoForm()
+            planejamentos = Planejamento.objects.filter(user=request.user)
+            context = {'form': form, 'planejamentos': planejamentos, 'error_message': error_message}
+            return render(request, 'galeria/planejamento.html', context)
 
+    if horario:
+        Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+        form = PlanejamentoForm()
+        planejamentos = Planejamento.objects.filter(user=request.user)
+        context = {'form': form, 'planejamentos': planejamentos}
+        return render(request, 'galeria/planejamento.html',context)
     form = PlanejamentoForm()
     planejamentos = Planejamento.objects.filter(user=request.user)
     context = {'form': form, 'planejamentos': planejamentos}
     return render(request, 'galeria/planejamento.html',context)
+
 
 @login_required(login_url='/')
 def historico(request):
