@@ -372,9 +372,10 @@ class TestHome(LiveServerTestCase):
         submit_button = browser.find_element(By.NAME, "OK-supino reto barra-button")
         submit_button.click()
         # Verify 
-        expected_weight = "5"
+        expected_weight = float("5")
         result_element = browser.find_element(By.ID, "supino reto barra")
         weight = result_element.get_attribute("value")
+        weight = float(weight)
         assert weight == expected_weight, f"O valor encontrado foi {expected_weight}, mas esperava-se 5"
 
     # Como usuário, gostaria de adicionar os pesos dos meus exercícios
@@ -408,9 +409,10 @@ class TestHome(LiveServerTestCase):
         submit_button = browser.find_element(By.NAME, "OK-puxada fechada-button")
         submit_button.click()
         # Verify 
-        expected_weight = "10"
+        expected_weight = float("10")
         result_element = browser.find_element(By.ID, "puxada fechada")
         weight = result_element.get_attribute("value")
+        weight = float(weight)
         assert weight == expected_weight, f"O valor encontrado foi {expected_weight}, mas esperava-se 10"
     
     # Como usuário, gostaria de ter tipos de treinos diferentes para escolher
