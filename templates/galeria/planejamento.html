@@ -186,16 +186,11 @@
   <form method="POST" action="{% url 'remove_workout' planejamento.id %}">
     {% csrf_token %}
     <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }}</p>
-    <label for="remove-{{ planejamento.id }}">Treino Finalizado?</label>
-    <input id="remove-{{ planejamento.id }}" type="submit" value="Confirmar">
+    <input id="remove-{{ planejamento.id }}" type="submit" value="Finalizar treino">
     <input type="hidden" name="treino_confirmado_id" value="{{ planejamento.id }}">
   </form>
 </div>
 <br>
 {% endfor %}
-
-
-<h1>{{quantidade_treinos}}</h1>
-
 
 {% endblock %}
