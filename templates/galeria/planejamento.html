@@ -183,10 +183,17 @@
 <h1><b>Treinos pendentes</b></h1>
 {% for planejamento in planejamentos %}
 <div class="planejamento-item">
-  <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }}</p>
+  <form method="post" action="{% url 'remove_workout' planejamento.id %}">
+    {% csrf_token %}
+    <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }}</p>
+    <input type="checkbox" name="remove" id="remove">
+    <label for="remove">Remove</label>
+    <input type="submit" value="Update">
+  </form>
 </div>
 <br>
 {% endfor %}
+
 
 
 {% endblock %}

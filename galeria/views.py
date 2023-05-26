@@ -218,3 +218,9 @@ def planejamento(request):
 @login_required(login_url='/')
 def historico(request):
     return render(request, 'galeria/historico.html')
+
+def remove_workout(request, id):
+    if request.method == "POST":
+        workout = get_object_or_404(Planejamento, id=id, user=request.user)
+        workout.delete()
+        return redirect('planejamento')
