@@ -19,10 +19,8 @@ urlpatterns = [
     path('register', register, name='register' ),
     path('treino_selecionado2/<str:option>/', treino_selecionado2, name='treino_selecionado2'), 
     path('planejamento', planejamento, name='planejamento'),
-    path('historico',historico,name='historico'),
     path('historico/',historico,name='historico'),
-    path('remove_workout/<int:id>/', remove_workout, name='remove_workout'),
-    
+    path('remove_workout/<int:id>/', remove_workout, name='remove_workout'),    
     #oq eh isso?
     #path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
     #n faço ideia meu brother -carlos

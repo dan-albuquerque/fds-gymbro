@@ -1,14 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento
+from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento, Historico
 from .forms import RegisterForm, SonoForm, PlanejamentoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from datetime import date, timedelta
-from django.http import HttpResponse
-
+from django.db.models import F
 # Create your views here.
 def index(request):
    if request.method == 'POST':
@@ -215,12 +214,26 @@ def planejamento(request):
     context = {'form': form, 'planejamentos': planejamentos, 'error_message': error_message}
     return render(request, 'galeria/planejamento.html', context)
 
-@login_required(login_url='/')
-def historico(request):
-    return render(request, 'galeria/historico.html')
 
+
+@login_required(login_url='/')
 def remove_workout(request, id):
     if request.method == "POST":
-        workout = get_object_or_404(Planejamento, id=id, user=request.user)
-        workout.delete()
-        return redirect('planejamento')
+        treino_confirmado_id = request.POST.get("treino_confirmado_id")
+        treino_confirmado = get_object_or_404(Planejamento, id=treino_confirmado_id, user=request.user)
+        
+        historico, created = Historico.objects.get_or_create(user=request.user)
+        if not created:
+            historico.increment_quantidade_treinos()
+
+        treino_confirmado.delete()
+    return redirect('planejamento')
+
+
+    
+@login_required(login_url='/')
+def historico(request):
+    historico = Historico.objects.filter(user=request.user).first()
+    quantidade_treinos = historico.quantidade_treinos 
+    context = {'quantidade_treinos': quantidade_treinos}
+    return render(request, 'galeria/historico.html', context)

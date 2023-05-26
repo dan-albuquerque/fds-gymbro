@@ -64,7 +64,7 @@
 </div>
 {% endif %}
 
-<form method="post", action="">
+<form method="POST", action="">
   {% csrf_token %}
   <table>
     <thead>
@@ -183,17 +183,19 @@
 <h1><b>Treinos pendentes</b></h1>
 {% for planejamento in planejamentos %}
 <div class="planejamento-item">
-  <form method="post" action="{% url 'remove_workout' planejamento.id %}">
+  <form method="POST" action="{% url 'remove_workout' planejamento.id %}">
     {% csrf_token %}
     <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }}</p>
-    <input type="checkbox" name="remove" id="remove">
-    <label for="remove">Remove</label>
-    <input type="submit" value="Update">
+    <label for="remove-{{ planejamento.id }}">Treino Finalizado?</label>
+    <input id="remove-{{ planejamento.id }}" type="submit" value="Confirmar">
+    <input type="hidden" name="treino_confirmado_id" value="{{ planejamento.id }}">
   </form>
 </div>
 <br>
 {% endfor %}
 
+
+<h1>{{quantidade_treinos}}</h1>
 
 
 {% endblock %}
