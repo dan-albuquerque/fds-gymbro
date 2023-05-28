@@ -278,9 +278,9 @@ class TestHome(LiveServerTestCase):
         submit_button.click()
 
         planejamento_link = browser.find_element(By.ID, "planejamento-menu")
-        time.sleep(5)
+        time.sleep(2)
         browser.execute_script("arguments[0].click();", planejamento_link)
-        time.sleep(5)
+        time.sleep(2)
 
         # Select the time input in the second table and enter "10:15"
         table = browser.find_elements(By.XPATH, "//table")[0] # Second table on the page
@@ -293,16 +293,17 @@ class TestHome(LiveServerTestCase):
         confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
         confirmar_button.click()
 
-        # Verify that the selected time and day are displayed in the plan details
+        # Verify that the selected time is displayed in the plan details
         planejamentos = browser.find_elements(By.CLASS_NAME, "planejamento-item")
         found_selected_time = False
-        found_selected_day = False
         for planejamento in planejamentos:
-            if planejamento.text == 'segunda-feira - 10:15 a.m.':
+            day_time_text = planejamento.find_element(By.TAG_NAME, "p").text
+            if day_time_text == 'segunda-feira - 10:15 a.m.':
                 found_selected_time = True
-                found_selected_day = True
-        assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
-        
+                break
+
+        assert found_selected_time, "Selected time not displayed in plan details"
+
     # Como usuário, gostaria de planejar meus dias e horários de treinos.
     # Cenário 2: Selecionar horário de treino no sábado
     '''Dado que estou na página de agendar o treino(planejamento), quando eu escolher 10:15 no input de horário na linha da segunda e pressionar “confirmar”, então será exibido “segunda-feira 10:15” embaixo de “planejamentos”'''
