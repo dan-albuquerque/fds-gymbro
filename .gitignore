@@ -1,6 +1,3 @@
-# Drivers
-chromedriver.exe
-LICENSE.chromedriver
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
