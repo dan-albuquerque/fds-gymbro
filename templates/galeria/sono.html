@@ -1,7 +1,5 @@
 {% extends 'galeria/base.html' %}
 {% load static %}
-
-
 {% block content %}
 
 
@@ -23,9 +21,9 @@
 
 {% if sono.dormiu and sono.acordou %}
 <div style="text-align: center; padding-top:50px ">
-   <p><b style = "color : #32CD32">No momento, você está tendo {{sono.total_sono}} horas de sono</b> </p>
+   <p><b style = "color : #32CD32">No momento, você está tendo {{sono.total_sono}} hora(s) de sono</b> </p>
 <div style="text-align: center;">
-   <p><b style = "color : #32CD32"> Da última vez você dormiu {{ sono.dormiu }} horas e acordou {{ sono.acordou }} horas</b> </p>
+   <p><b style = "color : #32CD32"> Da última vez você dormiu as {{ sono.dormiu }} horas e acordou as {{ sono.acordou }} horas</b> </p>
 </div>
 {% endif %}
 

@@ -1,5 +1,5 @@
 from django.urls import path, include
-from galeria.views import home, index, treinos, sono, treino_selecionado, register, treino_selecionado2, sono_selecionado, logout_view, planejamento,execucao
+from galeria.views import home, index, treinos, sono,  register, treino_selecionado2, logout_view, planejamento,execucao,historico,remove_workout
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -13,14 +13,15 @@ urlpatterns = [
     path('home', home, name='home'),
     path('', index, name='index'),
     path('logout/', logout_view, name='logout'),
-    path('treinos', treinos, name='treinos'),
     path('treinos/', treinos, name='treinos'),
-    path('sono', sono, name='sono'),
     path('sono/',sono, name='sono'),
-    path('treino_selecionado/<int:treino_id>', treino_selecionado, name='treino_selecionado'),
     path('', include("django.contrib.auth.urls")),
     path('register', register, name='register' ),
     path('treino_selecionado2/<str:option>/', treino_selecionado2, name='treino_selecionado2'), 
     path('planejamento', planejamento, name='planejamento'),
-    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
+    path('historico/',historico,name='historico'),
+    path('remove_workout/<int:id>/', remove_workout, name='remove_workout'),    
+    #oq eh isso?
+    #path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
+    #n faço ideia meu brother -carlos
 ]

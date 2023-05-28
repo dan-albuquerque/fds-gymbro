@@ -27,7 +27,7 @@ class Exercise(models.Model):
     sets = models.IntegerField()
     reps = models.IntegerField()
     rest = models.CharField(default='40s', max_length=30)
-    weight = models.IntegerField(default=1)
+    weight = models.FloatField(default=1)
     description = models.CharField(max_length=3000)
     link = models.TextField(max_length=3000)
 
@@ -69,9 +69,21 @@ class UserObjective(models.Model):
     selected_objective = models.CharField(max_length=100, choices=OBJETIVOS_CHOICES, default='hipertrofia')
 
 class Planejamento(models.Model):
+    TIPO_CHOICES = (
+        ('perna', 'Perna'),
+        ('costas', 'Costas'),
+        ('peito', 'Peito'),
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateField()
     horario = models.TimeField()
     data_horario = models.DateTimeField(default=datetime.now(), blank=False) #armazena hj
     dia_semana = models.CharField(default='segunda', max_length=40)
-    
+
+class Historico(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    quantidade_treinos = models.IntegerField(default=0)
+
+    def increment_quantidade_treinos(self):
+        self.quantidade_treinos += 1
+        self.save()

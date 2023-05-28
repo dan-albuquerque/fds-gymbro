@@ -14,7 +14,7 @@
     }
     
   th {
-    background-color: #4CAF50;
+    background-color: #32CD32;
     color: white;
     }
     
@@ -52,56 +52,127 @@
 }
 
 .planejamento-item p {
-  color: #32CD32;
+  color:  #32CD32;
   font-size: 14px;
   margin-bottom: 0;
 }
 </style>
 
-<form method="post", action="">
+{% if error_message %}
+<div class="error_message">
+  {{ error_message }} 
+</div>
+{% endif %}
+
+<form method="POST", action="">
   {% csrf_token %}
   <table>
     <thead>
       <tr>
         <th>Dia da semana</th>
         <th>Horário</th>
-        <th>Confirmar</th>
+        <th>Tipo de treino</th>
+        <th>Confirmar</th> 
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>Segunda-feira</td>
         <td><input type="time" name="segunda_horario1" value="{{planejamento.segunda_horario1 }}"></td>
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_segunda1" value="segunda_horario1">Confirmar</button></td>
       </tr>
       <tr>
         <td>Terça-feira</td>
         <td><input type="time" name="terca_horario1" value="{{ planejamento.terca_horario1 }}"></td>
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_terca1" value="terca_horario1">Confirmar</button></td>
       </tr>
       <tr>
         <td>Quarta-feira</td>
         <td><input type="time" name="quarta_horario1" value="{{ planejamento.quarta_horario1 }}"></td>
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_quarta1" value="quarta_horario1">Confirmar</button></td>
       </tr>
       <tr>
         <td>Quinta-feira</td>
         <td><input type="time" name="quinta_horario1" value="{{ planejamento.quinta_horario1 }}"></td>
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_quinta1" value="quinta_horario1">Confirmar</button></td>
       </tr>
       <tr>
         <td>Sexta-feira</td>
         <td><input type="time" name="sexta_horario1" value="{{ planejamento.sexta_horario1 }}"></td>
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_sexta1" value="sexta_horario1">Confirmar</button></td>
       </tr>
       <tr>
         <td>Sábado</td>
         <td><input type="time" name="sabado_horario1" value="{{ planejamento.sabado_horario1 }}"></td>
+
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_sabado1" value="sabado_horario1">Confirmar</button></td>
       </tr>
-      <tr>
+      <tr> 
         <td>Domingo</td>
         <td><input type="time" name="domingo_horario1" value="{{ planejamento.domingo_horario1 }}"></td>
+        <td><div class="rectangle">
+          <input type="radio" id="perna" name="tipo" value="perna">
+          <label style = "color : #000000"for="perna">Perna</label>
+          <input type="radio" id="peito" name="tipo" value="peito">
+          <label style = "color : #000000"for="peito">Peito</label>
+          <input type="radio" id="costas" name="tipo" value="costas">
+          <label style = "color : #000000" for="costas">Costas</label>
+        </div>
+        </td>
         <td><button type="submit" name="confirmar_domingo1" value="domingo_horario1">Confirmar</button></td>
       </tr>
     </tbody>
@@ -109,13 +180,17 @@
 </form>
 <br>
 
-<h1>Planejamentos</h1>
+<h1><b>Treinos pendentes</b></h1>
 {% for planejamento in planejamentos %}
 <div class="planejamento-item">
-  <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }}</p>
+  <form method="POST" action="{% url 'remove_workout' planejamento.id %}">
+    {% csrf_token %}
+    <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }}</p>
+    <input id="remove-{{ planejamento.id }}" type="submit" value="Finalizar treino">
+    <input type="hidden" name="treino_confirmado_id" value="{{ planejamento.id }}">
+  </form>
 </div>
 <br>
 {% endfor %}
-
 
 {% endblock %}

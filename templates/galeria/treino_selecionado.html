@@ -1,0 +1,87 @@
+{% extends 'galeria/base.html'%}
+{% load static %}
+{% block content %}
+<style>
+.exercise-box{background-color: #F2F2F2;
+   padding: 10px;
+   border-radius: 5px;
+   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+   margin-bottom: 10px;
+   font-size: 18px;
+   font-weight: bold;
+   color: #333;}
+</style>
+
+
+<table style="border-collapse: collapse; width: 100%;">
+   <tr style="background-color: #f2f2f2;">
+       <th style="border: 1px solid #ddd; padding: 8px;">Exercício</th>
+       <th style="border: 1px solid #ddd; padding: 8px;">Número de Série</th>
+       <th style="border: 1px solid #ddd; padding: 8px;">Número de Repetições</th>
+       <th style="border: 1px solid #ddd; padding: 8px;">Tempo de Descanso</th>
+       <th style="border: 1px solid #ddd; padding: 8px;">Carga</th>
+   </tr>
+   <tr>
+   <td style="border: 1px solid #ddd; padding: 8px;">Exercício 3</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+   <td style ="border: 1px solid #ddd; padding: 8px;">
+       <form action="{% url 'treino_selecionado' treino_id=treino.id %}" method="post">
+           {% csrf_token %}
+           <input type="hidden" name="peso_ex1" value="{{ peso_ex1 }}">
+           <label for="peso_ex1">Insira peso: </label>
+           <input id="peso_ex1" type="text" name="peso_ex1" value="{{ peso_ex1 }}">
+           <input type="submit" value="OK">
+       </form>
+       {% if request.method == 'POST' and 'peso_ex1' in request.POST %}
+           {% with weight=request.POST.peso_ex1 %}
+               <p>Peso escolhido: {{ weight }}</p>
+           {% endwith %}
+       {% endif %}
+   </td>
+</tr>
+   <tr>
+   <td style="border: 1px solid #ddd; padding: 8px;">Exercício 3</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+   <td style ="border: 1px solid #ddd; padding: 8px;">
+       <form action="{% url 'treino_selecionado' treino_id=treino.id %}" method="post">
+           {% csrf_token %}
+           <input type="hidden" name="peso_ex2" value="{{ peso_ex2 }}">
+           <label for="peso_ex2">Insira peso: </label>
+           <input id="peso_ex2" type="text" name="peso_ex2" value="{{ peso_ex2 }}">
+           <input type="submit" value="OK">
+       </form>
+       {% if request.method == 'POST' and 'peso_ex2' in request.POST %}
+           {% with weight=request.POST.peso_ex2 %}
+               <p>Peso escolhido: {{ weight }}</p>
+           {% endwith %}
+       {% endif %}
+   </td>
+</tr>
+   <tr>
+   <td style="border: 1px solid #ddd; padding: 8px;">Exercício 3</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+   <td style="border: 1px solid #ddd; padding: 8px;">30 segundos</td>
+   <td style ="border: 1px solid #ddd; padding: 8px;">
+       <form action="{% url 'treino_selecionado' treino_id=treino.id %}" method="post">
+           {% csrf_token %}
+           <input type="hidden" name="peso_ex3" value="{{ peso_ex3 }}">
+           <label for="peso_ex3">Insira peso: </label>
+           <input id="peso_ex3" type="text" name="peso_ex3" value="{{ peso_ex3 }}">
+           <input type="submit" value="OK">
+       </form>
+       {% if request.method == 'POST' and 'peso_ex3' in request.POST %}
+           {% with weight=request.POST.peso_ex3 %}
+               <p>Peso escolhido: {{ weight }}</p>
+           {% endwith %}
+       {% endif %}
+   </td>
+</tr>
+
+ </table>
+
+{% endblock %}

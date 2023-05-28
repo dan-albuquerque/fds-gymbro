@@ -62,9 +62,43 @@
         iframe {
             float: left;
             padding-left: 50px;
-
-
         }
+        .rectangle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 300px;
+            height: 50px;
+            
+            padding: 10px;
+            
+}
+
+        .rectangle input[type="radio"] {
+            display: none;
+            
+}
+
+        .rectangle label {
+            display: inline-block;
+            width: 80px;
+            height: 30px;
+            background-color:  #32CD32;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            
+}
+
+.rectangle input[type="radio"]:checked + label {
+  background-color: #000000;
+  color: #000000;
+}
+
+
+
+
+
     </style>
 </head>
 
@@ -81,13 +115,13 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-links">
                     <div class="navbar-nav">
-                        <a href="{% url 'treinos' %}" class="nav-item nav-link" id="treinos-menu">Treinos</a>
+                        <a href="{% url 'treinos' %}" class="nav-item nav-link" id="treinos-menu" name="treinos_menu_bar">Treinos</a>
                         <a href="{% url 'home' %}" class="nav-item nav-link" id="home-menu">home</a>
                         <a href="{% url 'planejamento' %}" class="nav-item nav-link"
                             id="planejamento-menu">Planejamento</a>
                         <a class="nav-item nav-link" id="desafios-menu">Desafios</a>
-                        <a href="{% url 'sono' %}" class="nav-item nav-link" id="sono-menu">Sono</a>
-                        <a class="nav-item nav-link" id="mybro-menu">Mybro</a>
+                        <a href="{% url 'sono' %}" class="nav-item nav-link" id="sono-menu" name="sono_menu_bar">Sono</a>
+                        <a href="{% url 'historico' %}" class="nav-item nav-link" id="historico-menu" name="historico_menu_bar">Histórico</a>
                         <a style = "padding-right :20px" href="{% url 'logout' %}">Logout</a>
                     </div>
                 </div>
