@@ -237,3 +237,8 @@ def historico(request):
     quantidade_treinos = historico.quantidade_treinos 
     context = {'quantidade_treinos': quantidade_treinos}
     return render(request, 'galeria/historico.html', context)
+
+
+def customizar(request):
+    
+    return render(request, 'galeria\customizar.html')
