@@ -22,7 +22,7 @@ urlpatterns = [
     path('historico/',historico,name='historico'),
     path('remove_workout/<int:id>/', remove_workout, name='remove_workout'),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
-     path('customizar/', customizar, name='customizar'),    
+    path('customizar/', customizar, name='customizar'),    
     #oq eh isso?
     #path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
     #n faço ideia meu brother -carlos
