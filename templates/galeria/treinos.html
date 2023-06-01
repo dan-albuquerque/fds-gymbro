@@ -3,6 +3,34 @@
 {% block content %}
 
 
+<style>
+  .customizar a {
+  text-decoration: none;
+}
+
+.customizar button {
+  background-color: #4CAF50;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.customizar button:hover {
+  background-color: #45a049;
+}
+
+.customizar button:active {
+  background-color: #3e8e41;
+}
+</style>
+
 <div class="row row-cols-2 g-3">
   <div class="col">
     {% for treino in cards %}
@@ -55,8 +83,13 @@
     <button type="submit" class="btn btn-primary">Selecionar</button>
   </form>
 </div>
-
-<div class="customizar">
-  <a href="{% url 'customizar' %}"><button>customizar</button></a>
-</div>
+<br>
+<br>
+<br>
+<br>
+<center>
+  <div class="customizar">
+    <a href="{% url 'customizar' %}"><button>Customize seus treinos</button></a>
+  </div>
+</center>
 {% endblock %}

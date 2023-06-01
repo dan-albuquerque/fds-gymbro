@@ -2,9 +2,94 @@
 {% load static %}
 {% block content %}
 
-<h1>Teste</h1>
+<style>
+    form {
+      max-width: 400px;
+      margin: 0;
+      padding: 20px;
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translate(0, -50%);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #060606;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    input[type="number"] {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid #060606;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  input[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #45a049;
+  }
+
+  input[type="submit"]:active {
+    background-color: #3e8e41;
+  }
+
+</style>
+    
 
 
+<head>
+    <title>ICustomize seu treino</title>
+  </head>
+  <body>
+    <form>
+      <label for="input-string">Nome do exercicio:</label>
+      <input type="text" id="input-string" name="input-string"><br>
+  
+      <label for="input-int1">Series:</label>
+      <input type="number" id="input-int1" name="input-int1"><br>
+  
+      <label for="input-int2">Repetições:</label>
+      <input type="number" id="input-int2" name="input-int2"><br>
+  
+      <label for="input-int3">Descanso:</label>
+      <input type="number" id="input-int3" name="input-int3"><br>
+  
+      <label for="input-int4">Peso:</label>
+      <input type="number" id="input-int4" name="input-int4"><br>
+        
+      <input type="submit" value="Enviar">
+    </form>
+  </body>
 
 
 {% endblock %}
