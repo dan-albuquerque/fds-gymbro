@@ -3,4 +3,8 @@
 {% block content %}
 <h1><b>Histórico de treinos</b></h1>
 <h2><b>Atualmente você realizou {{ quantidade_treinos }} treinos conosco! Continue assim, bro!</b></h2>
+{% for planejamento in planejamentos %}
+    <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }}</p>
+{% endfor %}
+
 {% endblock %}

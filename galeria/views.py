@@ -214,15 +214,20 @@ def remove_workout(request, id):
         treino_confirmado.delete()
     return redirect('planejamento')
 
-
 @login_required(login_url='/')
 def historico(request):
     historico = Historico.objects.filter(user=request.user).first()
+    planejamentos = Planejamento.objects.filter(user=request.user)
+
     if historico:
         quantidade_treinos = historico.quantidade_treinos
     else:
         quantidade_treinos = 0
-    context = {'quantidade_treinos': quantidade_treinos}
+
+    context = {
+        'quantidade_treinos': quantidade_treinos,
+        'planejamentos': planejamentos,
+    }
     return render(request, 'galeria/historico.html', context)
 
 
