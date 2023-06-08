@@ -151,69 +151,54 @@ def home(request):
 
 @login_required(login_url='/')
 def planejamento(request):
-    # Exclui objetos antigos
     LIMITE_DIAS = 7
     data_limite = date.today() - timedelta(days=LIMITE_DIAS)
     Planejamento.objects.filter(user=request.user, data__lt=data_limite).delete()
     error_message = None
 
     if request.method == 'POST':
-        # Verifica se algum botão de "confirmar" foi clicado
+        dia_semana = None
+        horario = None
+        tipo = None
+
         if 'confirmar_segunda1' in request.POST:
-            horario = request.POST['segunda_horario1']
+            horario = request.POST.get('segunda_horario1')
             dia_semana = "segunda-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('segunda_tipo')
         elif 'confirmar_terca1' in request.POST:
-            horario = request.POST['terca_horario1']
+            horario = request.POST.get('terca_horario1')
             dia_semana = "terca-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('terca_tipo')
         elif 'confirmar_quarta1' in request.POST:
-            horario = request.POST['quarta_horario1']
+            horario = request.POST.get('quarta_horario1')
             dia_semana = "quarta-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('quarta_tipo')
         elif 'confirmar_quinta1' in request.POST:
-            horario = request.POST['quinta_horario1']
+            horario = request.POST.get('quinta_horario1')
             dia_semana = "quinta-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('quinta_tipo')
         elif 'confirmar_sexta1' in request.POST:
-            horario = request.POST['sexta_horario1']
+            horario = request.POST.get('sexta_horario1')
             dia_semana = "sexta-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('sexta_tipo')
         elif 'confirmar_sabado1' in request.POST:
-            horario = request.POST['sabado_horario1']
+            horario = request.POST.get('sabado_horario1')
             dia_semana = "sabado"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('sabado_tipo')
         elif 'confirmar_domingo1' in request.POST:
-            horario = request.POST['domingo_horario1']
+            horario = request.POST.get('domingo_horario1')
             dia_semana = "domingo"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
-            
+            tipo = request.POST.get('domingo_tipo')
+
+        if not horario:  # Verifica se horario é vazio ou None
+            error_message = "Por favor, escolha um horário válido."
+        else:
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana, tipo=tipo)
+
     form = PlanejamentoForm()
     planejamentos = Planejamento.objects.filter(user=request.user)
     context = {'form': form, 'planejamentos': planejamentos, 'error_message': error_message}
     return render(request, 'galeria/planejamento.html', context)
-
 
 
 @login_required(login_url='/')

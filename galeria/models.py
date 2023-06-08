@@ -77,6 +77,7 @@ class Planejamento(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateField()
     horario = models.TimeField()
+    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
     data_horario = models.DateTimeField(default=datetime.now(), blank=False) #armazena hj
     dia_semana = models.CharField(default='segunda', max_length=40)
 
