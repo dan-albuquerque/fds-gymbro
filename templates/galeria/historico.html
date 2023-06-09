@@ -1,29 +1,78 @@
-{% extends 'galeria/base.html'%}
+{% extends 'galeria/base.html' %}
 {% load static %}
+
 {% block content %}
 <style>
-      .planejamento-item {
+.planejamento-item {
   padding: 10px;
   margin-bottom: 5px;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0,0,0,0.3);
   width: 20pc;
+  margin-left: 400px;
 }
 
 .planejamento-item p {
-  color:  #32CD32;
+  color: #32CD32;
   font-size: 14px;
   margin-bottom: 0;
 }
+
+.image-container {
+  margin-top: 20px;
+  float: right;
+  margin-right: 400px;
+}
+
+.image-container img {
+  max-width: 300px;
+}
+
 </style>
-<h1><b>Histórico de treinos</b></h1>
-<h2><b>Atualmente você realizou {{ quantidade_treinos }} treinos conosco! Continue assim, bro!</b></h2>
-{% for planejamento in planejamentos %}
-{% if planejamento.treinoFeito %}
-    <div class="planejamento-item">
-    <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }} - {{planejamento.data}}</p>
-    </div>
+
+<h1 style = "text-align: center;"><b>Histórico de treinos</b></h1>
+
+{% if planejamentos|length > 0 and planejamentos|length < 10 %}
+  <h2 style = "text-align: center;"><b>Atualmente você realizou {{ planejamentos|length }} treinos conosco! Vamos começar com força! &#x1F525;</b></h2>
+  <p style = "text-align: center; font-size: larger;">Treine 50 vezes para evoluir seu bro!</p>
+
+{% elif planejamentos|length == 0 %}
+  <h2 style = "text-align: center;"><b>Parece que você ainda não tem treinos. Comece sua lista em planejamentos e vamos meter marcha, bro!</b></h2>
+  <p style = "text-align: center; font-size: large;">Treine 50 vezes para evoluir seu bro!</p>
+{% elif planejamentos|length >= 10 and planejamentos|length < 30 %}
+  <h2 style = "text-align: center;"><b>Atualmente você realizou {{ planejamentos|length }} treinos conosco! Você está on fire! &#x1F525; &#x1F525;</b></h2>
+  <p style = "text-align: center; font-size: large;">Treine 50 vezes para evoluir seu bro!</p>
+{% elif planejamentos|length >= 30 and planejamentos|length < 50 %}
+  <h2 style = "text-align: center;"><b>Atualmente você realizou {{ planejamentos|length }} treinos conosco! Está ficando forte, ein? &#x1F525; &#x1F525; &#x1F525;</b></h2>
+  <p style = "text-align: center; font-size: large;">Treine 100 vezes para evoluir seu bro!</p>
+{% elif planejamentos|length >= 50 and planejamentos|length < 100 %}
+  <h2 style = "text-align: center;"><b>Já estamos na marca de {{ planejamentos|length }} treinos! Você está ficando monstruoso! &#x1F525; &#x1F525; &#x1F525; &#x1F525;</b></h2>
+  <p style = "text-align: center; font-size: large">Treine 100 vezes para evoluir seu bro!</p>
+{% elif planejamentos|length >= 100 %}
+  <h2 style = "text-align: center;"><b>Você ainda consegue passar pela porta, bro? {{ planejamentos|length }} treinos conosco! &#x1F525;&#x1F525; &#x1F525; &#x1F525; &#x1F525;</b></h2>
+  <p style = "text-align: center; font-size: large;">Seu Bro está muito forte!</p>
 {% endif %}
+
+{% if planejamentos|length < 50 %}
+<div class="image-container">
+  <img src="{% static 'img/carlos png boy 01.png' %}" alt="Iniciante">
+</div>
+{% elif planejamentos|length >= 50 and planejamentos|length < 100  %}
+<div class="image-container">
+  <img src="{% static 'img/carlos png boy 02.png' %}" alt="Fortinho">
+</div>
+{% elif planejamentos|length >= 100 %}
+<div class="image-container">
+  <img src="{% static 'img/carlos png boy 03(1).png' %}" alt="Monstruoso">
+</div>
+{% endif %}
+
+{% for planejamento in planejamentos %}
+  {% if planejamento.treinoFeito %}
+    <div class="planejamento-item">
+      <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }} - {{ planejamento.data }}</p>
+    </div>
+  {% endif %}
 {% endfor %}
 
 {% endblock %}
