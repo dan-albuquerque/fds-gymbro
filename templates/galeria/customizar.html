@@ -70,8 +70,9 @@
 <head>
     <title>ICustomize seu treino</title>
   </head>
-  <body>
-    <form>
+  <div>
+    <body>
+    <form action="{% url 'customizar' %}" method="post">
       <label for="input-string">Nome do exercicio:</label>
       <input type="text" id="input-string" name="input-string"><br>
   
@@ -88,8 +89,32 @@
       <input type="number" id="input-int4" name="input-int4"><br>
         
       <input type="submit" value="Enviar">
-    </form>
   </body>
+</div>
+
+  <div style="position: absolute; top: 300px; right: 300px;">
+      {% csrf_token %}
+      <h1><b>Escolha seu tipo de treino</b></h1>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="treino" id="treinoPeitoral" value="treinoPeitoral">
+        <label class="form-check-label" for="treinoPeitoral">
+          Treino de peitorial
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="treino" id="treinoCosta" value="treinoCosta">
+        <label class="form-check-label" for="treinoCosta">
+          Trieno de costa
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="treino" id="treioPerna" value="treioPerna">
+        <label class="form-check-label" for="treioPerna">
+          Treino de perna
+        </label>
+      </div>
+    </form>
+  </div>
 
 
 {% endblock %}
