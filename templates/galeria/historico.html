@@ -38,7 +38,6 @@
 
 {% elif planejamentos|length == 0 %}
   <h2 style = "text-align: center;"><b>Parece que você ainda não tem treinos. Comece sua lista em planejamentos e vamos meter marcha, bro!</b></h2>
-  <p style = "text-align: center; font-size: large;">Treine 50 vezes para evoluir seu bro!</p>
 {% elif planejamentos|length >= 10 and planejamentos|length < 30 %}
   <h2 style = "text-align: center;"><b>Atualmente você realizou {{ planejamentos|length }} treinos conosco! Você está on fire! &#x1F525; &#x1F525;</b></h2>
   <p style = "text-align: center; font-size: large;">Treine 50 vezes para evoluir seu bro!</p>
@@ -53,7 +52,7 @@
   <p style = "text-align: center; font-size: large;">Seu Bro está muito forte!</p>
 {% endif %}
 
-{% if planejamentos|length < 50 %}
+{% if planejamentos|length < 50  and planejamentos|length > 0 %}
 <div class="image-container">
   <img src="{% static 'img/carlos png boy 01.png' %}" alt="Iniciante">
 </div>
