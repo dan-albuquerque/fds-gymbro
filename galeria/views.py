@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento, Historico
+from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento, Historico, Customizar
 from .forms import RegisterForm, SonoForm, PlanejamentoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -232,5 +232,17 @@ def historico(request):
 
 
 def customizar(request):
+    if request.method == 'POST':
+        nome = request.POST['input-string']
+        series = request.POST['input-int1']
+        repeticoes = request.POST['input-int2']
+        descanso = request.POST['input-int3']
+        peso = request.POST['input-int4']
+        treino = request.POST.get('treino', '')
+
+        exercicio = Customizar(nome=nome, series=series, repeticoes=repeticoes, descanso=descanso, peso=peso, treino=treino)
+        exercicio.save()
+
+        return render(request, 'galeria/customizar.html')
     
-    return render(request, 'galeria\customizar.html')
+    return render(request, 'galeria/customizar.html')

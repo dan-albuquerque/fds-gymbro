@@ -88,3 +88,16 @@ class Historico(models.Model):
     def increment_quantidade_treinos(self):
         self.quantidade_treinos += 1
         self.save()
+
+
+class Customizar(models.Model):
+    nome = models.CharField(max_length=100)
+    series = models.IntegerField()
+    repeticoes = models.IntegerField()
+    descanso = models.IntegerField()
+    peso = models.DecimalField(max_digits=5, decimal_places=2)
+    treino = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nome
+
