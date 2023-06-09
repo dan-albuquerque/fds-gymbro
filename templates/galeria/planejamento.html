@@ -182,14 +182,17 @@
 
 <h1><b>Treinos pendentes</b></h1>
 {% for planejamento in planejamentos %}
+{% if not planejamento.treinoFeito %}
 <div class="planejamento-item">
   <form method="POST" action="{% url 'remove_workout' planejamento.id %}">
     {% csrf_token %}
     <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{planejamento.tipo}}</p>
+
     <input id="remove-{{ planejamento.id }}" type="submit" value="Finalizar treino">
     <input type="hidden" name="treino_confirmado_id" value="{{ planejamento.id }}">
   </form>
 </div>
+{% endif %}
 <br>
 {% endfor %}
 

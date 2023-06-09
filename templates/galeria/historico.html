@@ -1,10 +1,29 @@
 {% extends 'galeria/base.html'%}
 {% load static %}
 {% block content %}
+<style>
+      .planejamento-item {
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  width: 20pc;
+}
+
+.planejamento-item p {
+  color:  #32CD32;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+</style>
 <h1><b>Histórico de treinos</b></h1>
 <h2><b>Atualmente você realizou {{ quantidade_treinos }} treinos conosco! Continue assim, bro!</b></h2>
 {% for planejamento in planejamentos %}
-    <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }}</p>
+{% if planejamento.treinoFeito %}
+    <div class="planejamento-item">
+    <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }} - {{planejamento.data}}</p>
+    </div>
+{% endif %}
 {% endfor %}
 
 {% endblock %}

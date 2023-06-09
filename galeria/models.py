@@ -78,12 +78,14 @@ class Planejamento(models.Model):
     data = models.DateField()
     horario = models.TimeField()
     tipo = models.CharField(max_length=10, choices=TIPO_CHOICES)
+    treinoFeito = models.BooleanField(default=False)
     data_horario = models.DateTimeField(default=datetime.now(), blank=False) #armazena hj
     dia_semana = models.CharField(default='segunda', max_length=40)
 
 class Historico(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     quantidade_treinos = models.IntegerField(default=0)
+
 
     def increment_quantidade_treinos(self):
         self.quantidade_treinos += 1

@@ -210,8 +210,8 @@ def remove_workout(request, id):
         historico, created = Historico.objects.get_or_create(user=request.user)
         if not created:
             historico.increment_quantidade_treinos()
-
-        treino_confirmado.delete()
+        treino_confirmado.treinoFeito = True
+        treino_confirmado.save()
     return redirect('planejamento')
 
 @login_required(login_url='/')
