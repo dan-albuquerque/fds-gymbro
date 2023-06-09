@@ -488,3 +488,31 @@ class TestHome(LiveServerTestCase):
             EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody"))
         )
         assert tabela_exercicios.is_displayed()
+
+# Como usuário, gostaria de confirmar se treinei no dia
+# Cenário 1: confirmar que treinei no dia na aba de planejamentos
+'''Dado que estou na aba de planejamentos e tenho um treino planejado para segunda as 7 a.m. e realizei esse treino, então poderei clicar no botão de confirmar treino e será armazenado que treinei nesse dia'''
+# Criar teste aqui
+
+# Como usuário, gostaria de visualizar o histórico dos meus treinos
+# Cenário 1: acessar a aba de histórico
+'''Dado que estou na página home do site, quando eu clicar em “histórico de treinos” então será exibida a aba de histórico com uma tabela mostrando os exercícios que fiz em determinado dia.'''
+# Criar teste aqui
+
+# Como usuário, gostaria de criar treinos customizados
+# Cenário 1: criar um treino fullbody próprio
+'''Dado que estou na aba de treino customizado, quando eu clicar em “inserir exercício” e digitar Agachamento, depois digitar bíceps scoth, depois digitar Remada com halteres então será  sendo exibida a tabela de exercícios semelhante aos treinos já existentes do site com os exercícios customizados conforme coloco os exercícios com as informações de cada exercício default do site(series: 3,repetições: 10, descanso: 60s)'''
+# Criar teste aqui
+
+# Como usuário, gostaria de criar treinos customizados
+# Cenário 2: criar um treino de braço próprio
+'''Dado que estou na aba de treino customizado, quando eu clicar em “inserir exercício” e digitar Rosca direta com barra e especificar que quero fazer 4 series de 12, depois digitar Tríceps francês e especificar que quero fazer 4 series de 6, depois digitar Flexão diamante e especificar que quero fazer 3 series de 8 então será  sendo exibida a tabela de exercícios semelhante aos treinos já existentes do site com os exercícios customizados conforme coloco os exercícios com as informações de cada exercício com as informações que especifiquei '''
+
+# Testes de bugs
+
+# Issue #12: Escolher letra como valor de peso em treinos_selecionados
+    # Validação: Deve aparecer a mensagem de erro "O valor do peso deve ser numérico! Informe um valor válido. "
+# Issue #22: Confirmar planejamento sem inserir nenhum horário
+    # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um horário válido. "
+# Issue #25: Confirmar planejamento de treino sem escolher o tipo de treino
+    # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um tipo de treino"
