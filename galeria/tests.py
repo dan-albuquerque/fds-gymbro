@@ -512,7 +512,12 @@ class TestHome(LiveServerTestCase):
 
 # Issue #12: Escolher letra como valor de peso em treinos_selecionados
     # Validação: Deve aparecer a mensagem de erro "O valor do peso deve ser numérico! Informe um valor válido. "
-# Issue #22: Confirmar planejamento sem inserir nenhum horário
+
+# Issue #22: Confirmar planejamento sem inserir nenhum horário, mas escolhendo um tipo de treino
     # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um horário válido. "
-# Issue #25: Confirmar planejamento de treino sem escolher o tipo de treino
-    # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um tipo de treino"
+
+# Issue #25: Confirmar planejamento de treino sem escolher o tipo de treino, mas escolhendo um horário válido
+    # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um tipo de treino."
+
+# Outro issue em planejamento: Confirmar planejamento de treino sem escolher o tipo de treino e nem um horário:
+    # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um horário válido e um tipo de treino."
