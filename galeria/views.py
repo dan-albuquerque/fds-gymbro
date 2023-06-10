@@ -190,8 +190,14 @@ def planejamento(request):
             dia_semana = "domingo"
             tipo = request.POST.get('domingo_tipo')
 
-        if not horario:  # Verifica se horario é vazio ou None
-            error_message = "Por favor, escolha um horário válido."
+        if not horario or not tipo:  # Verifica se horario é vazio ou None
+            if not horario and tipo:
+                error_message = "Por favor, escolha um horário válido."
+            elif not tipo and horario:
+                error_message = "Por favor, escolha um tipo de treino."
+            else:
+                error_message = "Por favor, escolha um horário válido e um tipo de treino."
+
         else:
             Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana, tipo=tipo)
 
@@ -199,7 +205,7 @@ def planejamento(request):
     planejamentos = Planejamento.objects.filter(user=request.user)
     context = {'form': form, 'planejamentos': planejamentos, 'error_message': error_message}
     return render(request, 'galeria/planejamento.html', context)
-
+ 
 
 @login_required(login_url='/')
 def remove_workout(request, id):

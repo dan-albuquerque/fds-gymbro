@@ -40,7 +40,7 @@ class Sono(models.Model):
     dormiu = models.IntegerField(default= None)
     acordou = models.IntegerField(default= None)
     total_sono = models.IntegerField(null=True, blank=True)
-
+ 
     def calcular_horas(self):
         dormiu = int(self.dormiu)
         acordou = int(self.acordou)
