@@ -257,7 +257,7 @@ class TestHome(LiveServerTestCase):
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
         
-        expected_text = "Da última vez você dormiu as 22 pm e acordou as 6 am"
+        expected_text = "Da última vez você dormiu as 10 p.m. e acordou as 6 a.m."
         result_element = wait.until(EC.visibility_of_element_located((By.XPATH, "/html/body/div/div[2]/div/p/b")))
         result_text = result_element.get_attribute("innerHTML")
         assert expected_text in result_text
