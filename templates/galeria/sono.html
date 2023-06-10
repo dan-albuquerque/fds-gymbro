@@ -11,13 +11,11 @@
 
 <br><br>
 
-
 <form method="POST" action="">
    {% csrf_token %}
    {{ form.as_p }}
    <button type="submit">Enviar</button>
 </form>
-
 
 {% if sono.dormiu and sono.acordou %}
 <div style="text-align: center; padding-top:50px ">

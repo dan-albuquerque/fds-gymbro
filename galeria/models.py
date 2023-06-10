@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, User
 from django.db import models
 from datetime import datetime   
+from django.contrib.auth import get_user_model
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
@@ -37,19 +39,19 @@ class Exercise(models.Model):
 
 class Sono(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    dormiu = models.IntegerField(default= None)
-    acordou = models.IntegerField(default= None)
+    dormiu = models.TimeField(default=None)
+    acordou = models.TimeField(default=None)
     total_sono = models.IntegerField(null=True, blank=True)
  
     def calcular_horas(self):
-        dormiu = int(self.dormiu)
-        acordou = int(self.acordou)
+        dormiu = self.dormiu.hour + self.dormiu.minute / 60
+        acordou = self.acordou.hour + self.acordou.minute / 60
         cont = 0
 
         while dormiu <= 23 and dormiu > acordou:
             if dormiu == 23:
                 dormiu=0
-                cont = cont+1
+                cont = cont+1   
             cont=cont+1
             dormiu=dormiu+1
         while dormiu < acordou:
@@ -58,6 +60,12 @@ class Sono(models.Model):
 
         self.total_sono = cont
         self.save()
+    
+    def save(self, *args, **kwargs):
+        if not self.user_id:  # Verifica se o usuário já está definido
+            User = get_user_model()
+            self.user = User.objects.get(pk=User.id)
+        super().save(*args, **kwargs)
         
 class UserObjective(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
