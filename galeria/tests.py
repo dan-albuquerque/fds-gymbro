@@ -490,3 +490,7 @@ class TestHome(LiveServerTestCase):
     def tearDown(self):
         super().tearDown()
         self.browser.quit()
+
+    @classmethod
+    def tearDownClass(cls):
+        User.objects.filter(username='usuario_de_teste').delete()
