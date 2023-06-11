@@ -457,9 +457,36 @@ class TestHome(LiveServerTestCase):
 
     # Issue #25: Confirmar planejamento de treino sem escolher o tipo de treino, mas escolhendo um horário válido
     # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um tipo de treino."
+    def testIssue22(self):
+        planejamento_link = self.browser.find_element(By.ID, "planejamento-menu")
+        time.sleep(2)
+        self.browser.execute_script("arguments[0].click();", planejamento_link)
+        time.sleep(2)
 
+        table = self.browser.find_elements(By.XPATH, "//table")[0] # Second table on the page
+        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
+        confirmar_button.click()
+
+        errorMessage = self.browser.find_element(By.NAME, "error_message")
+        expectedErrorMessage = "Por favor, escolha um horário válido e um tipo de treino."
+        assert errorMessage.text == expectedErrorMessage, f'A mensagem de erro na verdade foi: {errorMessage.text}\nA mensagem de erro deveria ser: {expectedErrorMessage}'
+    
     # Outro issue em planejamento: Confirmar planejamento de treino sem escolher o tipo de treino e nem um horário:
     # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um horário válido e um tipo de treino."
+    def testOtherBugPlanejamento(self):
+        planejamento_link = self.browser.find_element(By.ID, "planejamento-menu")
+        time.sleep(2)
+        self.browser.execute_script("arguments[0].click();", planejamento_link)
+        time.sleep(2)
+
+        table = self.browser.find_elements(By.XPATH, "//table")[0] # Second table on the page
+        confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
+        confirmar_button.click()
+
+        errorMessage = self.browser.find_element(By.NAME, "error_message")
+        expectedErrorMessage = "Por favor, escolha um horário válido e um tipo de treino."
+        assert errorMessage.text == expectedErrorMessage, f'A mensagem de erro na verdade foi: {errorMessage.text}\nA mensagem de erro deveria ser: {expectedErrorMessage}'
+
     def tearDown(self):
         super().tearDown()
         self.browser.quit()
