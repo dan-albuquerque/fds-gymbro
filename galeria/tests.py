@@ -156,33 +156,33 @@ class TestHome(LiveServerTestCase):
     # Cenário 2 - hipertrofia
     '''Dado que estou na página de selecionar o treino, quando eu selecionar o objetivo “hipertrofia”, então todos os meus exercícios, encontrados selecionando o treino escolhido (Ex.: Peitoral, Costa, Perna), vão ter 10 repetições e tempo de descanso de 60s.'''
     def test_hipertrofia(self):
-       browser.get("http://127.0.0.1:8000/")
+        browser.get("http://127.0.0.1:8000/")
 
-       username_input = browser.find_element(By.NAME, "username")
-       password_input = browser.find_element(By.NAME, "password")
-       submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
 
-       username_input.send_keys("usuario_de_teste")
-       password_input.send_keys("senha123senha123#")
-       submit_button.click()
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
 
-       wait = WebDriverWait(browser, 10)
-       treino_link = browser.find_element( By.ID, "treinos-menu")
-       browser.execute_script("arguments[0].click();", treino_link)
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
 
-       hipertrofia = browser.find_element(By.ID, "hipertrofia")
-       hipertrofia.click()
+        hipertrofia = browser.find_element(By.ID, "hipertrofia")
+        hipertrofia.click()
 
-       botao_submit = browser.find_element(By.XPATH, "//button[@type='submit']")
-       botao_submit.click()
+        botao_submit = browser.find_element(By.XPATH, "//button[@type='submit']")
+        botao_submit.click()
 
-       treino_peitoral = browser.find_element(By.ID, "Treine")
-       treino_peitoral.click()
+        treino_peitoral = browser.find_element( By.NAME, "Treino de Peitoral")
+        browser.execute_script("arguments[0].click();", treino_peitoral)
 
-       reps = browser.find_element(By.XPATH, "//tbody/tr[1]/td[3]")
-       self.assertEqual(reps.text, "10")
-       rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
-       self.assertEqual(rest.text, "60s")
+        reps = browser.find_element(By.XPATH, "//tbody/tr[1]/td[3]")
+        self.assertEqual(reps.text, "10")
+        rest = browser.find_element(By.XPATH, "//tbody/tr[1]/td[4]")
+        self.assertEqual(rest.text, "60s")
     
 
     # Como usuário, gostaria de inserir meu objetivo com a academia
