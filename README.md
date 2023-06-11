@@ -32,9 +32,11 @@ Conclusion: It was concluded that the division into pairs was effective, but it 
 Second sprint: we mixed up the pairs and assigned new user stories. Danilo and Gabriel Rossiter worked on "Como usuário, gostaria de planejar meus dias e horários de treinos." Bernardo and Carlos tackled "Como um iniciante, gostaria de ver as execuções dos exercícios que estou fazendo." Finally, Gabriel Pires and Arthur worked on "Como usuário, gostaria de inserir meu objetivo com a academia."
 Conclusion: The dynamic proved to be highly efficient, as the learning experience for each programmer increased significantly. Working with different individuals allowed for a broader range of knowledge acquisition. Moreover, the code quality improved, as each pair now possesses a greater variety of skills. Additionally, at this stage of the project, all participants already had a solid understanding of Django.
 
-Plans for next sprint: For the next sprint, we should once again change the pairs to create new combinations that haven't been formed yet. This way, we can ensure a greater diversity of skills within each pair and allow each pair to develop new abilities by working with different partners. Next pairs: Gabriel Pires & Carlos, Gabriel Rossiter & Arthur, Danilo & Bernardo.
+Third sprint: we formed new pairs with the following assignments: Danilo and Bernardo worked on the user story "Como usuário, gostaria de confirmar a realização de um treino," Gabriel Pires and Carlos tackled the user story "Como usuário, gostaria de visualizar o histórico dos meus treinos," and Gabriel Rossiter and Arthur partnered on the user story "Como usuário, gostaria de criar treinos customizados.". It's worth mentioning that we initially had another user story planned for this sprint being "Como usuario, gostaria de poder cancelar meus planejamentos". However, due to time constraints and the additional workload it would require from one of the pairs, we made the decision not to implement it. Instead, we focused on the aforementioned user stories to ensure their successful completion within the sprint.
+Conclusion: By this point in the project, all team members had a solid understanding of Django and Selenium, which facilitated smoother development and reduced learning curves. Additionally, Gabriel Pires took charge of the continuous integration and continuous delivery (CI/CD) aspect of our project, further streamlining the delivery process. In general,, this sprint was notably faster and more efficient compared to the previous ones. The team's strong familiarity with the technologies involved, combined with the collaborative nature of pair programming, enabled swift completion of tasks. As a result, we successfully achieved the sprint's objectives for the discipline.
 
-Overall, pair programming proved to be an effective way for our team to work together, promote knowledge sharing, and increase code quality. We believe that by utilizing this approach, we were able to deliver a better product to our users.
+Future plans for Gymbro: 
+Our primary focus is to expand the range of available workouts, providing users with a more comprehensive selection to cater to their diverse fitness goals. Additionally, we are committed to enhancing the platform's usability and design, ensuring a seamless and visually appealing experience for our users. To further engage and motivate users, we plan to introduce a dedicated challenges section, where they can participate in fitness challenges and track their progress. Furthermore, we aim to create a personalized profile section, enabling users to customize their preferences and settings, thereby enhancing their overall experience and ultimately delivering a superior product. By actively pursuing these goals, we are confident that our project will continue to evolve and provide an exceptional fitness platform for our users.
 
 
 ## Links
@@ -51,6 +53,53 @@ Figma: https://drive.google.com/file/d/19p25ufgg-KVPRfRVTxW4u-0A9PZiMjvG/view
 Deploy of new users stories: https://drive.google.com/file/d/1UnoB43XKESigCExGv5blwGLSjuLKe7iZ/view?usp=share_link
 
 End-to-end tests (E2E): https://drive.google.com/file/d/1DI2CPXkd2SQ_yftZSjyyUx9fnXf9rxQs/view?usp=sharing
+<br>
+## Environment Setup
+Before you start contributing to the project, it's important to correctly set up your development environment. Follow the steps below to ensure you have all the necessary dependencies installed:
 
+Python: Make sure you have Python installed on your machine. We recommend using version 3.7 or higher.
+
+Virtual Environment: It's highly recommended to create a virtual environment to isolate the project dependencies. You can use tools like venv, virtualenv, or conda to create a virtual environment.
+
+Installing Dependencies: After setting up your virtual environment, navigate to the project's root directory and execute the following command to install all the necessary dependencies:
+
+'''pip install -r requirements.txt'''<br>
+
+Database Configuration: Open the settings.py file located in the projeto directory and adjust the database connection settings according to your local PostgreSQL configuration.<br>
+
+Database Migrations: To create the necessary tables in the database, run the following command:<br>
+
+'''python manage.py migrate'''<br>
+Running the Development Server: Now you can start the development server by executing the following command:<br>
+
+'''python manage.py runserver'''<br>
+The server will run at http://localhost:8000/.<br>
+ 
+## Contributing
+
+If you wish to contribute to the development of Gymbro, please follow the guidelines below:
+
+Ensure that you have correctly set up your development environment as described in the "Environment Setup" section.
+
+Check the project's Issues to find open tasks assigned to you. If you can't find a specific task, feel free to create a new Issue to discuss your proposed contribution.
+
+Create a fork of this repository to your GitHub account.
+
+Clone the forked repository to your local machine:
+
+'''git clone https://github.com/dan-albuquerque/fds-gymbro.git'''<br>
+Create a new branch to make your changes:
+
+'''git checkout -b my-branch'''<br>
+Make the desired changes, and then add, commit, and push them to your forked repository:
+
+'''git add .'''<br>
+'''git commit -m "Description of the changes" '''<br>
+'''git push origin my-branch'''<br>
+Open a Pull Request (PR) to the main repository. Be sure to clearly describe your changes and the rationale behind them.
+
+Wait for the project team to review your PR. We'll be glad to review and discuss your changes in order to incorporate them into the main project.
+
+Please note that we assume basic knowledge of Git and GitHub in these instructions. If you encounter any issues during the contribution process, feel free to ask for assistance.
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
