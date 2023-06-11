@@ -492,7 +492,32 @@ class TestHome(LiveServerTestCase):
 # Como usuário, gostaria de confirmar se treinei no dia
 # Cenário 1: confirmar que treinei no dia na aba de planejamentos
 '''Dado que estou na aba de planejamentos e tenho um treino planejado para segunda as 7 a.m. e realizei esse treino, então poderei clicar no botão de confirmar treino e será armazenado que treinei nesse dia'''
-# Criar teste aqui
+# Testando o botão de finalizar o treino
+def test_finalizarTreino(self):
+        browser.get("http://127.0.0.1:8000/")
+
+        username_input = browser.find_element(By.NAME, "username")
+        password_input = browser.find_element(By.NAME, "password")
+        submit_button = browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
+
+        username_input.send_keys("usuario_de_teste")
+        password_input.send_keys("senha123senha123#")
+        submit_button.click()
+
+        wait = WebDriverWait(browser, 10)
+        treino_link = browser.find_element(By.ID, "treinos-menu")
+        browser.execute_script("arguments[0].click();", treino_link)
+
+        def test_finalizarTreino(self):
+    
+         horario_input = browser.find_element(By.NAME, "segunda_horario1")
+         horario_input.click()
+
+        confirmar_button = browser.find_element(By.CSS_SELECTOR, "button[name='confirmar_segunda1']")
+        confirmar_button.click()
+
+        finalizar_button = browser.find_element(By.CSS_SELECTOR, "input[value='Finalizar treino']")
+        finalizar_button.click()
 
 # Como usuário, gostaria de visualizar o histórico dos meus treinos
 # Cenário 1: acessar a aba de histórico
