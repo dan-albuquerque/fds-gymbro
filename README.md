@@ -44,15 +44,18 @@ Our primary focus is to expand the range of available workouts, providing users 
 <br>
 <a href ="https://miro.com/app/board/uXjVMJPXCYg=/">Diagrama de atividades do sistema</a>
 <a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
-<a href ="https://www.figma.com/proto/QEgeAOpzAlOgq7QZUUuQcW/gymbro-lo-fi?node-id=3-147&scaling=contain&page-id=0%3A1&starting-point-node-id=3%3A147&show-proto-sidebar=1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" /> </a>
 
 ## Screencasts
-### Delivery 03 (15/05)
-Figma: https://drive.google.com/file/d/19p25ufgg-KVPRfRVTxW4u-0A9PZiMjvG/view
+### Delivery 04 (12/06)
+COLOCAR LINKS
 
-Deploy of new users stories: https://drive.google.com/file/d/1UnoB43XKESigCExGv5blwGLSjuLKe7iZ/view?usp=share_link
+Figma: 
 
-End-to-end tests (E2E): https://drive.google.com/file/d/1DI2CPXkd2SQ_yftZSjyyUx9fnXf9rxQs/view?usp=sharing
+Deploy of new users stories:
+
+End-to-end tests (E2E): 
+
+build and deployment process: 
 <br>
 ## Environment Setup
 Before you start contributing to the project, it's important to correctly set up your development environment. Follow the steps below to ensure you have all the necessary dependencies installed:
