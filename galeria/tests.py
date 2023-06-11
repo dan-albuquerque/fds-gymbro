@@ -382,7 +382,30 @@ class TestHome(LiveServerTestCase):
     # Como usuário, gostaria de visualizar o histórico dos meus treinos
     # Cenário 1: acessar a aba de histórico
     '''Dado que estou na página home do site, quando eu clicar em “histórico de treinos” então será exibida a aba de histórico com uma tabela mostrando os exercícios que fiz em determinado dia.'''
-    # Criar teste aqui
+    def test_historico(self):
+        planejamento_link = self.browser.find_element(By.ID, "planejamento-menu")
+        time.sleep(5)
+        self.browser.execute_script("arguments[0].click();", planejamento_link)
+        time.sleep(2)
+
+        time_input_sabado = self.browser.find_element(By.NAME, "sabado_horario1")
+        time_input_sabado.clear() 
+        time_input_sabado.send_keys("09:00")
+
+        wait = WebDriverWait(self.browser, 10)
+        sabado_tipo = wait.until(EC.presence_of_element_located((By.ID, "peito_sabado")))
+        self.browser.execute_script("arguments[0].click();", sabado_tipo)
+
+        confirmar_button = self.browser.find_element(By.NAME, "confirmar_sabado1")
+        confirmar_button.click()
+        
+        wait = WebDriverWait(self.browser, 10)
+        historico_link = self.browser.find_element(By.ID, "historico-menu")
+        historico_link.click()
+
+        mensagem_element = self.browser.find_element(By.XPATH, "//p[contains(text(), 'sabado - 9 a.m. - peito - June 11, 2023')]")
+        assert mensagem_element.is_displayed()
+
 
     # Como usuário, gostaria de criar treinos customizados
     # Cenário 1: criar um treino fullbody próprio
