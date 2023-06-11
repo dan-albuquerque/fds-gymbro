@@ -289,6 +289,10 @@ class TestHome(LiveServerTestCase):
         time_input.send_keys("10:15")
         time.sleep(3)
 
+        wait = WebDriverWait(browser, 10)
+        segunda_tipo = wait.until(EC.presence_of_element_located((By.ID, "peito_segunda")))
+        browser.execute_script("arguments[0].click();", segunda_tipo)
+
         # Click on the "confirmar" button
         confirmar_button = table.find_element(By.XPATH, "//button[contains(text(), 'Confirmar')]")
         confirmar_button.click()
@@ -298,7 +302,7 @@ class TestHome(LiveServerTestCase):
         found_selected_time = False
         for planejamento in planejamentos:
             day_time_text = planejamento.find_element(By.TAG_NAME, "p").text
-            if day_time_text == 'segunda-feira - 10:15 a.m.':
+            if day_time_text == 'segunda-feira - 10:15 a.m. - peito':
                 found_selected_time = True
                 break
 
@@ -323,11 +327,13 @@ class TestHome(LiveServerTestCase):
         browser.execute_script("arguments[0].click();", planejamento_link)
         time.sleep(2)
 
-        # Select the time input in the second table and enter "10:15"
-        date = browser.find_elements(By.NAME, "sabado_horario1")[0] # Second table on the page
-        date.clear()
-        date.send_keys("11:00")
-        time.sleep(2)
+        time_input_sabado = browser.find_element(By.NAME, "sabado_horario1")
+        time_input_sabado.clear() 
+        time_input_sabado.send_keys("09:00")
+
+        wait = WebDriverWait(browser, 10)
+        sabado_tipo = wait.until(EC.presence_of_element_located((By.ID, "peito_sabado")))
+        browser.execute_script("arguments[0].click();", sabado_tipo)
 
         # Click on the "confirmar" button
         confirmar_button = browser.find_element(By.NAME, "confirmar_sabado1")
@@ -338,7 +344,7 @@ class TestHome(LiveServerTestCase):
         found_selected_time = False
         found_selected_day = False
         for planejamento in planejamentos:
-            if planejamento.text == 'sabado - 11 a.m.':
+            if planejamento.text == 'sabado - 9 a.m. - peito':
                 found_selected_time = True
                 found_selected_day = True
         assert found_selected_time and found_selected_day, "Selected time and day not displayed in plan details"
