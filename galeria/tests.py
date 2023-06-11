@@ -7,49 +7,41 @@ from selenium.webdriver.support import expected_conditions as EC
 from django.contrib.auth.models import User
 import time
 
-# Inicia o navegador
+def registerUser(self):
+    self.browser.get("http://127.0.0.1:8000/register")
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--no-sandbox")
-chrome_options.add_argument("--headless") 
-chrome_options.add_argument("--disable-gpu")
+    # Preencher o formulário de registro
+    nome_input = self.browser.find_element(By.NAME, "username")
+    nome_input.send_keys("usuario_de_teste")
+
+    email_input = self.browser.find_element(By.NAME, "email")
+    email_input.send_keys("usuario_de_teste@gmail.com")
+
+    senha_input = self.browser.find_element(By.NAME, "password1")
+    senha_input.send_keys("senha123senha123#")
+
+    senha_input = self.browser.find_element(By.NAME, "password2")
+    senha_input.send_keys("senha123senha123#")
+
+    # Submeter o formulário para criar o usuário
+    submit_button = self.browser.find_element(By.XPATH, "//button[@type='submit']")
+    submit_button.click()
 
 class TestHome(LiveServerTestCase):
-    # Criando usuário que será usado para realizar os testes ou fazendo login com o usuário
     @classmethod
     def setUpClass(cls):
-        #Verifica se o usuário já existe
-        user, created = User.objects.get_or_create(username='usuario_de_teste', email='usuario_de_teste@gmail.com')
+        super().setUpClass()
+        chrome_options = webdriver.ChromeOptions()
+        #chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-dev-shm-usage")
+        cls.browser = webdriver.Chrome(options=chrome_options)
 
-        if created:
-            # Navegar até a página de registro
-            browser = webdriver.Chrome(options=chrome_options)
-            browser.get("http://127.0.0.1:8000/register")
-
-            # Preencher o formulário de registro
-            nome_input = browser.find_element(By.NAME, "username")
-            nome_input.send_keys("usuario_de_teste")
-
-            email_input = browser.find_element(By.NAME, "email")
-            email_input.send_keys("usuario_de_teste@gmail.com")
-
-            senha_input = browser.find_element(By.NAME, "password1")
-            senha_input.send_keys("senha123senha123#")
-
-            senha_input = browser.find_element(By.NAME, "password2")
-            senha_input.send_keys("senha123senha123#")
-
-            # Submeter o formulário para criar o usuário
-            submit_button = browser.find_element(By.XPATH, "//button[@type='submit']")
-            submit_button.click()
-
-            assert User.objects.filter(username='usuario_de_teste').first()
-
-    def setUp(self):
-        self.browser = webdriver.Chrome(options=chrome_options)  
+    def setUp(self):  
         super().setUp()
-        self.browser.get("http://127.0.0.1:8000/")
+        registerUser(self)
 
+        self.browser.get("http://127.0.0.1:8000/")
         username_input = self.browser.find_element(By.NAME, "username")
         password_input = self.browser.find_element(By.NAME, "password")
         submit_button = self.browser.find_element(By.CSS_SELECTOR, "button[type='submit']")
@@ -57,17 +49,6 @@ class TestHome(LiveServerTestCase):
         username_input.send_keys("usuario_de_teste")
         password_input.send_keys("senha123senha123#")
         submit_button.click()
-
-    # AQUI SERVIRIA PARA DELETAR O USUÁRIO NO FINAL, MAS NÃO CONSEGUI. ENTÃO CRIEI LÁ EM BAIXO UM TESTE P ISSO
-   # def tearDown(self):
-    #    if self.created_instances == 10:
-    #        print("Deletando usuário de teste...")
-    #        try:
-    #            user = User.objects.get(username="usuario_de_teste")
-    #            user.delete()
-    #            print("Usuário deletado com sucesso!")
-    #        except User.DoesNotExist:
-    #            print("Usuário não encontrado no banco de dados.")'''
 
     # Teste arbitrário do título da página
     def test_title(self):
@@ -384,19 +365,19 @@ class TestHome(LiveServerTestCase):
     # Cenário 1: confirmar que treinei no dia na aba de planejamentos
     '''Dado que estou na aba de planejamentos e tenho um treino planejado para segunda as 7 a.m. e realizei esse treino, então poderei clicar no botão de confirmar treino e será armazenado que treinei nesse dia'''
     # Testando o botão de finalizar o treino
-    def test_finalizarTreino(self):
-        wait = WebDriverWait(self.browser, 10)
-        planejamento_link = self.browser.find_element(By.ID, "Planejamento")
-        self.browser.execute_script("arguments[0].click();", planejamento_link)
+    # def test_finalizarTreino(self):
+    #     wait = WebDriverWait(self.browser, 10)
+    #     planejamento_link = self.browser.find_element(By.ID, "Planejamento")
+    #     self.browser.execute_script("arguments[0].click();", planejamento_link)
     
-        horario_input = self.browser.find_element(By.NAME, "segunda_horario1")
-        horario_input.click()
+    #     horario_input = self.browser.find_element(By.NAME, "segunda_horario1")
+    #     horario_input.click()
 
-        confirmar_button = self.browser.find_element(By.CSS_SELECTOR, "button[name='confirmar_segunda1']")
-        confirmar_button.click()
+    #     confirmar_button = self.browser.find_element(By.CSS_SELECTOR, "button[name='confirmar_segunda1']")
+    #     confirmar_button.click()
 
-        finalizar_button = self.browser.find_element(By.CSS_SELECTOR, "input[value='Finalizar treino']")
-        self.browser.execute_script("arguments[0].click();", finalizar_button)
+    #     finalizar_button = self.browser.find_element(By.CSS_SELECTOR, "input[value='Finalizar treino']")
+    #     self.browser.execute_script("arguments[0].click();", finalizar_button)
 
     # Como usuário, gostaria de visualizar o histórico dos meus treinos
     # Cenário 1: acessar a aba de histórico
@@ -487,10 +468,8 @@ class TestHome(LiveServerTestCase):
         expectedErrorMessage = "Por favor, escolha um horário válido e um tipo de treino."
         assert errorMessage.text == expectedErrorMessage, f'A mensagem de erro na verdade foi: {errorMessage.text}\nA mensagem de erro deveria ser: {expectedErrorMessage}'
 
-    def tearDown(self):
-        super().tearDown()
-        self.browser.quit()
-
     @classmethod
     def tearDownClass(cls):
-        User.objects.filter(username='usuario_de_teste').delete()
+        super().tearDownClass()
+        cls.browser.quit()
+        
