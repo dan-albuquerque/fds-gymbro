@@ -247,8 +247,8 @@ def customizar(request):
         peso = request.POST['input-int4']
         treino = request.POST.get('treino', '')
 
-        exercicio = Customizar(nome=nome, series=series, repeticoes=repeticoes, descanso=descanso, peso=peso, treino=treino)
-        exercicio.save()
+        exercise = Exercise.objects.create(user=request.user, name=nome, group=treino, sets=series, reps=repeticoes, rest=descanso, weight=peso,description = "Sem descrição", link="Sem link")
+        exercise.save()
 
         return render(request, 'galeria/customizar.html')
     
