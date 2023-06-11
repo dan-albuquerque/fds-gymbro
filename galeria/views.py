@@ -40,6 +40,7 @@ def execucao(request, exercise_id):
 def treinos(request):
     treinos = Treinos.objects.all()
     user_objective, created = UserObjective.objects.get_or_create(user=request.user)
+    customizar = Customizar.objects.all()
 
     print(user_objective.selected_objective)#não estou conseguindo visualizar
 
@@ -72,7 +73,7 @@ def treinos(request):
             exercise.rest = '120s'
             exercise.save()
 
-    return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective})
+    return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective,'treinos_customizados':customizar})
 
 @login_required(login_url='/')
 def sono(request):
@@ -252,3 +253,4 @@ def customizar(request):
         return render(request, 'galeria/customizar.html')
     
     return render(request, 'galeria/customizar.html')
+

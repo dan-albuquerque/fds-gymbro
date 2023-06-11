@@ -87,9 +87,20 @@
 <br>
 <br>
 <br>
+<div>
+  {% for customizar in treinos_customizados %}
+    <h1>{{ customizar.nome }}</h1>
+  {% endfor %}
+</div>
+
 <center>
   <div class="customizar">
     <a href="{% url 'customizar' %}"><button>Customize seus treinos</button></a>
   </div>
 </center>
+
+
+
+
+
 {% endblock %}
