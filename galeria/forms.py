@@ -9,6 +9,11 @@ class SonoForm(forms.ModelForm):
         model = Sono
         fields = ['dormiu', 'acordou']
 
+        widgets = {
+            'dormiu': forms.TimeInput(format='%H:%M'),
+            'acordou': forms.TimeInput(format='%H:%M'),
+        }
+
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control'}),max_length=254, required=True, help_text='Required. Enter a valid email address.')
 

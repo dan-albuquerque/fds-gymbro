@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento, Historico
+from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento, Historico, Customizar
 from .forms import RegisterForm, SonoForm, PlanejamentoForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -40,6 +40,7 @@ def execucao(request, exercise_id):
 def treinos(request):
     treinos = Treinos.objects.all()
     user_objective, created = UserObjective.objects.get_or_create(user=request.user)
+    customizar = Customizar.objects.all()
 
     print(user_objective.selected_objective)#não estou conseguindo visualizar
 
@@ -72,7 +73,7 @@ def treinos(request):
             exercise.rest = '120s'
             exercise.save()
 
-    return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective})
+    return render(request, 'galeria/treinos.html', {'cards': treinos, 'user_objective': user_objective,'treinos_customizados':customizar})
 
 @login_required(login_url='/')
 def sono(request):
@@ -151,70 +152,61 @@ def home(request):
 
 @login_required(login_url='/')
 def planejamento(request):
-    # Exclui objetos antigos
     LIMITE_DIAS = 7
     data_limite = date.today() - timedelta(days=LIMITE_DIAS)
     Planejamento.objects.filter(user=request.user, data__lt=data_limite).delete()
     error_message = None
 
     if request.method == 'POST':
-        # Verifica se algum botão de "confirmar" foi clicado
+        dia_semana = None
+        horario = None
+        tipo = None
+
         if 'confirmar_segunda1' in request.POST:
-            horario = request.POST['segunda_horario1']
+            horario = request.POST.get('segunda_horario1')
             dia_semana = "segunda-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('segunda_tipo')
         elif 'confirmar_terca1' in request.POST:
-            horario = request.POST['terca_horario1']
+            horario = request.POST.get('terca_horario1')
             dia_semana = "terca-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('terca_tipo')
         elif 'confirmar_quarta1' in request.POST:
-            horario = request.POST['quarta_horario1']
+            horario = request.POST.get('quarta_horario1')
             dia_semana = "quarta-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('quarta_tipo')
         elif 'confirmar_quinta1' in request.POST:
-            horario = request.POST['quinta_horario1']
+            horario = request.POST.get('quinta_horario1')
             dia_semana = "quinta-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('quinta_tipo')
         elif 'confirmar_sexta1' in request.POST:
-            horario = request.POST['sexta_horario1']
+            horario = request.POST.get('sexta_horario1')
             dia_semana = "sexta-feira"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('sexta_tipo')
         elif 'confirmar_sabado1' in request.POST:
-            horario = request.POST['sabado_horario1']
+            horario = request.POST.get('sabado_horario1')
             dia_semana = "sabado"
-            if not horario:  # Verifica se horario é vazio ou None
-                error_message = "Por favor, escolha um horário válido."
-            else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
+            tipo = request.POST.get('sabado_tipo')
         elif 'confirmar_domingo1' in request.POST:
-            horario = request.POST['domingo_horario1']
+            horario = request.POST.get('domingo_horario1')
             dia_semana = "domingo"
-            if not horario:  # Verifica se horario é vazio ou None
+            tipo = request.POST.get('domingo_tipo')
+
+        if not horario or not tipo:  # Verifica se horario é vazio ou None
+            if not horario and tipo:
                 error_message = "Por favor, escolha um horário válido."
+            elif not tipo and horario:
+                error_message = "Por favor, escolha um tipo de treino."
             else:
-                Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana)
-            
+                error_message = "Por favor, escolha um horário válido e um tipo de treino."
+
+        else:
+            Planejamento.objects.create(user=request.user, data=date.today(), horario=horario, dia_semana=dia_semana, tipo=tipo)
+
     form = PlanejamentoForm()
     planejamentos = Planejamento.objects.filter(user=request.user)
     context = {'form': form, 'planejamentos': planejamentos, 'error_message': error_message}
     return render(request, 'galeria/planejamento.html', context)
-
-
+ 
 
 @login_required(login_url='/')
 def remove_workout(request, id):
@@ -225,15 +217,43 @@ def remove_workout(request, id):
         historico, created = Historico.objects.get_or_create(user=request.user)
         if not created:
             historico.increment_quantidade_treinos()
-
-        treino_confirmado.delete()
+        treino_confirmado.treinoFeito = True
+        treino_confirmado.save()
     return redirect('planejamento')
 
-
-    
 @login_required(login_url='/')
 def historico(request):
     historico = Historico.objects.filter(user=request.user).first()
-    quantidade_treinos = historico.quantidade_treinos 
-    context = {'quantidade_treinos': quantidade_treinos}
+    planejamentos = Planejamento.objects.filter(user=request.user, treinoFeito=True)
+
+    if historico:
+        quantidade_treinos = historico.quantidade_treinos
+    else:
+        quantidade_treinos = 0
+
+    quantidade_planejamentos = planejamentos.count()
+
+    context = {
+        'quantidade_treinos': quantidade_treinos,
+        'quantidade_planejamentos': quantidade_planejamentos,
+        'planejamentos': planejamentos,
+    }
     return render(request, 'galeria/historico.html', context)
+
+
+def customizar(request):
+    if request.method == 'POST':
+        nome = request.POST['input-string']
+        series = request.POST['input-int1']
+        repeticoes = request.POST['input-int2']
+        descanso = request.POST['input-int3']
+        peso = request.POST['input-int4']
+        treino = request.POST.get('treino', '')
+
+        exercise = Exercise.objects.create(user=request.user, name=nome, group=treino, sets=series, reps=repeticoes, rest=descanso, weight=peso,description = "Sem descrição", link="Sem link")
+        exercise.save()
+
+        return render(request, 'galeria/customizar.html')
+    
+    return render(request, 'galeria/customizar.html')
+
