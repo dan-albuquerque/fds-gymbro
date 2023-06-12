@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from django.contrib.auth.models import User
+from galeria.models import Treinos, Exercise, Sono, UserObjective, Planejamento, Historico, Customizar
 import time
 
 def registerUser(self):
@@ -400,17 +401,17 @@ class TestHome(LiveServerTestCase):
         confirmar_button.click()
 
         time.sleep(3)
-        finalizar_treino = self.browser.find_element(By.ID,"remove-386")
-        finalizar_treino.click()
+        finalizar_treino = self.browser.find_element(By.ID,"remove")
+        self.browser.execute_script("arguments[0].click();", finalizar_treino)
         
-        time.sleep(3)
+        time.sleep(5)
         historico_link = self.browser.find_element(By.ID, "historico-menu")
-        historico_link.click()
+        self.browser.execute_script("arguments[0].click();", historico_link)
 
-        time.sleep(3)
+        time.sleep(5)
         mensagem_element = self.browser.find_element(By.NAME, "Treino_planejado")
-        mensagem_txt = "Treino_planejado"
-        assert mensagem_element.text == mensagem_txt
+        mensagem_name = "Treino_planejado"
+        assert mensagem_element.get_attribute("name") == mensagem_name
 
 
     # Como usuário, gostaria de criar treinos customizados

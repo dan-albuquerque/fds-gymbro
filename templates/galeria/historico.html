@@ -69,7 +69,7 @@
 {% for planejamento in planejamentos %}
   {% if planejamento.treinoFeito %}
     <div class="planejamento-item">
-      <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }} - {{ planejamento.data }}</p>
+      <p name = "Treino_planejado">{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }} - {{ planejamento.data }}</p>
     </div>
   {% endif %}
 {% endfor %}
