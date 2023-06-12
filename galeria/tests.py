@@ -411,6 +411,56 @@ class TestHome(LiveServerTestCase):
     # Cenário 1: criar um treino fullbody próprio
     '''Dado que estou na aba de treino customizado, quando eu clicar em “inserir exercício” e digitar Agachamento, depois digitar bíceps scoth, depois digitar Remada com halteres então será  sendo exibida a tabela de exercícios semelhante aos treinos já existentes do site com os exercícios customizados conforme coloco os exercícios com as informações de cada exercício default do site(series: 3,repetições: 10, descanso: 60s)'''
     # Criar teste aqui
+    def testCreateRoscaDiretaExercise(self):
+    # Go to the Treinos menu.
+        treinos_link = self.browser.find_element(By.ID, 'treinos-menu')
+        self.browser.execute_script("arguments[0].click();", treinos_link)
+
+        # Click on the Customizar menu.
+        customizar_menu = self.browser.find_element(By.ID, 'customizar-menu')
+        self.browser.execute_script("arguments[0].click();", customizar_menu)
+
+        # Enter the name of the exercise.
+        nome_input = self.browser.find_element(By.ID, 'input-string')
+        if nome_input.is_displayed():
+            nome_input.clear()
+            nome_input.send_keys('Rosca Direta')
+
+        # Enter the number of series.
+        series_input = self.browser.find_element(By.ID, 'input-int1')
+        if series_input.is_displayed():
+            series_input.clear()
+            series_input.send_keys('4')
+
+        # Enter the number of repetitions.
+        repeticoes_input = self.browser.find_element(By.ID, 'input-int2')
+        if repeticoes_input.is_displayed():
+            repeticoes_input.clear()
+            repeticoes_input.send_keys('12')
+
+        # Enter the amount of rest between sets.
+        descanso_input = self.browser.find_element(By.ID, 'input-int3')
+        if descanso_input.is_displayed():
+            descanso_input.clear()
+            descanso_input.send_keys('60')
+
+        # Enter the weight.
+        peso_input = self.browser.find_element(By.ID, 'input-int4')
+        if peso_input.is_displayed():
+            peso_input.clear()
+            peso_input.send_keys('20')
+
+        # Click on the Enviar button.
+        enviar_botao = self.browser.find_element(By.XPATH, '/html/body/div/table/tbody/tr[6]/td[1]')
+        if enviar_botao.is_displayed():
+            enviar_botao.click()
+
+        # Verify that the Rosca Direta exercise is created.
+        elements = self.browser.find_elements(By.XPATH, '//td[contains(text(), "Rosca Direta")]')
+        assert len(elements) > 0
+
+        for element in elements:
+            print(element.text)
 
     # Como usuário, gostaria de criar treinos customizados
     # Cenário 2: criar um treino de braço próprio
