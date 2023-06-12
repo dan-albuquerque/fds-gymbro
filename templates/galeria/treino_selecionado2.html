@@ -35,7 +35,7 @@
       <tbody>
         {% for exercise in exercises %}
           <tr>
-            <td name="nome_customizado">{{ exercise.name }}</td>
+            <td id="exercise {{exercise.name}}">{{ exercise.name }}</td>
             <td>{{ exercise.sets }}</td>
             <td>{{ exercise.reps }}</td>
             <td>{{ exercise.rest }}</td>

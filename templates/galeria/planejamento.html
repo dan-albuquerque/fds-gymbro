@@ -198,7 +198,7 @@
     <div class="planejamento-item">
       <form method="POST" action="{% url 'remove_workout' planejamento.id %}">
         {% csrf_token %}
-        <p>{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }}</p>
+        <p name="Treino_planejado">{{ planejamento.dia_semana }} - {{ planejamento.horario }} - {{ planejamento.tipo }}</p>
         <input id="remove-{{ planejamento.id }}" type="submit" value="✓">
         <input type="hidden" name="treino_confirmado_id" value="{{ planejamento.id }}">
       </form>

@@ -32,7 +32,7 @@ class TestHome(LiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         chrome_options = webdriver.ChromeOptions()
-        chrome_options.add_argument("--headless")
+        #chrome_options.add_argument("--headless")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
         cls.browser = webdriver.Chrome(options=chrome_options)
@@ -398,13 +398,19 @@ class TestHome(LiveServerTestCase):
 
         confirmar_button = self.browser.find_element(By.NAME, "confirmar_sabado1")
         confirmar_button.click()
+
+        time.sleep(3)
+        finalizar_treino = self.browser.find_element(By.ID,"remove-386")
+        finalizar_treino.click()
         
-        wait = WebDriverWait(self.browser, 10)
+        time.sleep(3)
         historico_link = self.browser.find_element(By.ID, "historico-menu")
         historico_link.click()
 
-        mensagem_element = self.browser.find_element(By.XPATH, "//p[contains(text(), 'sabado - 9 a.m. - peito - June 11, 2023')]")
-        assert mensagem_element.is_displayed()
+        time.sleep(3)
+        mensagem_element = self.browser.find_element(By.NAME, "Treino_planejado")
+        mensagem_txt = "Treino_planejado"
+        assert mensagem_element.text == mensagem_txt
 
 
     # Como usuário, gostaria de criar treinos customizados
@@ -446,8 +452,11 @@ class TestHome(LiveServerTestCase):
         peso_input.send_keys("20")
 
         # Click on the Enviar button.
-        enviar_botao = self.browser.find_element(By.ID, 'treinoCosta')
-        enviar_botao.click()
+        enviar_costa = self.browser.find_element(By.ID, 'treinoCosta')
+        enviar_costa.click()
+
+        botao_enviar = self.browser.find_element(By.NAME,"enviar_botao")
+        self.browser.execute_script("arguments[0].click();", botao_enviar)
 
         treinos_link = self.browser.find_element(By.ID, 'treinos-menu')
         self.browser.execute_script("arguments[0].click();", treinos_link)
@@ -456,8 +465,11 @@ class TestHome(LiveServerTestCase):
         self.browser.execute_script("arguments[0].click();", aba_costa)
 
         # Verify that the Rosca Direta exercise is created.
-        find_name = self.browser.find_element(By.XPATH,"/html/body/div/table/tbody/tr[6]/td[1]")
+        find_name = self.browser.find_element(By.ID,"exercise Rosca direta")
         self.assertEqual(find_name.text, "Rosca direta")
+
+        find_series = self.browser.find_element(By.XPATH,"/html/body/div/table/tbody/tr[6]/td[2]")
+        self.assertEqual(find_series.text,"4")
 
 
     # Como usuário, gostaria de criar treinos customizados
@@ -509,7 +521,7 @@ class TestHome(LiveServerTestCase):
 
     # Issue #25: Confirmar planejamento de treino sem escolher o tipo de treino, mas escolhendo um horário válido
     # Validação: Deve aparecer a mensagem de erro "Por favor, escolha um tipo de treino."
-    def testIssue22(self):
+    def testIssue25(self):
         planejamento_link = self.browser.find_element(By.ID, "planejamento-menu")
         time.sleep(2)
         self.browser.execute_script("arguments[0].click();", planejamento_link)
