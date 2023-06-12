@@ -456,9 +456,8 @@ class TestHome(LiveServerTestCase):
         self.browser.execute_script("arguments[0].click();", aba_costa)
 
         # Verify that the Rosca Direta exercise is created.
-        new_exercise = self.browser.find_element(By.NAME, "Rosca direta")
-        expected_exercise = "Rosca direta"
-        assert new_exercise.text == expected_exercise
+        find_name = self.browser.find_element(By.XPATH,"/html/body/div/table/tbody/tr[6]/td[1]")
+        self.assertEqual(find_name.text, "Rosca direta")
 
 
     # Como usuário, gostaria de criar treinos customizados
