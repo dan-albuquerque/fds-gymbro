@@ -422,45 +422,44 @@ class TestHome(LiveServerTestCase):
 
         # Enter the name of the exercise.
         nome_input = self.browser.find_element(By.ID, 'input-string')
-        if nome_input.is_displayed():
-            nome_input.clear()
-            nome_input.send_keys('Rosca Direta')
+        nome_input.clear()
+        nome_input.send_keys('Rosca direta')
 
         # Enter the number of series.
         series_input = self.browser.find_element(By.ID, 'input-int1')
-        if series_input.is_displayed():
-            series_input.clear()
-            series_input.send_keys('4')
+        series_input.clear()
+        series_input.send_keys("4")
 
         # Enter the number of repetitions.
         repeticoes_input = self.browser.find_element(By.ID, 'input-int2')
-        if repeticoes_input.is_displayed():
-            repeticoes_input.clear()
-            repeticoes_input.send_keys('12')
+        repeticoes_input.clear()
+        repeticoes_input.send_keys("12")
 
         # Enter the amount of rest between sets.
         descanso_input = self.browser.find_element(By.ID, 'input-int3')
-        if descanso_input.is_displayed():
-            descanso_input.clear()
-            descanso_input.send_keys('60')
+        descanso_input.clear()
+        descanso_input.send_keys("60")
 
         # Enter the weight.
         peso_input = self.browser.find_element(By.ID, 'input-int4')
-        if peso_input.is_displayed():
-            peso_input.clear()
-            peso_input.send_keys('20')
+        peso_input.clear()
+        peso_input.send_keys("20")
 
         # Click on the Enviar button.
-        enviar_botao = self.browser.find_element(By.XPATH, '/html/body/div/table/tbody/tr[6]/td[1]')
-        if enviar_botao.is_displayed():
-            enviar_botao.click()
+        enviar_botao = self.browser.find_element(By.ID, 'treinoCosta')
+        enviar_botao.click()
+
+        treinos_link = self.browser.find_element(By.ID, 'treinos-menu')
+        self.browser.execute_script("arguments[0].click();", treinos_link)
+
+        aba_costa = self.browser.find_element(By.NAME,"link-Treino de Costas")
+        self.browser.execute_script("arguments[0].click();", aba_costa)
 
         # Verify that the Rosca Direta exercise is created.
-        elements = self.browser.find_elements(By.XPATH, '//td[contains(text(), "Rosca Direta")]')
-        assert len(elements) > 0
+        new_exercise = self.browser.find_element(By.NAME, "Rosca direta")
+        expected_exercise = "Rosca direta"
+        assert new_exercise.text == expected_exercise
 
-        for element in elements:
-            print(element.text)
 
     # Como usuário, gostaria de criar treinos customizados
     # Cenário 2: criar um treino de braço próprio
