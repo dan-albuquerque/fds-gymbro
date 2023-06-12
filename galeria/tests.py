@@ -320,7 +320,6 @@ class TestHome(LiveServerTestCase):
     # Cenário 1: selecionar treino de peitoral
     '''Dado que estou na página de selecionar treinos, quando eu selecionar o treino de peitoral, então será exibido uma tabela com os exercícios do treino de peitoral com o nome do exercício, series, repetições, descanso e peso''' 
     def test_treinoPeitoral(self):
-        wait = WebDriverWait(self.browser, 10)
         treino_link = self.browser.find_element(By.ID, "treinos-menu")
         self.browser.execute_script("arguments[0].click();", treino_link)
 
@@ -366,19 +365,30 @@ class TestHome(LiveServerTestCase):
     # Cenário 1: confirmar que treinei no dia na aba de planejamentos
     '''Dado que estou na aba de planejamentos e tenho um treino planejado para segunda as 7 a.m. e realizei esse treino, então poderei clicar no botão de confirmar treino e será armazenado que treinei nesse dia'''
     # Testando o botão de finalizar o treino
-    # def test_finalizarTreino(self):
-    #     wait = WebDriverWait(self.browser, 10)
-    #     planejamento_link = self.browser.find_element(By.ID, "Planejamento")
-    #     self.browser.execute_script("arguments[0].click();", planejamento_link)
-    
-    #     horario_input = self.browser.find_element(By.NAME, "segunda_horario1")
-    #     horario_input.click()
+    def test_removerConfirmar(self):
+        planejamento_link = self.browser.find_element(By.ID, "planejamento-menu")
+        time.sleep(5)
+        self.browser.execute_script("arguments[0].click();", planejamento_link)
+        time.sleep(2)
 
-    #     confirmar_button = self.browser.find_element(By.CSS_SELECTOR, "button[name='confirmar_segunda1']")
-    #     confirmar_button.click()
+        time_input_sabado = self.browser.find_element(By.NAME, "segunda_horario1")
+        time_input_sabado.clear() 
+        time_input_sabado.send_keys("07:00")
 
-    #     finalizar_button = self.browser.find_element(By.CSS_SELECTOR, "input[value='Finalizar treino']")
-    #     self.browser.execute_script("arguments[0].click();", finalizar_button)
+        wait = WebDriverWait(self.browser, 10)
+        sabado_tipo = wait.until(EC.presence_of_element_located((By.ID, "perna_segunda")))
+        self.browser.execute_script("arguments[0].click();", sabado_tipo)
+
+        confirmar_button = self.browser.find_element(By.NAME, "confirmar_segunda1")
+        confirmar_button.click()
+
+        time.sleep(3)
+        finalizar_treino = self.browser.find_element(By.ID,"remove")
+        self.browser.execute_script("arguments[0].click();", finalizar_treino)
+
+        card_present = self.browser.find_elements(By.XPATH, "//div[@class='card']")
+        assert len(card_present) == 0, "The card was not removed from the page"
+
 
     # Como usuário, gostaria de visualizar o histórico dos meus treinos
     # Cenário 1: acessar a aba de histórico
