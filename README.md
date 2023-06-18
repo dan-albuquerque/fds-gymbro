@@ -41,12 +41,12 @@ Our primary focus is to expand the range of available workouts, providing users 
 
 ## Links
 <a href="http://gymbro-01-env.eba-42qyc4qm.us-east-2.elasticbeanstalk.com/">Gymbro</a>
-<br>
+<br/>
 <a href ="https://miro.com/app/board/uXjVMJPXCYg=/">Diagrama de atividades do sistema</a>
+<br/>
+<br/>
 <a href = "https://danilo1.atlassian.net/jira/software/projects/GYM/boards/1"><img align="center" height="50" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" /> </a>
 
-
-<br>
 ## Environment Setup
 Before you start contributing to the project, it's important to correctly set up your development environment. Follow the steps below to ensure you have all the necessary dependencies installed:
 
