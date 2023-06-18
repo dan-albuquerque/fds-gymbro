@@ -96,3 +96,5 @@ Wait for the project team to review your PR. We'll be glad to review and discuss
 Please note that we assume basic knowledge of Git and GitHub in these instructions. If you encounter any issues during the contribution process, feel free to ask for assistance.
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
+<br>
+Esse projeto tem escopo meramente educacional.
